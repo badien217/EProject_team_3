@@ -4,33 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
-using Application.Interfaces.UnitOfWorks;
+using persistence.UnitOfWorks;
 using Domain.Entities;
-using Application.Interfaces.AutoMapper;
-using Application.DTOs;
-using Microsoft.EntityFrameworkCore;
 
-
-namespace Application.Features.Users.queries.GetAllUser
+namespace Application.Features.Users.queries
 {
     public class GetAllUserQueryHandler : IRequestHandler<GetAllUserQueryRequest, IList<GetAllUserQueryReponse>>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IAutoMapper _mapper;
-        public GetAllUserQueryHandler(IUnitOfWork unitOfWork, IAutoMapper mapper)
+        public GetAllUserQueryHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
 
         public async Task<IList<GetAllUserQueryReponse>> Handle(GetAllUserQueryRequest request, CancellationToken cancellationToken)
         {
             var user = await _unitOfWork.GetReadReponsitory<User>().GetAllAsync();
-            var role = _mapper.Map<RoleDto, Role>(new Role());
             List<GetAllUserQueryReponse> reponse = new();
+            foreach (var item in user)
+            {
+                reponse.Add(new GetAllUserQueryReponse
+                {
+                    Username = item.Username,
+                    Email = item.Email,
+                    phone = item.phone,
+                    SubcriptionType = item.SubcriptionType,
+                    PaymentStatus = item.PaymentStatus,
 
-            var map = _mapper.Map<GetAllUserQueryReponse, User>(user);
-            return map;
+                });
+                  
+            }
+             return  reponse;
         }
     }
 }

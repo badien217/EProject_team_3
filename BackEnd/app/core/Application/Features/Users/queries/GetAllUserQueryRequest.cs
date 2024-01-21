@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Users.queries.GetAllUser
+namespace Application.Features.Users.queries
 {
     public class GetAllUserQueryRequest : IRequest<IList<GetAllUserQueryReponse>>
     {

@@ -15,5 +15,3 @@ D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\De
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.pdb
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.genruntimeconfig.cache
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\ref\persistence.dll
-D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\Application.dll
-D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\Application.pdb

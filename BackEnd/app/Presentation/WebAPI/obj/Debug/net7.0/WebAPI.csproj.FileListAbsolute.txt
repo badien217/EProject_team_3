@@ -78,13 +78,3 @@ D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\persistence.dll
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\persistence.pdb
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Domain.pdb
-D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\AutoMapper.dll
-D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\MediatR.dll
-D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\MediatR.Contracts.dll
-D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Application.dll
-D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Mapper.dll
-D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Application.pdb
-D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Mapper.pdb
-D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.Exchange.WebServices.Auth.dll
-D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.Exchange.WebServices.dll

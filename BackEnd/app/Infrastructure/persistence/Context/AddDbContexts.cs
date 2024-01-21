@@ -25,7 +25,6 @@ namespace persistence.Context
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Step> Steps { get; set; }
-
        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

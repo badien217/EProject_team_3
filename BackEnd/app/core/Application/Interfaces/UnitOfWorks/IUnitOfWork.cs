@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Interfaces.UnitOfWorks
+namespace persistence.Interfaces.UnitOfWorks
 {
-    public interface IUnitOfWork : IAsyncDisposable
+    public interface IUnitOfWork : IAsyncDisposable 
     {
-        IReadReponsitories<T> GetReadReponsitory<T>() where T : class, IEntityBase, new();
+        IReadReponsitories<T> GetReadReponsitory<T>() where T : class, IEntityBase,new();
         IWriteReponsitories<T> GetWriteReponsitory<T>() where T : class, IEntityBase, new();
         Task<int> SaveAsync();
         int Save();
