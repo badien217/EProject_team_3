@@ -1,7 +1,7 @@
 ﻿using Application.Interfaces.Reponsitory;
 using persistence.Context;
 using persistence.Repositories;
-using persistence.Interfaces.UnitOfWorks;
+using Application.Interfaces.UnitOfWorks;
 using System;
 using System.Collections.Generic;
 using System.Linq;

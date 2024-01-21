@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Application.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Users.queries
+namespace Application.Features.Users.queries.GetAllUser
 {
     public class GetAllUserQueryReponse
     {
@@ -13,6 +14,7 @@ namespace Application.Features.Users.queries
         public string phone { get; set; }
         public string SubcriptionType { get; set; }
         public bool PaymentStatus { get; set; }
-       
+        public RoleDto Role { get; set; }
+
     }
 }

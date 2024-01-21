@@ -16,7 +16,7 @@ namespace Domain.Entities
         public string SubcriptionType { get;set; }
         public bool PaymentStatus { get;set; }
         public int RoleId { get;set; }
-        public Role role { get;set; }
+        public Role Role;  
         public User() { }
         public User(string username,string password,string email,string Phone, string subcriptionType,bool paymentStatus,int roleId) { 
             Username = username;
