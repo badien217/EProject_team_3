@@ -12,3 +12,8 @@ D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\infrastructure.pdb
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\infrastructure.genruntimeconfig.cache
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\ref\infrastructure.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\bin\Debug\net7.0\Application.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\bin\Debug\net7.0\Domain.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\bin\Debug\net7.0\Application.pdb
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\bin\Debug\net7.0\Domain.pdb
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\infrastructure.csproj.CopyComplete
