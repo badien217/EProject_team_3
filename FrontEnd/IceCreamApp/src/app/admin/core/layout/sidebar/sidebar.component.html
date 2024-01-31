@@ -1,0 +1,71 @@
+<div class="d-flex flex-column flex-shrink-0 bg-warning-subtle sidebar">
+    <a [routerLink]="['/admin/dashboard']" class="text-center py-3">
+        <img src="../../../../assets/images/logo-minimalist-white.png" alt="logo-minimalist"
+            class="bg-warning rounded-circle logo">
+    </a>
+
+    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center mt-4">
+        <li class="d-flex align-items-center justify-content-center py-2">
+            <a  [routerLink]="['/admin/dashboard']" routerLinkActive="active"
+                class="rounded-4 d-flex align-items-center justify-content-center fs-5 p-2 sidebar-link"
+                title="Dashboard">
+                <fa-icon class="p-1" [icon]="faHouse"></fa-icon>
+            </a>
+        </li>
+        <li class="d-flex align-items-center justify-content-center py-2">
+            <a  [routerLink]="['/admin/recipe-management']" routerLinkActive="active"
+                class="rounded-4 d-flex align-items-center justify-content-center fs-5 p-2 sidebar-link"
+                title="Recipes">
+                <fa-icon class="p-1" [icon]="faBookOpen"></fa-icon>
+            </a>
+        </li>
+        <li class="d-flex align-items-center justify-content-center py-2">
+            <a  [routerLink]="['/admin/product-management']" routerLinkActive="active"
+                class="rounded-4 d-flex align-items-center justify-content-center fs-5 p-2 sidebar-link"
+                title="Products">
+                <fa-icon class="p-1" [icon]="faIceCream"></fa-icon>
+            </a>
+        </li>
+        <li class="d-flex align-items-center justify-content-center py-2">
+            <a  [routerLink]="['/admin/user-management']" routerLinkActive="active"
+                class="rounded-4 d-flex align-items-center justify-content-center fs-5 p-2 sidebar-link"
+                title="User">
+                <fa-icon class="p-1" [icon]="faUser"></fa-icon>
+            </a>
+        </li>
+        <li class="d-flex align-items-center justify-content-center py-2">
+            <a [routerLink]="['/admin/order-management']" routerLinkActive="active"
+                class="rounded-4 d-flex align-items-center justify-content-center fs-5 p-2 sidebar-link"
+                title="Order">
+                <fa-icon class="p-1" [icon]="faCartShopping"></fa-icon>
+            </a>
+        </li>
+        <li class="d-flex align-items-center justify-content-center py-2">
+            <a [routerLink]="['/admin/feedback-management']" routerLinkActive="active"
+                class="rounded-4 d-flex align-items-center justify-content-center fs-5 p-2 sidebar-link"
+                title="Feedback">
+                <fa-icon class="p-1" [icon]="faComment"></fa-icon>
+            </a>
+        </li>
+        <li class="d-flex align-items-center justify-content-center py-2">
+            <a [routerLink]="['/admin/book-management']" routerLinkActive="active"
+                class="rounded-4 d-flex align-items-center justify-content-center fs-5 p-2 sidebar-link"
+                title="Book">
+                <fa-icon class="p-1" [icon]="faBook"></fa-icon>
+            </a>
+        </li>
+        <li class="d-flex align-items-center justify-content-center py-2">
+            <a [routerLink]="['/admin/faq-management']" routerLinkActive="active"
+                class="rounded-4 d-flex align-items-center justify-content-center fs-5 p-2 sidebar-link"
+                title="FAQS">
+                <fa-icon class="p-1" [icon]="faComments"></fa-icon>
+            </a>
+        </li>
+    </ul>
+
+    <div  class="d-flex align-items-center justify-content-center mb-2">
+        <button  (click)="logoutAdmin()" class="text-warning btn border-0" title="User">
+            <fa-icon class="p-1" [icon]="faPowerOff"></fa-icon>
+        </button>
+    </div>
+</div>

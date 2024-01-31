@@ -12,8 +12,25 @@ D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\infrastructure.pdb
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\infrastructure.genruntimeconfig.cache
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\ref\infrastructure.dll
+<<<<<<< HEAD
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\bin\Debug\net7.0\Application.dll
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\bin\Debug\net7.0\Domain.dll
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\bin\Debug\net7.0\Application.pdb
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\bin\Debug\net7.0\Domain.pdb
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\infrastructure.csproj.CopyComplete
+=======
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\bin\Debug\net7.0\infrastructure.deps.json
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\bin\Debug\net7.0\infrastructure.runtimeconfig.json
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\bin\Debug\net7.0\infrastructure.dll
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\bin\Debug\net7.0\infrastructure.pdb
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\infrastructure.csproj.AssemblyReference.cache
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\infrastructure.AssemblyInfoInputs.cache
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\infrastructure.AssemblyInfo.cs
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\infrastructure.dll
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\refint\infrastructure.dll
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\infrastructure.pdb
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\infrastructure.genruntimeconfig.cache
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\infrastructure\obj\Debug\net7.0\ref\infrastructure.dll
+>>>>>>> thao

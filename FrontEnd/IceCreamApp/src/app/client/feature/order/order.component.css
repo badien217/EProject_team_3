@@ -1,0 +1,14 @@
+.book-img{
+    width: 120px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.delete-btn{
+    width: 25px;
+    height: 25px;
+}
+
+.payment-credit-img{
+height: 35px;
+}

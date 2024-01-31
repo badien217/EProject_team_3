@@ -1,0 +1,45 @@
+<div class="py-4 px-5 bg-light overflow-y-auto main-admin">
+    <div class="h2 pb-3">Recipe Management</div>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <a [routerLink]="['/admin/recipe-management/add-recipe']" class="btn btn-success">Add new recipe</a>
+        <div class="input-group w-50 float-end">
+            <input type="text" class="form-control" placeholder="Search by name" >
+            <button class="btn btn-outline-warning" type="submit">Search</button>
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Submitted By</th>
+                <th scope="col">Image</th>
+                <th scope="col">Description</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let recipe of recipes | paginate: { itemsPerPage: 10, currentPage: page }; let i = index" [class.active]="i == currentIndex">
+            <tr>
+                <th scope="row">{{i+1}}</th>
+                <td>{{recipe.name}}</td>
+                <td>{{recipe.submittedBy}}</td>
+                <td><img src="../../../../assets/images/{{recipe.imageUrl}}" alt="{{recipe.name}}" class="recipe-img"> </td>
+                <td>{{recipe.description}}</td>
+                <td>
+                    <div class="d-flex flex-column gap-1">
+                        <button class="bg-warning-subtle text-warning border-0 rounded btn-action"><fa-icon
+                                [icon]="faPenToSquare"></fa-icon></button>
+                        <button class="bg-danger-subtle text-danger border-0 rounded btn-action"><fa-icon
+                                [icon]="faTrash"></fa-icon></button>
+                    </div>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex align-items-center justify-content-center mt-5">
+        <pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="Prev"
+            nextLabel="Next"></pagination-controls>
+    </div>
+</div>

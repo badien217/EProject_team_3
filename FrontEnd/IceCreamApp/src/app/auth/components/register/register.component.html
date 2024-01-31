@@ -1,0 +1,186 @@
+<div class="d-flex align-items-center justify-content-center py-5"
+    style="min-height: 100vh; background-image: url('../../../assets/images/bg-login.png'); background-size: cover;background-repeat:no-repeat;">
+    <div class=" container rounded-5 p-0 bg-white shadow-lg">
+        <div class="d-lg-flex align-items-stretch justify-content-center">
+            <div class="col rounded-5"
+                style=" background-image: url('../../../assets/images/auth-img.png'); background-size: cover;background-repeat:no-repeat;">
+                <div class="d-flex align-items-center justify-content-between px-3">
+                    <a [routerLink]="['/home']"><img src="../../../assets/images/logo.png" alt="logo"
+                            class="m-3 bg-white p-1 rounded shadow" style="width: 150px;" /></a>
+                    <a [routerLink]="['/home']" class="btn btn-outline-dark rounded-5 px-3 me-3">
+                        <fa-icon [icon]="faHome" class="pe-2"></fa-icon>
+                        <span>Home</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col py-4 px-5" id="step-1"  *ngIf="currentStep === 1">
+                <div class="d-flex align-items-center justify-content-end">
+                    <span class="pe-3">Already have an account?</span>
+                    <a [routerLink]="['/auth/login']" class="btn btn-sm btn-outline-dark rounded-5 px-3">Login</a>
+                </div>
+                <h2 class="mt-3 fs-2">Welcome to Ice Cream Parlour</h2>
+                <strong>Step 1 of 3</strong>
+                <p class="fs-6 mb-4">Register you account</p>
+                <div>
+                    <div class="row mb-3">
+                        <div class="col-lg">
+                            <label for="nameInput" class="form-label h6">Name</label>
+                            <input type="text" [(ngModel)]="registerDto.name" class="form-control" id="nameInput" />
+                        </div>
+                        <div class="col-lg">
+                            <label for="phoneInput" class="form-label h6">Phone</label>
+                            <input type="text" [(ngModel)]="registerDto.phone" class="form-control" id="phoneInput" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg">
+                            <label for="usernameInput" class="form-label h6">Username</label>
+                            <input type="text" [(ngModel)]="registerDto.username" class="form-control" id="usernameInput" />
+                        </div>
+                        <div class="col-lg">
+                            <label for="passwordInput" class="form-label h6">Password</label>
+                            <input type="{{ showPassword ? 'text' : 'password' }}" [(ngModel)]="registerDto.password" class="form-control"
+                                id="passwordInput" />
+                            <button type="button" (click)="togglePasswordVisibility()"
+                                class="position-relative float-end bg-white text-dark me-1 z-3 border border-0"
+                                style="margin-top: -30px;">
+                                <fa-icon [icon]="showPassword ? faEyeSlash : faEye"></fa-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailInput" class="form-label h6">Email</label>
+                        <input type="text" [(ngModel)]="registerDto.email" class="form-control" id="emailInput" />
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center my-4">
+                        <button type="button" class="btn btn-dark px-5 py-2 rounded-5"
+                            (click)="nextStep()">Next</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col py-4 px-5" id="step-2" *ngIf="currentStep === 2">
+                <div class="d-flex align-items-center justify-content-between">
+                    <button class="btn btn-sm btn-outline-dark rounded-5 px-3" (click)="previousStep()">
+                        <fa-icon class="pe-2" [icon]="faArrowLeft"></fa-icon>
+                        Back
+                    </button>
+                    <div>
+                        <span class="pe-3">Already have an account?</span>
+                        <a [routerLink]="['/auth/login']" class="btn btn-sm btn-outline-dark rounded-5 px-3">Login</a>
+                    </div>
+                </div>
+                <h2 class="mt-3 fs-2">Welcome to Ice Cream Parlour</h2>
+                <strong>Step 2 of 3</strong>
+                <p class="fs-6 mb-3">Choose the service package that's right for you</p>
+
+                <div class="d-flex align-items-stretch justify-content-center gap-3 subscription-type">
+                    <input type="radio" id="monthly" [(ngModel)]="registerDto.subscriptionType" class="form-check-input d-none"
+                        value="monthly" [checked]="selectedSubscription === 'monthly'"
+                        (change)="selectSubscription('monthly')">
+                    <label for="monthly" class="card w-50 user-select-none cursor-pointer"
+                        [class.selected]="selectedSubscription === 'monthly'">
+                        <span class="fs-4 fw-bold text-center">Monthly</span>
+                        <span class="fs-1 fw-bold text-center">$15</span>
+                        <div class="card-body">
+                            <div class="d-flex gap-2 py-1">
+                                <fa-icon [icon]="faCheck" class="check-icon"></fa-icon>
+                                <span>Access to all website features.</span>
+                            </div>
+                            <div class="d-flex gap-2 py-1">
+                                <fa-icon [icon]="faCheck" class="check-icon"></fa-icon>
+                                <span>Ability to view and submit recipes.</span>
+                            </div>
+                            <div class="d-flex gap-2 py-1">
+                                <fa-icon [icon]="faCheck" class="check-icon"></fa-icon>
+                                <span>Eligibility for participation in contests.</span>
+                            </div>
+                        </div>
+                    </label>
+                    <input type="radio" id="yearly" [(ngModel)]="registerDto.subscriptionType" class="form-check-input d-none"
+                        value="yearly" [checked]="selectedSubscription === 'yearly'"
+                        (change)="selectSubscription('yearly')">
+                    <label for="yearly" class="card w-50  user-select-none cursor-pointer"
+                        [class.selected]="selectedSubscription === 'yearly'">
+                        <span class="fs-4 fw-bold text-center">Yearly</span>
+                        <span class="fs-1 fw-bold text-center">$150</span>
+                        <div class="card-body">
+                            <div class="d-flex gap-2 py-1">
+                                <fa-icon [icon]="faCheck" class="check-icon"></fa-icon>
+                                <span>Access to all website features.</span>
+                            </div>
+                            <div class="d-flex gap-2 py-1">
+                                <fa-icon [icon]="faCheck" class="check-icon"></fa-icon>
+                                <span>Ability to view and submit recipes.</span>
+                            </div>
+                            <div class="d-flex gap-2 py-1">
+                                <fa-icon [icon]="faCheck" class="check-icon"></fa-icon>
+                                <span>Eligibility for participation in contests.</span>
+                            </div>
+                            <div class="d-flex gap-2 py-1">
+                                <fa-icon [icon]="faCheck" class="check-icon"></fa-icon>
+                                <span>Cost savings compared to the monthly plan.</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <div class="d-flex align-items-center justify-content-center my-4">
+                    <button type="button" class="btn btn-dark px-5 py-2 rounded-5" (click)="nextStep()">Next</button>
+                </div>
+            </div>
+            <div class="col py-4 px-5" id="step-3" *ngIf="currentStep === 3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <button class="btn btn-sm btn-outline-dark rounded-5 px-3" (click)="previousStep()">
+                        <fa-icon class="pe-2" [icon]="faArrowLeft"></fa-icon>
+                        Back
+                    </button>
+                    <div>
+                        <span class="pe-3">Already have an account?</span>
+                        <a [routerLink]="['/auth/login']" class="btn btn-sm btn-outline-dark rounded-5 px-3">Login</a>
+                    </div>
+                </div>
+                <h2 class="mt-3 fs-2">Welcome to Ice Cream Parlour</h2>
+                <strong>Step 3 of 3</strong>
+                <p class="fs-6 mb-4">Choose payment method</p>
+
+                <div class="fs-5 text-center">
+                    <p>Your payment process is encrypted and you can change your payment method at any time.</p>
+                    <p><strong>Safe for peace of mind.</strong><br><strong>Cancel online easily.</strong></p>
+                </div>
+
+                <div class="d-flex flex-column gap-3 py-3 payment-option">
+                    <input type="radio" id="creditDebitCard" [(ngModel)]="registerDto.paymentOption" class="form-check-input d-none"
+                        value="creditDebitCard" [checked]="selectedPaymentOption === 'creditDebitCard'"
+                        (change)="selectPaymentOption('creditDebitCard')">
+                    <label for="creditDebitCard" [class.selected]="selectedPaymentOption === 'creditDebitCard'">
+                        <div class="d-flex align-items-center justify-content-between fs-5 border rounded px-2">
+                            <div class="d-flex align-items-center">
+                                <span>Credit or Debit Card</span>
+                                <img src="../../../assets/images/visa-mastercard.png" alt="visa-mastercard"
+                                    class="payment-img">
+                            </div>
+                            <fa-icon [icon]="faAngleRight"></fa-icon>
+                        </div>
+                    </label>
+                    <input type="radio" id="digitalWallet" [(ngModel)]="registerDto.paymentOption" class="form-check-input d-none"
+                        value="digitalWallet" [checked]="selectedPaymentOption === 'digitalWallet'"
+                        (change)="selectPaymentOption('digitalWallet')">
+                    <label for="digitalWallet" [class.selected]="selectedPaymentOption === 'digitalWallet'">
+                        <div class="d-flex align-items-center justify-content-between fs-5 border rounded px-2">
+                            <div class="d-flex align-items-center">
+                                <span>Digital Wallet</span>
+                                <img src="../../../assets/images/digital-wallet-vnpay.png" alt="visa-mastercard"
+                                    class="payment-img">
+                            </div>
+                            <fa-icon [icon]="faAngleRight"></fa-icon>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-center my-4">
+                    <button type="submit" (click)="register()" class="btn btn-dark px-5 py-2 rounded-5">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+.card-recipe{
+    width: 25rem;
+}
+
+.card-img-top{
+    height: 18rem;
+    object-fit: cover;
+}
+
+.recipe-title{
+    font-weight: 600;
+}
+
+.view-recipe-btn{
+    width: 40px;
+    height: 40px;
+}

@@ -1,0 +1,21 @@
+<div class="d-flex align-items-center justify-content-center"
+    style="height: 60vh ; background-image: url('../../../assets/images/ice-cream-faq-0.jpg');background-repeat: no-repeat; background-size: cover; background-position: center;">
+    <p class="display-1 text-center text-white text-page-header">FAQS</p>
+</div>
+
+<div class="container py-5">
+    <div class="text-center pb-3">
+        <h2 class="fw-bold">Find Out More About The Ice Cream Shop</h2>
+        <p class="fs-5">You have questions. We have answers.</p>
+    </div>
+    <div *ngFor="let item of faqs; index as i" class="my-2">
+        <div (click)="toggleFaq(item)"
+            class="d-flex align-items-center justify-content-between py-2 px-3 text-white fs-5 bg-warning">
+            <strong>Q.{{i+1}}: {{item.question}}</strong>
+            <fa-icon [icon]="item.isFaqOpen ? faAngleUp : faAngleDown"></fa-icon>
+        </div>
+        <div [@fadeInOut]="item.isFaqOpen ? 'open' : 'closed'">
+            <div *ngIf="item.isFaqOpen" class="fs-6 pt-3 pb-4 px-4"> {{item.answer}} </div>
+        </div>
+    </div>
+</div>
