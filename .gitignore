@@ -3,3 +3,7 @@ BackEnd/app/core/Application/obj/Debug/net7.0/Application.csproj.AssemblyReferen
 BackEnd/app/Infrastructure/persistence/obj/Debug/net7.0/persistence.csproj.AssemblyReference.cache
 BackEnd/app/.vs/app/FileContentIndex
 BackEnd/app/core/Application/obj
+BackEnd/app/Presentation/WebAPI/bin/Debug/net7.0
+BackEnd/app/core/Application/bin/Debug/net7.0
+BackEnd/app/core/Application/obj/Debug/net7.0
+BackEnd

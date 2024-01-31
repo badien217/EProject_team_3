@@ -1,0 +1,38 @@
+<div class="py-4 px-5 bg-light overflow-y-auto main-admin">
+    <a [routerLink]="['/admin/book-management']" class="btn btn-outline-dark mb-3"><fa-icon [icon]="faArrowLeft"></fa-icon></a>
+    <div class="h2 pb-3">Add New Book</div>
+    <form *ngIf="!submitted">
+        <div class="mb-3">
+            <label for="titleInput" class="form-label">Title</label>
+            <input type="text" class="form-control" id="titleInput" name="title" [(ngModel)]="book.title" required>
+            <div class="form-text text-danger">Error title </div>
+        </div>
+        <div class="row g-3 mb-3">
+            <div class="col">
+                <label for="authorInput" class="form-label">Author</label>
+                <input type="text" class="form-control" id="authorInput" name="author" [(ngModel)]="book.author"
+                    required>
+            </div>
+            <div class="col">
+                <label for="priceInput" class="form-label">Price</label>
+                <input type="number" class="form-control" id="priceInput" name="price" [(ngModel)]="book.price"
+                    required>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="imageFileInput" class="form-label">Image</label>
+            <input class="form-control" type="file" id="imageFileInput" name="imageUrl" [(ngModel)]="book.imageUrl"
+                required>
+        </div>
+        <div class="mb-3">
+            <label for="descriptionInput" class="form-label">Description</label>
+            <textarea name="description" class="form-control" rows="5" id="descriptionInput"
+                [(ngModel)]="book.description" required></textarea>
+        </div>
+        <button class="btn btn-success px-5" (click)="saveBook()">Save</button>
+    </form>
+    <div *ngIf="submitted">
+        <h4>Tutorial was submitted successfully!</h4>
+        <button class="btn btn-success" (click)="newBook()">Add</button>
+    </div>
+</div>

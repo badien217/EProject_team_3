@@ -1,0 +1,307 @@
+<div class="d-flex align-items-center hero-container">
+    <div class="container">
+        <div class="w-50 mb-5 bg- text-white pb-5">
+            <div class="display-1 fw-bold mb-2">Ice Cream</div>
+            <div class="display-6">Welcome to the happiest place in the universe.</div>
+            <a [routerLink]="['/menu']" class="btn bg-white rounded-5 px-5 mt-3 text-dark fs-5">Yummy</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <p class="display-5 text-center pb-2">Trending Products</p>
+    <div class='d-flex flex-wrap gap-lg-3 gap-md-3 gap-sm-2 gap-2 align-items-center justify-content-center'>
+        <div *ngFor="let iceCream of iceCreams; index as i" class="card card-ice-cream">
+            <img src="../../../assets/images/{{iceCream.imageUrl}}" class="card-img-top object-fit-contain"
+                alt="{{iceCream.name}}">
+            <div class="card-body text-center rounded-bottom">
+                <div class="d-flex align-items-center justify-content-center overflow-hidden" style="height: 4rem;">
+                    <span class="fs-5 two-line-text">{{iceCream.name}}</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-center stars-rating small">
+                    <fa-icon class="small" [icon]="faStar"></fa-icon>
+                    <fa-icon class="small" [icon]="faStar"></fa-icon>
+                    <fa-icon class="small" [icon]="faStar"></fa-icon>
+                    <fa-icon class="small" [icon]="faStar"></fa-icon>
+                    <fa-icon class="small" [icon]="faStarHalfStroke"></fa-icon>
+                </div>
+                <div class="d-flex align-items-center justify-content-center overflow-hidden" style="height: 2.5rem;">
+                    <span class="two-line-text">{{ iceCream.flavorId ? getFlavorName(iceCream.flavorId) : '' }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-center mt-4">
+        <a [routerLink]="['/menu']" class="btn btn-outline-warning rounded-5 px-5">
+            See all
+            <fa-icon [icon]="faArrowRight" class="small ps-1"></fa-icon>
+        </a>
+    </div>
+</div>
+
+<div class="flavour-container my-5 py-4">
+    <p class="display-5 text-center pb-3">Flavors</p>
+    <div class="container">
+
+        <swiper-container #swiper [slidesPerView]="slidesPerView" autoplay="true" loop="true">
+            <swiper-slide *ngFor="let flavor of flavors; index as i">
+                <div class="d-flex flex-column align-items-center gap-2">
+                    <img src="../../../assets/images/{{flavor.imageUrl}}" alt="{{flavor.name}}"
+                        class="object-fit-cover rounded-circle flavour-img image">
+                    <span class="text-center">{{flavor.name}}</span>
+                </div>
+            </swiper-slide>
+        </swiper-container>
+        <swiper-container #swiperFlavorReverse [slidesPerView]="slidesPerView" autoplay="true" loop="true">
+            <swiper-slide *ngFor="let flavor of flavors.reverse(); index as i">
+                <div class="d-flex flex-column align-items-center gap-2">
+                    <img src="../../../assets/images/{{flavor.imageUrl}}" alt="{{flavor.name}}"
+                        class="object-fit-cover rounded-circle flavour-img image">
+                    <span class="text-center">{{flavor.name}}</span>
+                </div>
+            </swiper-slide>
+        </swiper-container>
+
+    </div>
+</div>
+
+<div class="container">
+    <p class="display-5 text-center pb-2">Recipe Books</p>
+    <div class='d-flex flex-wrap gap-lg-3 gap-md-3 gap-sm-2 gap-2 align-items-center justify-content-center'>
+        <div *ngFor="let book of books; index as i" class="card card-book">
+            <img src="../../../assets/images/{{book.imageUrl}}" class="card-img-top object-fit-contain"
+                alt="{{book.title}}" style="height: 20rem;">
+            <div class="card-body text-center rounded-bottom">
+                <div class="d-flex align-items-center justify-content-center overflow-hidden" style="height: 4rem;">
+                    <a [routerLink]="['/book-detail', book.id]"
+                        class="text-decoration-none text-dark fs-5 two-line-text">{{book.title}}</a>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mt-2">
+                    <div>
+                        <span class="">${{book.price}}</span>
+                        <div class="d-flex align-items-center justify-content-center stars-rating small">
+                            <fa-icon class="small" [icon]="faStar"></fa-icon>
+                            <fa-icon class="small" [icon]="faStar"></fa-icon>
+                            <fa-icon class="small" [icon]="faStar"></fa-icon>
+                            <fa-icon class="small" [icon]="faStar"></fa-icon>
+                            <fa-icon class="small" [icon]="faStarHalfStroke"></fa-icon>
+                        </div>
+                    </div>
+                    <div>
+                        <button
+                            class="d-flex align-items-center justify-content-center btn btn-outline-warning rounded-circle cart-btn">
+                            <fa-icon class="small" [icon]="faCartShopping"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-center mt-4">
+        <a [routerLink]="['/books']" class="btn btn-outline-warning rounded-5 px-5">
+            See all
+            <fa-icon [icon]="faArrowRight" class="small ps-1"></fa-icon>
+        </a>
+    </div>
+</div>
+
+
+<div class="flavour-container my-5 py-4">
+    <p class="display-5 text-center pb-3">100% Fresh Milk, Pure Bliss</p>
+    <div class="container">
+        <div class="row d-flex align-items-center">
+            <div class="col">
+                <img src="../../../assets/images/cow-milk.png" class="w-100" alt="cow-milk" />
+            </div>
+            <div class="col text-center">
+                <p class="fs-3 lh-sm pb-2">Pure Bliss: Crafted with 100% Fresh Milk for an Unforgettable Treat!</p>
+                <div class="fs-5 lh-sm">
+                    Savor the pure delight of our shop—crafted from 100% fresh milk. Our commitment to
+                    quality ensures a wholesome and delicious experience in every creamy scoop. Indulge in the
+                    richness
+                    and smoothness derived from the pure essence of fresh milk. At our Ice Cream Parlour, we believe
+                    in
+                    the simple pleasure of using the best ingredients, guaranteeing freshness in every mouthwatering
+                    spoonful.
+                </div>
+                <a [routerLink]="['/about-us']" class="btn btn-light rounded-5 px-4 mt-4"><span>Read
+                        more</span><fa-icon class="ps-1" [icon]="faArrowRight"></fa-icon></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <p class="display-5 text-center pb-2">Top Recipes</p>
+    <div class='d-flex flex-wrap gap-lg-4 gap-md-3 gap-sm-2 gap-2 align-items-center justify-content-around'>
+        <div *ngFor="let recipe of recipes; index as i" class="card card-recipe">
+            <img src="../../../assets/images/{{recipe.imageUrl}}" class="card-img-top image-recipe"
+                alt="{{recipe.name}}">
+            <div class="card-body rounded-bottom">
+                <div class="d-flex align-items-center justify-content-center overflow-hidden" style="height: 4rem;">
+                    <span class="fs-4 lh-sm two-line-text recipe-title">{{recipe.name}}</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-center overflow-hidden" style="height: 3rem;">
+                    <span class="two-line-text">{{recipe.description}}</span>
+                </div>
+                <a [routerLink]="['/recipes/recipe-detail', recipe.id]"
+                    class="d-flex align-items-center h5 text-decoration-none text-dark mt-3">
+                    View recipe
+                    <fa-icon [icon]="faArrowRight"
+                        class="d-flex align-items-center justify-content-center btn btn-outline-warning rounded-5 ms-2 view-recipe-btn"></fa-icon></a>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-center mt-4">
+        <a [routerLink]="['/recipes']" class="btn btn-outline-warning rounded-5 px-5">
+            See all
+            <fa-icon [icon]="faArrowRight" class="small ps-1"></fa-icon>
+        </a>
+    </div>
+</div>
+
+<div class="flavour-container py-3 px-5 my-5">
+    <div class="d-flex gap-5 py-5">
+        <div class="col">
+            <img src="../../../../assets/images/certificate.png" alt="certificate" class="w-100">
+        </div>
+        <div class="col">
+            <h2>List candidates</h2>
+            <div class="overflow-auto scrollbar" style="height: 400px;">
+                <div *ngFor="let item of testImages; index as i"
+                    class="d-flex align-items-center justify-content-between pt-3 ">
+                    <div class="d-flex align-items-center gap-2 fs-5">
+                        <span class="fw-bold">{{i+1}}</span>
+                        <img src="../../../../assets/images/user-avatar.png" alt="avatar" style="width: 50px;">
+                        <span class="fw-bold">username</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 fs-5">
+                        <fa-icon [icon]="faHeart" class="text-danger"></fa-icon>
+                        <span class="fw-bold">1000</span>
+                    </div>
+                </div>
+                <div *ngFor="let item of testImages; index as i"
+                    class="d-flex align-items-center justify-content-between pt-3">
+                    <div class="d-flex align-items-center gap-2 fs-5">
+                        <span class="fw-bold">{{i+1}}</span>
+                        <img src="../../../../assets/images/user-avatar.png" alt="avatar" style="width: 50px;">
+                        <span class="fw-bold">username</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 fs-5">
+                        <fa-icon [icon]="faHeart" class="text-danger"></fa-icon>
+                        <span class="fw-bold">100</span>
+                    </div>
+                </div>
+                <div *ngFor="let item of testImages; index as i"
+                    class="d-flex align-items-center justify-content-between pt-3">
+                    <div class="d-flex align-items-center gap-2 fs-5">
+                        <span class="fw-bold">{{i+1}}</span>
+                        <img src="../../../../assets/images/user-avatar.png" alt="avatar" style="width: 50px;">
+                        <span class="fw-bold">username</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 fs-5">
+                        <fa-icon [icon]="faHeart" class="text-danger"></fa-icon>
+                        <span class="fw-bold">10000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="d-flex align-items-center justify-content-between">
+        <div class="">
+            <div class="feature p-3 d-flex">
+                <div class="feature-box">
+                    <img src="../../../assets/images/feature-fresh.png" alt="feature-fresh" class="rounded-circle p-1"
+                        style="outline-color: #FFC436; background-color: #FFC436;">
+                </div>
+                <div class="ps-3">
+                    <div class="fs-5">Fresh & Natural</div>
+                    <div>
+                        Garnish with fresh lime a few ice cubes served chilled!
+                    </div>
+                </div>
+            </div>
+            <div class="feature p-3 d-flex">
+                <div class="feature-box">
+                    <img src="../../../assets/images/feature-healthy.png" alt="feature-healthy"
+                        class="rounded-circle p-1" style="outline-color: #A8DF8E; background-color: #A8DF8E;">
+                </div>
+                <div class="ps-3">
+                    <div class="fs-5">100% Healthy</div>
+                    <div>
+                        Add in a few ice cubes. The drink is the best served chilled!
+                    </div>
+                </div>
+            </div>
+            <div class="feature p-3 d-flex">
+                <div class="feature-box">
+                    <img src="../../../assets/images/feature-full-creamy.png" alt="feature-full-creamy"
+                        class="rounded-circle p-1" style="outline-color: #F47C7C; background-color: #F47C7C;">
+                </div>
+                <div class="ps-3">
+                    <div class="fs-5">Full Creamy</div>
+                    <div>
+                        Recommended to serve in a highball. Add in a served chilled!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <img src="../../../assets/images/ice-cream-feature-0.png" alt="feature-img" class="w-100">
+        </div>
+        <div class="">
+            <div class="feature p-3 d-flex justify-content-end justify-content-end text-end">
+                <div class="pe-3">
+                    <div class="fs-5">Gluten-Free Goodness</div>
+                    <div>
+                        Indulge worry-free with our gluten-free options!
+                    </div>
+                </div>
+                <div class="feature-box">
+                    <img src="../../../assets/images/feature-gluten-free.png" alt="feature-gluten-free"
+                        class="rounded-circle p-1" style="outline-color: #D0A2F7; background-color: #D0A2F7;">
+                </div>
+            </div>
+            <div class="feature p-3 d-flex justify-content-end text-end">
+                <div class="pe-3">
+                    <div class="fs-5">Premium Ingredients</div>
+                    <div>
+                        Indulge in richness with our finest-quality ingredients!
+                    </div>
+                </div>
+                <div class="feature-box">
+                    <img src="../../../assets/images/feature-premium-ingredients.png" alt="feature-premium-ingredients"
+                        class="rounded-circle p-1" style="outline-color: #85E6C5; background-color: #85E6C5;">
+                </div>
+            </div>
+            <div class="feature p-3 d-flex justify-content-end text-end">
+                <div class="pe-3">
+                    <div class="fs-5">Seasonal Specials</div>
+                    <div>
+                        Embrace the essence of each season with fresh, festive specials!
+                    </div>
+                </div>
+                <div class="feature-box">
+                    <img src="../../../assets/images/feature-seasonal-special.png" alt="feature-seasonal-special"
+                        class="rounded-circle p-1" style="outline-color: #97DEFF; background-color: #97DEFF;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="container">
+
+    <div class="">
+        <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
+            navigation="true" centered-slides="true" autoplay-delay="2500" autoplay-disable-on-interaction="false"
+            slides-per-view="3" loop="true">
+            <swiper-slide *ngFor="let image of testImages">
+                <img class="swiperImage" src="{{image}}" alt="">
+            </swiper-slide>
+        </swiper-container>
+    </div>
+</div>

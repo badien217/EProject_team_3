@@ -1,0 +1,22 @@
+.card-body{
+    background-color: #FFFBEB;
+}
+
+.stars-rating{
+    color: #FFB000;
+}
+
+.cart-btn{
+    width: 40px;
+    height: 40px;
+}
+
+.card-img-top{
+    height: 350px;
+    width: 100%;
+    object-fit: cover;
+}
+/* 
+.my-pagination ::ng-deep .ngx-pagination {
+    background: red;
+  } */

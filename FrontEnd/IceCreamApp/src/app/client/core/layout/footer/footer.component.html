@@ -1,0 +1,52 @@
+<div class="bg-dark">
+    <footer class="container-fluid px-5 pt-5 pb-3">
+        <div class="d-flex flex-column justify-content-center">
+            <a [routerLink]="['/']" class="text-center py-2">
+                <img src="../../../../assets/images/logo.png" class='logo-white' alt='sample' />
+            </a>
+            <div class="d-flex align-items-center justify-content-center my-2">
+                <button
+                    class="d-flex align-items-center justify-content-center btn btn-outline-light fs-5 rounded-5 footer-icon mx-2">
+                    <fa-icon [icon]="faFacebook"></fa-icon>
+                </button>
+                <button
+                    class="d-flex align-items-center justify-content-center btn btn-outline-light fs-5 rounded-5 footer-icon mx-2">
+                    <fa-icon [icon]="faInstagram"></fa-icon>
+                </button>
+                <button
+                    class="d-flex align-items-center justify-content-center btn btn-outline-light fs-5 rounded-5 footer-icon mx-2">
+                    <fa-icon [icon]="faTiktok"> </fa-icon>
+                </button>
+                <button
+                    class="d-flex align-items-center justify-content-center btn btn-outline-light fs-5 rounded-5 footer-icon mx-2">
+                    <fa-icon [icon]="faYoutube"> </fa-icon>
+                </button>
+            </div>
+            <div class="row text-white my-4">
+                <div class="col text-end border-end">
+                    <p class="fs-3">Get In Touch</p>
+                    <p>19 Le Thanh Nghi Str. - Hai Ba Trung Dist - Hanoi</p>
+                    <p>+012 345 67890</p>
+                </div>
+                <div class="col border-start">
+                    <p class="fs-3">Opening Hours</p>
+                    <p>Monday – Sunday, 8AM – 10PM</p>
+                    <p>Working all weekend</p>
+                </div>
+            </div>
+        </div>
+        <!-- <button>hehe</button> -->
+        <div class="text-center text-white">
+            &#64; 2023
+            <span class="text-warning">Ice Cream Parlour</span>
+            Designed & Developed By
+            <span class="text-warning">Group 3</span>
+        </div>
+    </footer>
+
+    <button *ngIf="showScrollButton" class="btn border-0 position-fixed cursor-pointer z-3 scroll-up-button"
+        (click)="scrollToTop()">
+        <img src="../../../../../assets/images/scroll-up.png" class="scroll-up-img" alt="scroll-up">
+    </button>
+
+</div>

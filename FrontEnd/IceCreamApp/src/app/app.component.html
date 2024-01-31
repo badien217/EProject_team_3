@@ -1,0 +1,4 @@
+<app-header *ngIf="!isAdminRoute && !isAuthRoute"></app-header>
+<app-sidebar *ngIf="isAdminRoute"></app-sidebar>
+<router-outlet></router-outlet>
+<app-footer *ngIf="!isAdminRoute && !isAuthRoute"></app-footer>
