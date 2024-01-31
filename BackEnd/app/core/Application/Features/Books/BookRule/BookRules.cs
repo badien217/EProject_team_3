@@ -1,5 +1,5 @@
 ﻿using Application.Bases;
-using Application.Features.Users.Excaptions;
+
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace Application.Features.Books.BookRule
         public Task BookTitleMostNotBeSame(IList<Book> book, string requestTitle)
         {
 
-            if (book.Any(x => x.Author == requestTitle)) throw new UserTitleMustNotBeSameException();
+            if (book.Any(x => x.Author == requestTitle)) throw new Exception();
             return Task.CompletedTask;
         }
     }

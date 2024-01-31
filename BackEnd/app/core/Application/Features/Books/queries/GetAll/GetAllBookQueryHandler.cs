@@ -1,5 +1,5 @@
 ﻿using Application.Dtos;
-using Application.Features.Users.queries.GetAll;
+
 using Application.Interfaces.AutoMapper;
 using Domain.Entities;
 using MediatR;

@@ -1,4 +1,4 @@
-﻿using Application.Features.Users.command.UpdateUser;
+﻿
 using Application.Interfaces.AutoMapper;
 using Domain.Entities;
 using MediatR;
@@ -26,7 +26,7 @@ namespace Application.Features.Books.command.UpdateBook
 
             var books = await _unitOfWork.GetReadReponsitory<Book>().GetAsync(x => x.Id == request.Id && !x.IsDeleted);
             var map = _autoMapper.Map<Book, UpdateBookCommandReuquest>(request);
-            var BookRole = await _unitOfWork.GetReadReponsitory<Role>().GetAsync(x => x.Id == books.Id);
+
            
             await _unitOfWork.GetWriteReponsitory<Book>().UpdateAsync(books);
             await _unitOfWork.SaveAsync();

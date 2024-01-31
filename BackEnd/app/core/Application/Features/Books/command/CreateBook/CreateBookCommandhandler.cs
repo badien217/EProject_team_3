@@ -1,5 +1,4 @@
-﻿using Application.Features.Users.command.CreateUser;
-using Domain.Entities;
+﻿using Domain.Entities;
 using MediatR;
 using persistence.Interfaces.UnitOfWorks;
 using System;
