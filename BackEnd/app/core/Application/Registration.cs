@@ -1,4 +1,5 @@
-﻿using Application.Exceptions;
+﻿using Application.Bases;
+using Application.Exceptions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,19 @@ namespace Application
             var assembly = Assembly.GetExecutingAssembly();
             services.AddTransient<ExceptionMiddleware>();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assembly));
+            services.AddTransient<ExceptionMiddleware>();
+            services.AddRulesFromAssemblyContaining(assembly, typeof(BaseRule));
+        }
+        private static IServiceCollection AddRulesFromAssemblyContaining(
+           this IServiceCollection services,
+           Assembly assembly,
+           Type type)
+        {
+            var types = assembly.GetTypes().Where(t => t.IsSubclassOf(type) && type != t).ToList();
+            foreach (var item in types)
+                services.AddTransient(item);
+
+            return services;
         }
     }
 }
