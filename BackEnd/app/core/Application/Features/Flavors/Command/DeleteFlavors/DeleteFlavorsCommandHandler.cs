@@ -17,17 +17,15 @@ namespace Application.Features.Flavors.Command.DeleteFlavors
         {
             this.unitOfWork = unitOfWork;
         }
-       
-
-        public async Task<Unit> Handle(DeleteFlavorsCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteUserCommandRequest request, CancellationToken cancellationToken)
         {
-            var flavor = await unitOfWork.GetReadReponsitory<Flavor>().GetAsync(x => x.Id == request.Id && !x.IsDeleted);
+            var flavor = await unitOfWork.GetReadReponsitory<Book>().GetAsync(x => x.Id == request.Id && !x.IsDeleted);
             flavor.IsDeleted = true;
 
-            await unitOfWork.GetWriteReponsitory<Flavor>().UpdateAsync(flavor);
+            await unitOfWork.GetWriteReponsitory<Book>().UpdateAsync(flavor);
             await unitOfWork.SaveAsync();
 
-            return Unit.Value; 
+            return Unit.Value;
         }
     }
 }

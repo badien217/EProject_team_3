@@ -17,3 +17,22 @@ D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\De
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\ref\persistence.dll
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\Application.dll
 D:\eProject_team_3\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\Application.pdb
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\persistence.deps.json
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\persistence.runtimeconfig.json
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\persistence.dll
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\persistence.pdb
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\Application.dll
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\Domain.dll
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\Application.pdb
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\Domain.pdb
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.csproj.AssemblyReference.cache
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.AssemblyInfoInputs.cache
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.AssemblyInfo.cs
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.csproj.CoreCompileInputs.cache
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.csproj.CopyComplete
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.dll
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\refint\persistence.dll
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.pdb
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.genruntimeconfig.cache
+C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\ref\persistence.dll

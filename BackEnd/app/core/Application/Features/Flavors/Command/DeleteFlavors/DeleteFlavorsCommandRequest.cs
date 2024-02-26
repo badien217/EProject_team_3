@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Flavors.Command.DeleteFlavors
 {
-    public class DeleteFlavorsCommandRequest :IRequest<Unit>
+    public class DeleteFlavorsCommandRequest : IRequest<Unit>
     {
-
-        public int Id { get; set; }
 
     }
 }

@@ -26,9 +26,7 @@ namespace Domain.Entities
             phone = Phone;
             SubcriptionType = subcriptionType;
             PaymentStatus = paymentStatus;  
-            RoleId = roleId;
-          
-                
+            RoleId = roleId;        
         }
     }
 }

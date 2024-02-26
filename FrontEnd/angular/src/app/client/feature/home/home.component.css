@@ -1,0 +1,89 @@
+.hero-container {
+    height: 95%;
+    background-image: url('../../../../assets/images/bg-hero.png');
+    background-size: cover;
+    background-position: bottom;
+}
+
+.flavour-container {
+    background-color: #FAEAB1;
+}
+
+.flavour-img {
+    width: 200px;
+    height: 200px;
+}
+
+.feature img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    outline: 2px dotted;
+    outline-offset: 2px;
+}
+
+.card-body {
+    background-color: #FFFBEB;
+}
+
+.card-ice-cream {
+    width: 18rem;
+}
+
+.card-book{
+    width: 18rem;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 16rem;
+}
+
+.swiperImage {
+    width: 355px;
+    height: 300px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #fff;
+    -webkit-text-stroke: 1px #ffb848;
+}
+
+.card-recipe{
+    width: 25rem;
+}
+
+
+.image-recipe{
+    height: 18rem;
+    object-fit: cover;
+}
+
+.recipe-title{
+    font-weight: 600;
+}
+
+.view-recipe-btn{
+    width: 40px;
+    height: 40px;
+}
+
+
+.scrollbar{
+    padding-right: 15px;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #ffffff;
+  border-radius: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #FFB000;
+  border-radius: 10px;
+}

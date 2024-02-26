@@ -25,7 +25,7 @@ namespace Application.Features.Flavors.Command.UpdateFlavors
         public async Task Handle(UpdateFlavorsCommandReuquest request, CancellationToken cancellationToken)
         {
 
-            var flavor = await _unitOfWork.GetReadReponsitory<Flavor>().GetAsync(x => x.Id == request.Id && !x.IsDeleted);
+            var flavor = await _unitOfWork.GetReadReponsitory<>(Flavor).GetAsync(x => x.Id == request.Id && !x.IsDeleted);
 
 
             var map = _autoMapper.Map<Flavor, UpdateFlavorsCommandReuquest>(request);

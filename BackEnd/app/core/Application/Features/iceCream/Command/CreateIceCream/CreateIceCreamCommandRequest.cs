@@ -13,6 +13,6 @@ namespace Application.Features.iceCream.Command.CreateIceCream
         public string Name { get; set; }
         public int Flavorld { get; set; }
         public string ImageUrl { get; set; }
-        
+        public ICollection<Flavor> Flavor { get; set; }
     }
 }

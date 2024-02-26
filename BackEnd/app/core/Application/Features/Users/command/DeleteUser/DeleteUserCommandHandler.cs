@@ -19,10 +19,10 @@ namespace Application.Features.Users.command.DeleteUser
         }
         public async Task<Unit> Handle(DeleteUserCommandRequest request, CancellationToken cancellationToken)
         {
-            var users = await unitOfWork.GetReadReponsitory<User>().GetAsync(x => x.Id == request.Id && !x.IsDeleted);
+            var users = await unitOfWork.GetReadReponsitory<Book>().GetAsync(x => x.Id == request.Id && !x.IsDeleted);
             users.IsDeleted = true;
 
-            await unitOfWork.GetWriteReponsitory<User>().UpdateAsync(users);
+            await unitOfWork.GetWriteReponsitory<Book>().UpdateAsync(users);
             await unitOfWork.SaveAsync();
 
             return Unit.Value;

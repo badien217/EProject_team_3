@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain;
+using Domain.Entities;
 
 namespace Application.Interfaces.Reponsitory
 {
@@ -15,7 +16,6 @@ namespace Application.Interfaces.Reponsitory
         Task HardDeleteAsync(T entity);
         Task<T> UpdateAsync(T entity);
         Task HardDeleteRangerAsync(IList<T> entity);
-
-
+       
     }
 }

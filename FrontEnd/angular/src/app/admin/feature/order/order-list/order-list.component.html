@@ -1,0 +1,45 @@
+<div class="py-4 px-5 bg-light overflow-y-auto main-admin">
+    <div class="h2 pb-3">Orders Management</div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Address</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Payment Option</th>
+                <th scope="col">Transaction Status</th>
+                <th scope="col">Order Date</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let order of orders | paginate: { itemsPerPage: 10, currentPage: page }; let i = index" [class.active]="i == currentIndex">
+            <tr>
+                <th scope="row">{{i+1}}</th>
+                <td>{{order.name}}</td>
+                <td>{{order.email}}</td>
+                <td>{{order.phone}}</td>
+                <td>{{order.address}}</td>
+                <td>{{order.amount}}</td>
+                <td>{{order.paymentOption}}</td>
+                <td>{{order.transactionStatus}}</td>
+                <td>{{order.orderDate | date}}</td>
+                <td>
+                    <div class="d-flex flex-column gap-1">
+                        <button class="bg-warning-subtle text-warning border-0 rounded btn-action"><fa-icon
+                                [icon]="faPenToSquare"></fa-icon></button>
+                        <button class="bg-danger-subtle text-danger border-0 rounded btn-action"><fa-icon
+                                [icon]="faTrash"></fa-icon></button>
+                    </div>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex align-items-center justify-content-center mt-5">
+        <pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="Prev"
+            nextLabel="Next"></pagination-controls>
+    </div>
+</div>

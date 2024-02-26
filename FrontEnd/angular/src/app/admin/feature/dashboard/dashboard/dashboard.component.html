@@ -1,0 +1,83 @@
+<div class="py-4 px-5 bg-light overflow-y-auto main-admin">
+    <div class="h2 pb-3">Dashboard</div>
+    <div class="row d-flex align-items-center">
+        <div class="col-lg-4 col-md-5 py-2">
+            <div class="d-flex align-items-center justify-content-between bg-white shadow-sm rounded-3 p-3">
+                <div class="d-flex align-items-center">
+                    <fa-icon class="border-0 rounded fs-4 btn-dashboard p-3 d-flex align-items-center justify-content-center" [icon]="faBook"
+                        style="background-color: #ebeeff;color: #3956ff;"></fa-icon>
+                    <div class="d-flex flex-column ps-2">
+                        <span class="fs-5">Total Books</span>
+                        <span>In month</span>
+                    </div>
+                </div>
+                <div class="fs-3 fw-bold mx-3">{{totalBooks}}</div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-5 py-2">
+            <div class="d-flex align-items-center justify-content-between bg-white shadow-sm rounded-3 p-3">
+                <div class="d-flex align-items-center">
+                    <fa-icon class="border-0 rounded fs-4 btn-dashboard p-3 d-flex align-items-center justify-content-center" [icon]="faBookOpen"
+                        style="background-color: #ffe7eb;color: #ff1743;"></fa-icon>
+                    <div class="d-flex flex-column ps-2">
+                        <span class="fs-5">Total Recipes</span>
+                        <span>In month</span>
+                    </div>
+                </div>
+                <div class="fs-3 fw-bold mx-3">{{totalRecipes}}</div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-5 py-2">
+            <div class="d-flex align-items-center justify-content-between bg-white shadow-sm rounded-3 p-3">
+                <div class="d-flex align-items-center">
+                    <fa-icon class="border-0 rounded fs-4 btn-dashboard p-3 d-flex align-items-center justify-content-center" [icon]="faComment"
+                        style="background-color: #f6f4ff;color: #8d75ff;"></fa-icon>
+                    <div class="d-flex flex-column ps-2">
+                        <span class="fs-5">Total Feedback</span>
+                        <span>In month</span>
+                    </div>
+                </div>
+                <div class="fs-3 fw-bold mx-3">{{totalFeedback}}</div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-5 py-2">
+            <div class="d-flex align-items-center justify-content-between bg-white shadow-sm rounded-3 p-3">
+                <div class="d-flex align-items-center">
+                    <fa-icon class="border-0 rounded fs-4 btn-dashboard p-3 d-flex align-items-center justify-content-center" [icon]="faIceCream"
+                        style="background-color: #fff5e9;color: #ffa928;"></fa-icon>
+                    <div class="d-flex flex-column ps-2">
+                        <span class="fs-5">Total Products</span>
+                        <span>In month</span>
+                    </div>
+                </div>
+                <div class="fs-3 fw-bold mx-3">{{totalProducts}}</div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-5 py-2">
+            <div class="d-flex align-items-center justify-content-between bg-white shadow-sm rounded-3 p-3">
+                <div class="d-flex align-items-center">
+                    <fa-icon class="border-0 rounded fs-4 btn-dashboard p-3 d-flex align-items-center justify-content-center" [icon]="faUser"
+                        style="background-color: #edf9df;color: #71c157;"></fa-icon>
+                    <div class="d-flex flex-column ps-2">
+                        <span class="fs-5">Total User</span>
+                        <span>In month</span>
+                    </div>
+                </div>
+                <div class="fs-3 fw-bold mx-3">{{totalUsers}}</div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-5 py-2">
+            <div class="d-flex align-items-center justify-content-between bg-white shadow-sm rounded-3 p-3">
+                <div class="d-flex align-items-center">
+                    <fa-icon class="border-0 rounded fs-4 btn-dashboard p-3 d-flex align-items-center justify-content-center" [icon]="faCartShopping"
+                        style="background-color: #ffeee7;color: #fe5620;"></fa-icon>
+                    <div class="d-flex flex-column ps-2">
+                        <span class="fs-5">Total Orders</span>
+                        <span>In month</span>
+                    </div>
+                </div>
+                <div class="fs-3 fw-bold mx-3">{{totalOrders}}</div>
+            </div>
+        </div>
+      
+    </div>

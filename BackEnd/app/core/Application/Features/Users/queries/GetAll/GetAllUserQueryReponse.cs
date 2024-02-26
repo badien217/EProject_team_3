@@ -16,5 +16,6 @@ namespace Application.Features.Users.queries.GetAll
         public bool PaymentStatus { get; set; }
         public RoleDto role { get;set; }  
 
+
     }
 }

@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Feedbacks\Exceptions\**" />
+    <Compile Remove="Features\Feedbacks\FeedbacksRule\**" />
+    <Compile Remove="Features\Flavors\**" />
+    <Compile Remove="Features\IceCreams\**" />
+    <EmbeddedResource Remove="Features\Feedbacks\Exceptions\**" />
+    <EmbeddedResource Remove="Features\Feedbacks\FeedbacksRule\**" />
+    <EmbeddedResource Remove="Features\Flavors\**" />
+    <EmbeddedResource Remove="Features\IceCreams\**" />
+    <None Remove="Features\Feedbacks\Exceptions\**" />
+    <None Remove="Features\Feedbacks\FeedbacksRule\**" />
+    <None Remove="Features\Flavors\**" />
+    <None Remove="Features\IceCreams\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.9.0" />
     <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
@@ -27,10 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Feedbacks\FeedbacksRule\" />
-    <Folder Include="Features\Feedbacks\Exceptions\" />
-    <Folder Include="Features\IceCreams\" />
-    <Folder Include="Features\Flavors\" />
     <Folder Include="Features\Steps\" />
     <Folder Include="Features\Recipes\" />
   </ItemGroup>

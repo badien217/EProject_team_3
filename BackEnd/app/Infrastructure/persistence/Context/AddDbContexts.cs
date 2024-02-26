@@ -15,6 +15,7 @@ namespace persistence.Context
         public AddDbContexts(DbContextOptions options) : base(options) {
         }
         public DbSet<User> Users { get; set; }
+        
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }

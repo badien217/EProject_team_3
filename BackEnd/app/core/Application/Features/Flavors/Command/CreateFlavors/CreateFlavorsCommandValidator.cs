@@ -14,7 +14,7 @@ namespace Application.Features.Flavors.Command.CreateFlavors
         {
             RuleFor(x => x.Name).NotEmpty();
             RuleFor(x => x.ImageUrl).NotEmpty();
-            
+            RuleFor(x => x.iceCream).NotEmpty();
            
         }
 

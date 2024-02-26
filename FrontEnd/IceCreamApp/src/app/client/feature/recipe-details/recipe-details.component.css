@@ -1,0 +1,33 @@
+.recipe-main-img{
+    border-bottom-left-radius: 80px;
+    }
+    
+    .recipe-container{
+        background-color: #FFFBEB;
+    }
+    
+    .card-recipe{
+        width: 25rem;
+    }
+    
+    .card-img-top{
+        height: 18rem;
+        object-fit: cover;
+    }
+    
+    .recipe-title{
+        font-weight: 600;
+    }
+    
+    .view-recipe-btn{
+        width: 40px;
+        height: 40px;
+    }
+    
+    .reviewer-avatar{
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+    }
+    
+    
