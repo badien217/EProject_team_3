@@ -16,6 +16,7 @@
             "outputPath": "dist/ice-cream-app",
             "index": "src/index.html",
             "main": "src/main.ts",
+           
             "polyfills": [
               "zone.js"
             ],

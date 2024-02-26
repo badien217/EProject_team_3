@@ -24,9 +24,7 @@ namespace Application.Features.Steps.Command.UpdateSteps
 
         public async Task Handle(UpdateStepsCommandRequest request, CancellationToken cancellationToken)
         {
-            var step = await _unitOfWork.GetReadReponsitory<Step>().GetAsync(x => x.Id == request.Id && !x.IsDeleted);
-
-
+            var step = await _unitOfWork.GetReadReponsitory<Step>().GetAsync(x => x.Id == request.Id && !x.IsDeleted); 
             await _unitOfWork.GetWriteReponsitory<Step>().UpdateAsync(step);
             await _unitOfWork.SaveAsync();
         }

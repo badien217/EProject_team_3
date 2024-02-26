@@ -23,8 +23,7 @@ export class RegisterComponent {
   selectedPaymentOption: string = 'creditDebitCard';
 
   registerDto: Register = {
-    username: '',
-    name: '',
+    fullname: '',
     email: '',
     password: '',
     phone: '',
@@ -36,18 +35,14 @@ export class RegisterComponent {
 
   register(): void {
     const data = {
-      username: this.registerDto.username,
-      name: this.registerDto.name,
+      fullname: this.registerDto.fullname,
       email: this.registerDto.email,
-      phone: this.registerDto.phone,
       password: this.registerDto.password,
+      phone: this.registerDto.phone,
       subscriptionType: this.registerDto.subscriptionType,
       paymentOption: this.registerDto.paymentOption
     }
-
-    // console.log(data);
-
-    this.authService.register(data).subscribe(()=>{
+    this.authService.registerUser(data).subscribe(()=>{
       console.log(data);
       this.router.navigate(['/auth/login']);
     });  

@@ -1,4 +1,6 @@
 ﻿using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,14 +11,11 @@ using System.Threading.Tasks;
 
 namespace persistence.Context
 {
-    public class AddDbContexts : DbContext
+    public class AddDbContexts : IdentityDbContext<User,Role,Guid>
     {
         public AddDbContexts() { }
         public AddDbContexts(DbContextOptions options) : base(options) {
-        }
-        public DbSet<User> Users { get; set; }
-        
-        public DbSet<Admin> Admins { get; set; }
+        } 
         public DbSet<Book> Books { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Flavor> Flavor { get; set; }
@@ -24,7 +23,7 @@ namespace persistence.Context
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
-        public DbSet<Role> Roles { get; set; }
+       
         public DbSet<Step> Steps { get; set; }
        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

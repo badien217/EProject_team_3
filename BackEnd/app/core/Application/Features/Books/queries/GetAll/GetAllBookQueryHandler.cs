@@ -1,5 +1,5 @@
 ﻿using Application.Dtos;
-using Application.Features.Users.queries.GetAll;
+
 using Application.Interfaces.AutoMapper;
 using Domain.Entities;
 using MediatR;
@@ -26,8 +26,6 @@ namespace Application.Features.Books.queries.GetAll
         public async Task<IList<GetAllBookQueryReponse>> Handle(GetAllBookQueryRequest request, CancellationToken cancellationToken)
         {
             var books = await _unitOfWork.GetReadReponsitory<Book>().GetAllAsync();
-            var rolers = _mapper.Map<RoleDto, Role>(new Role());
-
             var map = _mapper.Map<GetAllBookQueryReponse, Book>(books);
             return map;
         }

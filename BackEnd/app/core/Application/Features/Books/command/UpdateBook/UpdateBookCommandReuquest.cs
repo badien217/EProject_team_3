@@ -9,7 +9,7 @@ namespace Application.Features.Books.command.UpdateBook
 {
     public class UpdateBookCommandReuquest : IRequest
     {
-        internal readonly int Id;
+        public  int Id { get; set; }
 
         public string Title { get; set; }
         public string Author { get; set; }

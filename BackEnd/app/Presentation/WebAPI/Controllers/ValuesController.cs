@@ -1,7 +1,4 @@
-﻿using Application.Features.Users.command.CreateUser;
-using Application.Features.Users.command.DeleteUser;
-using Application.Features.Users.command.UpdateUser;
-using Application.Features.Users.queries.GetAll;
+﻿
 using Application.Features.Feedbacks.Queries.GetAll;
 using Application.Features.Feedbacks.Command.CreateFeedbacks;
 using Application.Features.Feedbacks.Command.UpdateFeedbacks;
@@ -10,6 +7,9 @@ using Application.Features.Feedbacks.Queries.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Application.Features.Auths.Command.Register;
+using Application.Features.Books.queries.GetAll;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
@@ -23,17 +23,21 @@ namespace WebAPI.Controllers
             this.mediator = mediator;
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAllUser()
         {
-            var reponse = await mediator.Send(new GetAllFeedbackRequest());
+            var reponse = await mediator.Send(new GetAllBookQueryRequest());
             return Ok(reponse);
         }
+
         [HttpPost] 
         public async Task<IActionResult> CreateUser (CreateFeedbackCommandRequest requeste)
         {
             await mediator.Send(requeste);
             return Ok();
         }
+
+       
         [HttpPost]
         public async Task<IActionResult> UpdateUser(UpdateFeedbackCommandRRequest requeste)
         {
@@ -52,5 +56,6 @@ namespace WebAPI.Controllers
             var reponse = await mediator.Send(new GetFeebbackByIDQueriesRequest());
             return Ok(reponse);
         }
+
     }
 }

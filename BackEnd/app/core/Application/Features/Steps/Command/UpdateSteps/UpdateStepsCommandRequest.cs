@@ -9,6 +9,7 @@ namespace Application.Features.Steps.Command.UpdateSteps
 {
     public class UpdateStepsCommandRequest : IRequest
     {
+        public int Id { get; set; }
         public string Content { get; set; }
         public string ImageUrl { get; set; }
         public int RecipeId { get; set; }

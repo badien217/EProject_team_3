@@ -61,7 +61,6 @@ export class AddRecipeComponent {
 
   createRecipe() {
     this.recipeService.createRecipe(this.recipe).subscribe((createdRecipe) => {
-      // Handle the response as needed
       console.log('Recipe created:', createdRecipe);
     });
   }

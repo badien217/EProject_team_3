@@ -1,6 +1,10 @@
-﻿using Application.Features.Feedbacks.Command.CreateFeedbacks;
+﻿using Application.Bases;
+using Application.Features.Books.BookRule;
+using Application.Features.Feedbacks.Command.CreateFeedbacks;
+using Application.Interfaces.AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using persistence.Interfaces.UnitOfWorks;
 using System;
 using System.Collections.Generic;
@@ -10,15 +14,17 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Steps.Command.CreateSteps
 {
-    public class CreateStepsCommandHandler : IRequestHandler<CreateStepsCommandRequest>
+    public class CreateStepsCommandHandler : BaseHandler, IRequestHandler<CreateStepsCommandRequest>
     {
 
         public readonly IUnitOfWork _unitOfWork;
-        public CreateStepsCommandHandler(IUnitOfWork unitOfWork)
+        public CreateStepsCommandHandler(IUnitOfWork unitOfWork, IAutoMapper mapper, IHttpContextAccessor httpContextAccessor, BookRules bookRules) : base(mapper, unitOfWork, httpContextAccessor)
         {
             _unitOfWork = unitOfWork;
+            
+
         }
-        public CreateStepsCommandHandler() { }
+        
         public async System.Threading.Tasks.Task Handle(CreateStepsCommandRequest request, CancellationToken cancellationToken)
         {
             Step steps = new(request.Content, request.ImageUrl, request.RecipeId);
