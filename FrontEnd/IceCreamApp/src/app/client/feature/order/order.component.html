@@ -3,108 +3,149 @@
         <div class="col py-5 ps-5">
             <div class="d-flex align-items-center gap-4">
                 <p class="display-6 fw-bold">Shopping Cart</p>
-                <p class="fs-4 mb-0">(3 items)</p>
+                <p class="fs-4 mb-0">({{ cartDetailsWithBooks.length }} items)</p>
             </div>
-            <div class="d-flex justify-content-between border rounded p-2 my-2">
-                <div class="d-flex">
-                    <img src="../../../assets/images/ice-cream-book-1.png" alt="ice-cream-book-1" class="book-img">
-                    <div class="d-flex flex-column justify-content-center ps-3 gap-2">
-                        <p class="fs-4">Sweet Scoops: A Journey Through Ice Cream Delights</p>
-                        <p class="fs-5"><strong>Qty: </strong><span>1</span></p>
-                        <p class="fs-4 fw-bold text-danger price">$9.99</p>
+            <div *ngFor="let item of cartDetailsWithBooks">
+                <div class="d-flex justify-content-between border rounded p-2 my-2">
+                    <div class="d-flex">
+                        <img [src]="'../../../assets/images/' + item.book.imageUrl" alt="{{ item.book.title }}"
+                            class="book-img">
+                        <div class="d-flex flex-column justify-content-center ps-3 gap-2">
+                            <div class="book-title">{{ item.book.title }}</div>
+                            <div class="d-flex align-items-center gap-2 py-2"><strong>Qty: </strong>
+                                <div class="input-group">
+                                    <button (click)="updateCartDetailQuantity(item.cartDetail, false)"
+                                        class="border-1 border-secondary-subtle rounded-start d-flex align-items-center justify-content-center">
+                                        <fa-icon class="p-1 icon-quantity" [icon]="faMinus"></fa-icon>
+                                    </button>
+
+                                    <input type="number" [(ngModel)]="item.cartDetail.quantity"
+                                        onchange="item.cartDetail.quantity"
+                                        class="rounded-0 border-1 border-secondary-subtle text-center input-quantity">
+
+                                    <button (click)="updateCartDetailQuantity(item.cartDetail, true)"
+                                        class="border-1 border-secondary-subtle rounded-end d-flex align-items-center justify-content-center">
+                                        <fa-icon class="p-1 icon-quantity" [icon]="faPlus"></fa-icon>
+                                    </button>
+                                </div>
+
+                            </div>
+                            <div class="fs-4 fw-bold text-danger price">{{ (item.book.price *
+                                item.cartDetail.quantity) | currency }}</div>
+                        </div>
                     </div>
+                    <button (click)="removeCartDetail(item.cartDetail.id)"
+                        class="btn btn-outline-danger d-flex align-items-center justify-content-center rounded-circle delete-btn">
+                        <fa-icon [icon]="faXmark"></fa-icon>
+                    </button>
                 </div>
-                <button
-                    class="btn btn-outline-danger d-flex align-items-center justify-content-center rounded-circle delete-btn">
-                    <fa-icon [icon]="faXmark"></fa-icon></button>
-            </div>
-            <div class="d-flex justify-content-between border rounded p-2 my-2">
-                <div class="d-flex">
-                    <img src="../../../assets/images/ice-cream-book-1.png" alt="ice-cream-book-1" class="book-img">
-                    <div class="d-flex flex-column justify-content-center ps-3 gap-2">
-                        <p class="fs-4">Sweet Scoops: A Journey Through Ice Cream Delights</p>
-                        <p class="fs-5"><strong>Qty: </strong><span>1</span></p>
-                        <p class="fs-4 fw-bold text-danger price">$9.99</p>
-                    </div>
-                </div>
-                <button
-                    class="btn btn-outline-danger d-flex align-items-center justify-content-center rounded-circle delete-btn">
-                    <fa-icon [icon]="faXmark"></fa-icon></button>
-            </div>
-            <div class="d-flex justify-content-between border rounded p-2 my-2">
-                <div class="d-flex">
-                    <img src="../../../assets/images/ice-cream-book-1.png" alt="ice-cream-book-1" class="book-img">
-                    <div class="d-flex flex-column justify-content-center ps-3 gap-2">
-                        <p class="fs-4">Sweet Scoops: A Journey Through Ice Cream Delights</p>
-                        <p class="fs-5"><strong>Qty: </strong><span>1</span></p>
-                        <p class="fs-4 fw-bold text-danger price">$9.99</p>
-                    </div>
-                </div>
-                <button
-                    class="btn btn-outline-danger d-flex align-items-center justify-content-center rounded-circle delete-btn">
-                    <fa-icon [icon]="faXmark"></fa-icon></button>
+
             </div>
         </div>
-        <div class="col-lg-4 bg-light py-5">
+        <form #orderForm=ngForm (ngSubmit)="createOrder()" class="col-lg-4 py-5">
             <div class="fs-5">
                 <div class="py-3"> <strong>Buyer information</strong></div>
-                <form>
+                <div>
                     <div class="mb-3">
                         <label for="nameInput" class="form-label mb-1 h6">Name</label>
-                        <input type="text" class="form-control" id="nameInput" placeholder="Enter your name" />
+                        <input type="text" class="form-control" id="nameInput" name="name" [(ngModel)]="order.name"
+                            placeholder="Enter your name" />
                     </div>
                     <div class="mb-3">
                         <label for="emailInput" class="form-label mb-1 h6">Email</label>
-                        <input type="text" class="form-control" id="emailInput" placeholder="Enter your email" />
+                        <input type="text" class="form-control" id="emailInput" name="email" [(ngModel)]="order.email"
+                            placeholder="Enter your email" />
                     </div>
                     <div class="mb-3">
                         <label for="phoneInput" class="form-label mb-1 h6">Phone</label>
-                        <input type="text" class="form-control" id="phoneInput" placeholder="Enter your phone" />
+                        <input type="text" class="form-control" id="phoneInput" name="phone" [(ngModel)]="order.phone"
+                            placeholder="Enter your phone" />
                     </div>
                     <div class="mb-3">
                         <label for="addressInput" class="form-label mb-1 h6">Address</label>
-                        <textarea rows="3" class="form-control" id="addressInput"
-                            placeholder="Enter your address"></textarea>
+                        <textarea rows="3" class="form-control" id="addressInput" name="address"
+                            [(ngModel)]="order.address" placeholder="Enter your address"></textarea>
                     </div>
-                </form>
+                </div>
             </div>
             <div class="fs-5">
                 <div class="py-3"> <strong>Payment Method</strong></div>
-                <div class="d-flex align-items-center justify-content-between border rounded px-2 py-1 my-2">
-                    <div>
-                        <span>Credit or Debit Card</span>
-                        <img src="../../../assets/images/visa-mastercard.png" alt="visa-mastercard"
-                            class="payment-credit-img">
-                    </div>
-                    <button class="btn"><fa-icon [icon]="faAngleRight"></fa-icon></button>
-                </div>
-                <div class="d-flex align-items-center justify-content-between border rounded px-2 py-1 my-2">
-                    <div>
-                        <span>Payment on delivery</span>
-                    </div>
-                    <button class="btn"><fa-icon [icon]="faAngleRight"></fa-icon></button>
+                <div class="d-flex flex-column gap-2 py-3 payment-option">
+                    <input type="radio" id="creditDebitCard" class="form-check-input d-none" value="Credit/Debit Card"
+                        name="paymentOption" [(ngModel)]="order.paymentOption"
+                        [checked]="selectedPaymentOption === 'creditDebitCard'"
+                        (change)="selectPaymentOption('creditDebitCard')">
+                    <label for="creditDebitCard" [class.selected]="selectedPaymentOption === 'creditDebitCard'">
+                        <div class="d-flex align-items-center justify-content-between fs-5 border rounded px-2">
+                            <div class="d-flex align-items-center">
+                                <span>Credit or Debit Card</span>
+                                <img src="../../../assets/images/visa-mastercard.png" alt="visa-mastercard"
+                                    class="payment-credit-img">
+                            </div>
+                            <fa-icon [icon]="faAngleRight"></fa-icon>
+                        </div>
+                    </label>
+
+                    <input type="radio" id="digitalWallet" class="form-check-input d-none" value="Digital Wallet"
+                        name="paymentOption" [(ngModel)]="order.paymentOption"
+                        [checked]="selectedPaymentOption === 'digitalWallet'"
+                        (change)="selectPaymentOption('digitalWallet')">
+                    <label for="digitalWallet" [class.selected]="selectedPaymentOption === 'digitalWallet'">
+                        <div class="d-flex align-items-center justify-content-between fs-5 border rounded px-2">
+                            <div class="d-flex align-items-center">
+                                <span>Digital Wallet</span>
+                                <img src="../../../assets/images/digital-wallet-vnpay.png" alt="visa-mastercard"
+                                    class="payment-credit-img">
+                            </div>
+                            <fa-icon [icon]="faAngleRight"></fa-icon>
+                        </div>
+                    </label>
+
+                    <input type="radio" id="paymentOnDelivery" class="form-check-input d-none"
+                        value="Payment on delivery" name="paymentOption" [(ngModel)]="order.paymentOption"
+                        [checked]="selectedPaymentOption === 'paymentOnDelivery'"
+                        (change)="selectPaymentOption('paymentOnDelivery')">
+                    <label for="paymentOnDelivery" [class.selected]="selectedPaymentOption === 'paymentOnDelivery'">
+                        <div class="d-flex align-items-center justify-content-between fs-5 border rounded px-2">
+                            <div class="d-flex align-items-center py-1">
+                                <span>Payment on delivery</span>
+                            </div>
+                            <fa-icon [icon]="faAngleRight"></fa-icon>
+                        </div>
+                    </label>
+
                 </div>
             </div>
 
             <div class="fs-5 my-4">
-                <div class="d-flex align-items-center justify-content-between py-3">
-                    <strong>Subtotal</strong>
-                    <span>$9.99</span>
+                <div class="pb-3">
+                    <span class="fw-bold pe-3">Total:</span>
+                    <span class="fs-2 fw-bold"> {{ calculateTotalAmount() | currency }}</span>
                 </div>
-                <div class="d-flex align-items-center justify-content-between py-3">
-                    <strong>Shipping costs</strong>
-                    <span>FREE!</span>
-                </div>
-                <div class="d-flex align-items-center justify-content-between">
-                    <div class="d-flex flex-column gap-3">
-                        <span>Total</span>
-                        <span class="fs-2 fw-bold">$10.99</span>
+                <button type="submit" [disabled]="!orderForm.valid" class="btn rounded p-0">
+                    <div class="checkout-btn-container d-flex position-relative border rounded">
+                        <div
+                            class="left-side d-flex align-items-center justify-content-center overflow-hidden position-relative rounded cursor-pointer">
+                            <div class="card-checkout">
+                                <div class="card-line"></div>
+                                <div class="buttons"></div>
+                            </div>
+                            <div class="post">
+                                <div class="post-line"></div>
+                                <div class="screen">
+                                    <div class="dollar">$</div>
+                                </div>
+                                <div class="numbers"></div>
+                                <div class="numbers-line2"></div>
+                            </div>
+                        </div>
+                        <div
+                            class="right-side d-flex align-items-center justify-content-between overflow-hidden position-relative cursor-pointer">
+                            <div class="mx-2 fw-bold">Checkout</div>
+                        </div>
                     </div>
-                    <button class="btn btn-lg btn-warning text-white fs-5">Checkout</button>
-                </div>
-
+                </button>
             </div>
-
-        </div>
+        </form>
     </div>
 </div>

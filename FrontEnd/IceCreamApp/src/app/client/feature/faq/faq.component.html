@@ -10,11 +10,11 @@
     </div>
     <div *ngFor="let item of faqs; index as i" class="my-2">
         <div (click)="toggleFaq(item)"
-            class="d-flex align-items-center justify-content-between py-2 px-3 text-white fs-5 bg-warning">
+            class="d-flex align-items-center justify-content-between py-2 px-3 text-white fs-5 rounded bg-accent-color">
             <strong>Q.{{i+1}}: {{item.question}}</strong>
             <fa-icon [icon]="item.isFaqOpen ? faAngleUp : faAngleDown"></fa-icon>
         </div>
-        <div [@fadeInOut]="item.isFaqOpen ? 'open' : 'closed'">
+        <div [@fadeInOut]="item.isFaqOpen ? 'open' : 'closed'" class="bg-secondary-color rounded mt-1">
             <div *ngIf="item.isFaqOpen" class="fs-6 pt-3 pb-4 px-4"> {{item.answer}} </div>
         </div>
     </div>

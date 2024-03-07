@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { Feedback } from '../interfaces/feedback';
 import { Observable } from 'rxjs';
 
-const baseUrl = 'http://localhost:5175/api/Feedbacks';
+const baseUrl = 'http://localhost:5033/api/Feedback';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedbackService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAllFeedbacks(): Observable<Feedback[]> {
     return this.http.get<Feedback[]>(baseUrl);
@@ -18,5 +18,13 @@ export class FeedbackService {
 
   createFeedback(data: any): Observable<any> {
     return this.http.post(baseUrl, data);
+  }
+
+  updateFeedback(id: any, data: any): Observable<any> {
+    return this.http.put(`${baseUrl}/${id}`, data);
+  }
+
+  deleteFeedback(id: any): Observable<any> {
+    return this.http.delete(`${baseUrl}/${id}`);
   }
 }

@@ -1,38 +1,45 @@
-<div class="py-4 px-5 bg-light overflow-y-auto main-admin">
-    <a [routerLink]="['/admin/book-management']" class="btn btn-outline-dark mb-3"><fa-icon [icon]="faArrowLeft"></fa-icon></a>
-    <div class="h2 pb-3">Add New Book</div>
-    <form *ngIf="!submitted">
-        <div class="mb-3">
-            <label for="titleInput" class="form-label">Title</label>
-            <input type="text" class="form-control" id="titleInput" name="title" [(ngModel)]="book.title" required>
-            <div class="form-text text-danger">Error title </div>
+<div class="d-flex align-items-center justify-content-between border-bottom">
+    <h2 mat-dialog-title>Add New Book</h2>
+    <button mat-dialog-title (click)="onNoClick()" class="btn border-0 rounded-cirlce"><fa-icon
+            [icon]="faX"></fa-icon></button>
+</div>
+<div mat-dialog-content class="add-book-dialog-container">
+    <form #bookForm="ngForm" class="py-2">
+        <div class="form-group pb-3">
+            <label for="bookTitle">Title:</label>
+            <input type="text" class="form-control" id="bookTitle" name="title" [(ngModel)]="data.title" required>
         </div>
-        <div class="row g-3 mb-3">
-            <div class="col">
-                <label for="authorInput" class="form-label">Author</label>
-                <input type="text" class="form-control" id="authorInput" name="author" [(ngModel)]="book.author"
-                    required>
-            </div>
-            <div class="col">
-                <label for="priceInput" class="form-label">Price</label>
-                <input type="number" class="form-control" id="priceInput" name="price" [(ngModel)]="book.price"
-                    required>
-            </div>
+        <div class="form-group pb-3">
+            <label for="bookAuthor">Author:</label>
+            <input type="text" class="form-control" id="bookAuthor" name="author" [(ngModel)]="data.author" required>
         </div>
-        <div class="mb-3">
-            <label for="imageFileInput" class="form-label">Image</label>
-            <input class="form-control" type="file" id="imageFileInput" name="imageUrl" [(ngModel)]="book.imageUrl"
-                required>
+        <div class="form-group pb-3">
+            <label for="bookPrice">Price:</label>
+            <input type="number" class="form-control" id="bookPrice" name="price" [(ngModel)]="data.price" required>
         </div>
-        <div class="mb-3">
-            <label for="descriptionInput" class="form-label">Description</label>
-            <textarea name="description" class="form-control" rows="5" id="descriptionInput"
-                [(ngModel)]="book.description" required></textarea>
+        <div class="form-group pb-3">
+            <label for="bookImage">Image:</label>
+            <input type="text" class="form-control" id="bookImage" name="imageUrl" [(ngModel)]="data.imageUrl" required>
         </div>
-        <button class="btn btn-success px-5" (click)="saveBook()">Save</button>
+        <div class="form-group pb-3">
+            <label for="bookDescription">Description:</label>
+            <textarea rows="3" class="form-control" id="bookDescription" name="description"
+                [(ngModel)]="data.description" required></textarea>
+        </div>
+        <div class="form-group pb-3">
+            <label for="bookPublishedDate">Published Date:</label>
+            <input type="date" class="form-control" id="bookPublishedDate" name="publishedDate"
+                [(ngModel)]="data.publishedDate" required>
+        </div>
+        <div class="form-group pb-3">
+            <label for="bookQuantityInStock">Quantity In Stock:</label>
+            <input type="number" class="form-control" id="bookQuantityInStock" name="quantityInStock"
+                [(ngModel)]="data.quantityInStock" required>
+        </div>
     </form>
-    <div *ngIf="submitted">
-        <h4>Tutorial was submitted successfully!</h4>
-        <button class="btn btn-success" (click)="newBook()">Add</button>
-    </div>
+</div>
+
+<div mat-dialog-actions class="d-flex align-items-center justify-content-end gap-2 border-top pe-4">
+    <button (click)="onNoClick()" class="btn btn-secondary px-4">Cancel</button>
+    <button [mat-dialog-close]="data" [disabled]="!bookForm.valid" class="btn btn-success px-4">Save</button>
 </div>

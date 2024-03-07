@@ -1,40 +1,8 @@
-<!-- <form (ngSubmit)="createRecipe()" class="ps-5 ms-5">
-    <label for="name">Name</label>
-    <input id="name" [(ngModel)]="recipe.name" name="name" />
-
-    <label for="description">Description</label>
-    <input id="description" [(ngModel)]="recipe.description" name="description" />
-
-    <label for="imageUrl">Image Url</label>
-    <input id="imageUrl" [(ngModel)]="recipe.imageUrl" name="imageUrl" />
-
-    <label for="submittedBy">Submitted By</label>
-    <input id="submittedBy" [(ngModel)]="recipe.submittedBy" name="submittedBy" />
-
-
-
-    <div *ngFor="let step of recipe.steps; let i = index">
-        <label for="stepContent{{ i }}">Step {{ i + 1 }}</label>
-        <input id="stepContent{{ i }}" [(ngModel)]="step.content" name="content{{ i }}" />
-
-        <input id="imageUrl{{ i }}" [(ngModel)]="step.imageUrl" name="imageUrl{{ i }}" />
-    </div>
-
-    <div *ngFor="let ingredient of recipe.ingredients; let i = index">
-        <label for="ingredient{{ i }}">Ingredient {{ i + 1 }}</label>
-        <input id="ingredient{{ i }}" [(ngModel)]="ingredient.name" name="ingredient{{ i }}" />
-    </div>
-
-    <button type="button" (click)="addStep()">Add Step</button>
-    <button type="button" (click)="addIngredient()">Add Ingredient</button>
-
-    <button type="submit">Create Recipe</button>
-</form> -->
-
 <div class="py-4 px-5 bg-light overflow-y-auto main-admin">
-    <a [routerLink]="['/admin/recipe-management']" class="btn btn-outline-dark mb-3"><fa-icon [icon]="faArrowLeft"></fa-icon></a>
+    <a [routerLink]="['/admin/recipe-management']" class="btn btn-outline-dark mb-3"><fa-icon
+            [icon]="faArrowLeft"></fa-icon></a>
     <div class="h2 pb-3">Add New Recipe</div>
-    <form (ngSubmit)="createRecipe()">
+    <form #recipeForm="ngForm" (ngSubmit)="createRecipe()">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" id="name" [(ngModel)]="recipe.name" name="name" required>
@@ -58,23 +26,13 @@
         </div>
         <div class="mb-3">
             <label for="ingredient" class="form-label">Ingredients
-                <span class="small ps-1 text-danger">
-                    (*Press Enter after each ingredient to add it to the list)
-                </span>
             </label>
-            <div class="row">
-                <div class="col">
-                    <textarea class="form-control overflow-hidden" rows="3" (input)="autoResize($event)"
-                        id="ingredient" [(ngModel)]="recipe.ingredient" name="ingredient"
-                        [formControl]="listIngredientInput"></textarea>
-                </div>
-                <div class="col">
-                    <p>List of ingredients</p> 
-                    <ul>
-                        <li *ngFor="let item of ingredients">{{item}}</li>
-                    </ul>
-                </div>
+            <div class="content" role="main">
+                <ckeditor [editor]="Editor" [(ngModel)]="recipe.ingredient" name="ingredient" id="ingredient"
+                    [config]="editorConfig">
+                </ckeditor>
             </div>
+
         </div>
 
         <div class="mb-3">
@@ -83,10 +41,14 @@
             </div>
 
             <div *ngFor="let step of recipe.steps; let i = index" class="ms-3 mt-3">
-                <div class="d-flex align-items-center pb-3">
+                <div class="d-flex align-items-center gap-3 pb-3">
                     <button type="button" class="border-0 bg-light" (click)="toggleStep(i)">
                         <fa-icon [icon]="stepOpenStates[i] ? faAngleUp : faAngleDown" class="pe-2"></fa-icon>
                         <strong>Step {{ i + 1}}</strong>
+                    </button>
+
+                    <button type="button" class="btn btn-outline-danger" (click)="removeStep(i)">
+                        <fa-icon [icon]="faTrash"></fa-icon>
                     </button>
                 </div>
                 <div [hidden]="!stepOpenStates[i]" [@fadeInOut]="stepOpenStates[i] ? 'open' : 'closed'">
@@ -108,6 +70,6 @@
         </div>
 
 
-        <button class="btn btn-success px-5" type="submit">Save</button>
+        <button class="btn btn-success px-5" [disabled]="!recipeForm.valid" type="submit">Save</button>
     </form>
 </div>

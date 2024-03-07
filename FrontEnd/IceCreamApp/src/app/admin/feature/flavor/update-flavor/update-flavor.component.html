@@ -1,0 +1,23 @@
+<div class="d-flex align-items-center justify-content-between border-bottom">
+    <h2 mat-dialog-title>Update Flavor</h2>
+    <button mat-dialog-title (click)="onNoClick()" class="btn border-0 rounded-cirlce"><fa-icon
+            [icon]="faX"></fa-icon></button>
+</div>
+<div mat-dialog-content class="update-flavor-dialog-container">
+    <form #flavorForm="ngForm" class="py-2">
+        <div class="form-group pb-3">
+            <label for="flavorName">Name:</label>
+            <input type="text" class="form-control" id="flavorName" name="name" [(ngModel)]="data.name" required>
+        </div>
+        <div class="form-group pb-3">
+            <label for="flavorImageUrl">Image:</label>
+            <input type="text" class="form-control" id="flavorImageUrl" name="imageUrl" [(ngModel)]="data.imageUrl"
+                required>
+        </div>
+    </form>
+</div>
+
+<div mat-dialog-actions class="d-flex align-items-center justify-content-end gap-2 border-top pe-4">
+    <button (click)="onNoClick()" class="btn btn-secondary px-4">Cancel</button>
+    <button [mat-dialog-close]="data" [disabled]="!flavorForm.valid" class="btn btn-success px-4">Save</button>
+</div>

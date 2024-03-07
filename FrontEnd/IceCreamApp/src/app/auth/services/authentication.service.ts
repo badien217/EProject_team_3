@@ -1,14 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { JwtAuth } from '../interfaces/jwt-auth';
 import { Observable } from 'rxjs';
 import { Register } from '../interfaces/register';
-import { AuthResult } from '../interfaces/auth-result';
 import { Login } from '../interfaces/login';
+import { AuthResponse } from '../interfaces/auth-response';
+import { SendMail } from '../interfaces/send-mail';
+import { ResetPassword } from '../interfaces/reset-password';
 
-const registerUrl = "http://localhost:5175/api/AuthManagement/Register";
-const loginUrl = "http://localhost:5175/api/AuthManagement/Login";
-const loginAdminUrl = "http://localhost:5215/api/Auth/loginAdmin";
+const baseUrl = 'http://localhost:5033/api/Auth';
 
 @Injectable({
   providedIn: 'root'
@@ -17,21 +16,49 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
-   register(user: Register): Observable<JwtAuth> {
-    return this.http.post<JwtAuth>(registerUrl, user);
+  register(user: Register): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${baseUrl}/UserRegister`, user);
   }
 
-   login(user: Login): Observable<JwtAuth> {
-    return this.http.post<JwtAuth>(loginUrl, user);
+  login(user: Login): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${baseUrl}/UserLogin`, user);
   }
 
-  loginAdmin(admin: Login) : Observable<AuthResult>{
-    return this.http.post<AuthResult>(loginAdminUrl, admin);
+  loginAdmin(admin: Login): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${baseUrl}/AdminLogin`, admin);
   }
 
-  
-  // New method for logout
-  logout(): void {
+  logoutAdmin(): void {
     localStorage.removeItem('isAdminLoggedIn');
+  }
+
+  logoutClient(): void {
+    localStorage.removeItem('isClientLoggedIn');
+  }
+
+  getUserInfo(token: string): Observable<any> {
+    return this.http.get(`${baseUrl}/GetUserInfoByToken?token=${token}`);
+  }
+
+  sendOtpEmail(email: SendMail): Observable<any> {
+    return this.http.post(`${baseUrl}/SendOtpEmail`, email);
+  }
+
+  resetPassword(data: ResetPassword): Observable<any> {
+    return this.http.post(`${baseUrl}/ResetPassword`, data);
+  }
+
+  isTokenExpired(token: string): boolean {
+    if (!token) return true; // Token doesn't exist, consider it expired
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const expirationDate = new Date(payload.exp * 1000); // Convert to milliseconds
+    return expirationDate <= new Date(); // Check if expired
+  }
+
+  // Check if the client is logged in
+  isClientLoggedIn(): boolean {
+    const clientToken = localStorage.getItem('isClientLoggedIn');
+    return !!clientToken;
   }
 }

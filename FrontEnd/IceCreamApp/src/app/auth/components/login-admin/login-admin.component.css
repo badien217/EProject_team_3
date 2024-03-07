@@ -1,6 +1,66 @@
-.login-admin{
-    background: url('../../../../assets/images/admin-login-bg.png') no-repeat;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
+.login-section {
+    /* margin-block: 30px;
+    margin-inline: 50px; */
+    min-height: 100vh;
+}
+
+.login-container {
+    width: 550px;
+    /* min-height: calc(100vh - 60px); */
+}
+
+.back-home {
+    font-size: 14px;
+}
+
+.btn-icon {
+    width: 25px;
+    height: 25px;
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.2);
+    /* Adjust opacity as needed */
+    backdrop-filter: blur(50px);
+    /* Adjust blur strength as needed */
+    border-radius: 20px;
+    /* Adjust border radius as needed */
+}
+
+/* .form-label {
+    color: rgba(255, 255, 255, 0.85); 
+} */
+
+
+input {
+    font-size: 16px;
+}
+
+
+/* responsive */
+
+@media screen and (max-width: 1500px) {}
+
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 992px) {}
+
+@media screen and (max-width: 768px) {
+    .logo {
+        width: 180px;
+    }
+
+    .login-container {
+        width: 450px;
+    }
+}
+
+@media screen and (max-width: 465px) {
+    .logo {
+        width: 150px;
+    }
+
+    .login-container {
+        width: 345px;
+    }
 }

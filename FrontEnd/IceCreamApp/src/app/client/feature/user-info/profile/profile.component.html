@@ -1,0 +1,51 @@
+<div class="container py-5">
+    <div class="d-flex pt-5">
+        <div class="col-3">
+            <img src="../../../../assets/images/profile-img.png" alt="profile-img"
+                class="object-fit-cover rounded-circle profile-img">
+            <button
+                class="position-absolute btn btn-dark d-inline-flex align-items-center justify-content-center rounded-circle btn-edit-avatar"><fa-icon
+                    [icon]="faCamera" class="small"></fa-icon></button>
+        </div>
+        <div class="col">
+            <h2>My profile</h2>
+            <div *ngIf="userInfo" class="d-flex mt-4">
+                <div class="col fs-5">
+                    <p><strong class="pe-1">Name: </strong><span>{{userInfo.name}}</span></p>
+                    <p><strong class="pe-1">Username: </strong><span>{{userInfo.username}}</span></p>
+                    <p><strong class="pe-1">Phone: </strong><span>{{userInfo.phone}}</span></p>
+                </div>
+                <div class="col fs-5">
+                    <p><strong class="pe-1">Email: </strong><span>{{userInfo.email}}</span></p>
+                    <p><strong class="pe-1">Subscription Type: </strong><span>{{userInfo.subscriptionType}}</span></p>
+                </div>
+            </div>
+            <button type="button" class="btn-outline-accent-color border-2 rounded fw-bold mt-3 py-1 px-3"
+                (click)="openUpdateUserDialog(userInfo)">Edit profile</button>
+        </div>
+    </div>
+
+    <div class="py-5">
+        <h2 class="mb-3">Your submitted recipe</h2>
+        <div class="d-flex flex-wrap gap-3">
+            <div *ngFor="let item of userRecipes">
+                <div class="border d-flex flex-row gap-3 recipe-container">
+                    <img src="../../../../../assets/images/ice-cream-recipe-1.jpg" alt="recipe-img"
+                        class="object-fit-cover recipe-img">
+                    <div class="py-2 d-flex flex-column justify-content-between">
+                        <div>
+                            <h5>{{item.recipeName}}</h5>
+                            <p class="fs-6">{{item.recipeDescription}}</p>
+                        </div>
+                        <a [routerLink]="['/recipes/recipe-detail', item.recipeId]"
+                            class="d-flex align-items-center text-decoration-none text-dark mt-3 text-view">
+                            View recipe
+                            <fa-icon [icon]="faArrowRight"
+                                class="d-flex align-items-center justify-content-center btn btn-outline-accent-color rounded-5 ms-2 view-recipe-btn"></fa-icon></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

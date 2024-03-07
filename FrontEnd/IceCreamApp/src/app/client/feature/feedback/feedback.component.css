@@ -1,5 +1,36 @@
-.reviewer-avatar{
+.reviewer-avatar {
     width: 40px;
     height: 40px;
     object-fit: cover;
 }
+
+.feedback-date {
+    font-size: 12px;
+}
+
+.feedback-container {
+    width: 60%;
+}
+
+
+/* responsive */
+
+@media screen and (max-width: 1500px) {}
+
+@media screen and (max-width: 1200px) {
+    .feedback-container {
+        width: 70%;
+    }
+
+}
+
+@media screen and (max-width: 992px) {}
+
+@media screen and (max-width: 768px) {
+    .feedback-container {
+        width: 80%;
+    }
+
+}
+
+@media screen and (max-width: 465px) {}

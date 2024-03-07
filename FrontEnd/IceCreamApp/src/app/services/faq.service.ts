@@ -3,14 +3,14 @@ import { Observable } from 'rxjs';
 import { Faq } from '../interfaces/faq';
 import { HttpClient } from '@angular/common/http';
 
-const baseUrl = 'http://localhost:5175/api/CommonQuestions';
+const baseUrl = 'http://localhost:5033/api/Faq';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FaqService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAllFaqs(): Observable<Faq[]> {
     return this.http.get<Faq[]>(baseUrl);
@@ -32,11 +32,4 @@ export class FaqService {
     return this.http.delete(`${baseUrl}/${id}`);
   }
 
-  deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
-  }
-
-  findByTitle(title: any): Observable<Faq[]> {
-    return this.http.get<Faq[]>(`${baseUrl}?title=${title}`);
-  }
 }

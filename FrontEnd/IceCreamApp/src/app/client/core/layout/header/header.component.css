@@ -3,7 +3,7 @@
 }
 
 .header {
-    background-color: #FFFBEB;
+    background-color: var(--dominant-color);
     color: #5C2712;
 }
 
@@ -12,29 +12,42 @@
 }
 
 .btn-header {
-    background-color: #FFFBEB;
+    background-color: var(--dominant-color);
 }
 
-.nav-link:hover{
-    background-color: #FFB000;
-    color: #FFFFFF; 
+.btn-icon {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #5C2712;
+}
+
+.nav-link:hover {
+    background: var(--accent-color);
+    color: #FFFFFF;
 }
 
 .active {
-   background-color: #FFB000;
-   color: #FFFFFF; 
+    background: var(--accent-color);
+    color: #FFFFFF;
 }
 
-.sidebar-link:hover{
-   background-color: #FFB000;
-   color: #FFFFFF; 
+.sidebar-link:hover {
+    background: var(--accent-color);
+    color: #FFFFFF;
 }
 
-.logo-minimalist-img{
+.logo-minimalist-img {
     width: 60px;
     height: 60px;
 }
 
-.offcanvas{
+.offcanvas {
     width: 300px;
+}
+
+.badge {
+    margin-left: 25px;
+    margin-bottom: 25px;
+    padding-inline: 5px;
+    padding-block: 3px;
 }

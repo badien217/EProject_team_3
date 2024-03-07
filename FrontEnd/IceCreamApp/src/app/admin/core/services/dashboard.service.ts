@@ -6,31 +6,31 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DashboardService {
-  private apiUrl = 'http://localhost:5175/api';
+  private apiUrl = 'http://localhost:5033/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getTotalBooks(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/Books/total`);
+    return this.http.get<any>(`${this.apiUrl}/Book/Total`);
   }
 
   getTotalFeedbacks(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/Feedbacks/total`);
+    return this.http.get<any>(`${this.apiUrl}/Feedback/Total`);
   }
 
   getTotalRecipes(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/Recipes/total`);
+    return this.http.get<any>(`${this.apiUrl}/Recipe/Total`);
   }
 
   getTotalUsers(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/Users/total`);
+    return this.http.get<any>(`${this.apiUrl}/User/Total`);
   }
 
   getTotalOrders(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/Orders/total`);
+    return this.http.get<any>(`${this.apiUrl}/Order/Total`);
   }
 
   getTotalProducts(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/IceCreams/total`);
+    return this.http.get<any>(`${this.apiUrl}/Product/Total`);
   }
 }

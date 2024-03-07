@@ -1,89 +1,407 @@
-.hero-container {
-    height: 95%;
-    background-image: url('../../../../assets/images/bg-hero.png');
-    background-size: cover;
-    background-position: bottom;
+.section-divider {
+    position: relative;
 }
 
-.flavour-container {
-    background-color: #FAEAB1;
+.section-divider::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background-repeat: repeat no-repeat;
+    background-position: bottom;
+    background-image: url("../../../../assets/images/shape-bottom.png");
 }
+
+.section-divider::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background-repeat: repeat no-repeat;
+    background-position: bottom;
+    background-image: url("../../../../assets/images/shape-top.png");
+}
+
+.wave-curve {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: url('../../../../assets/images/wave-svg.svg') center bottom no-repeat;
+    background-size: cover;
+}
+
+/* hero section  */
+
+.hero-section {
+    height: 100vh;
+    background-size: cover;
+    /* background-position-x: -80px;
+    background-position-y: bottom; */
+    color: #fff;
+}
+
+.hero-img-section {
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+/* product section  */
+
+.title-container {
+    width: 25%;
+}
+
+.product-container {
+    width: 75%;
+}
+
+.hover\:shine {
+    overflow: hidden;
+}
+
+.hover\:shine .has-bg-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    transition: 0.5s ease;
+}
+
+.hover\:shine:is(:hover, :focus) .has-bg-image {
+    transform: scale(1.15);
+}
+
+.hover\:shine::before {
+    top: 0;
+    left: -140%;
+    bottom: 0;
+    width: 100%;
+    background-image: linear-gradient(to right, transparent 50%, hsl(0, 0%, 100%, 0.3) 100%);
+    transform: skewX(-25deg);
+    transition: 0.5s ease;
+    z-index: 1;
+}
+
+.hover\:shine:is(:hover, :focus-within)::before {
+    animation: shine 1s ease forwards;
+}
+
+@keyframes shine {
+    0% {
+        transform: skewX(-25deg) translateX(0);
+    }
+
+    100% {
+        transform: skewX(-25deg) translateX(250%);
+    }
+}
+
+.product-item {
+    width: 15rem;
+    height: 18rem;
+    margin-block: 35px;
+    -webkit-transition: 1000ms all;
+    transition: 1000ms all;
+    -webkit-transform-origin: center left;
+    transform-origin: center left;
+}
+
+.product-item:hover~.product-item {
+    -webkit-transform: translate3d(50px, 0, 0);
+    transform: translate3d(50px, 0, 0);
+}
+
+.product-container:hover .product-item:hover {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+}
+
+.product-details {
+    background: -webkit-gradient(linear,
+            left bottom,
+            left top,
+            from(rgba(0, 0, 0, 0.9)),
+            to(rgba(0, 0, 0, 0)));
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0) 100%);
+    opacity: 0;
+    -webkit-transition: 450ms opacity;
+    transition: 450ms opacity;
+}
+
+.product-details:hover {
+    opacity: 1;
+}
+
+
+/* video section  */
+
+.video-section .row .video-container h3 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff;
+    width: 100%;
+    text-align: center;
+    mix-blend-mode: screen;
+}
+
+/* flavor section  */
 
 .flavour-img {
     width: 200px;
     height: 200px;
 }
 
-.feature img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    outline: 2px dotted;
-    outline-offset: 2px;
-}
+/* experience section  */
 
-.card-body {
-    background-color: #FFFBEB;
-}
+/* book section  */
 
-.card-ice-cream {
+
+.card-book {
     width: 18rem;
 }
 
-.card-book{
-    width: 18rem;
-}
-
-.card-img-top {
-    width: 100%;
-    height: 16rem;
-}
-
-.swiperImage {
-    width: 355px;
-    height: 300px;
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-    color: #fff;
-    -webkit-text-stroke: 1px #ffb848;
-}
-
-.card-recipe{
-    width: 25rem;
-}
-
-
-.image-recipe{
-    height: 18rem;
-    object-fit: cover;
-}
-
-.recipe-title{
-    font-weight: 600;
-}
-
-.view-recipe-btn{
+.cart-btn {
     width: 40px;
     height: 40px;
 }
 
+.book-img {
+    width: 100%;
+    height: 18rem;
+}
 
-.scrollbar{
+
+.card-tag {
+    position: absolute;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    top: -8px;
+    left: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-tag::before {
+    content: 'New';
+    position: absolute;
+    width: 135%;
+    height: 30px;
+    background-image: linear-gradient(45deg, #ff6547 0%, #ffb144 51%, #ff7053 100%);
+    transform: rotate(-45deg) translateY(-20px) scale(1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.23);
+}
+
+.card-tag::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    bottom: 7px;
+    left: 0;
+    z-index: -10;
+    box-shadow: 85.5px -85.5px #cc3f47;
+    background-image: linear-gradient(45deg, #FF512F 0%, #F09819 51%, #FF512F 100%);
+}
+
+
+/* about section  */
+
+/* recipe section  */
+
+
+.text-blur {
+    backdrop-filter: blur(30px);
+    /* width: 100%; */
+}
+
+.image-recipe {
+    height: 18rem;
+    object-fit: cover;
+}
+
+.recipe-title {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.view-recipe-btn {
+    width: 40px;
+    height: 40px;
+}
+
+.has-bg-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.card-recipe {
+    width: 25rem;
+    height: 18rem;
+    position: relative;
+    z-index: 1;
+}
+
+.card-recipe::before {
+    content: "";
+    position: absolute;
+}
+
+/* pricing section  */
+
+.plan {
+    max-width: 400px;
+}
+
+/* competition section  */
+
+.scrollbar {
     padding-right: 15px;
 }
 
 .scrollbar::-webkit-scrollbar {
-  width: 5px;
+    width: 5px;
 }
 
 .scrollbar::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px #ffffff;
-  border-radius: 10px;
+    box-shadow: inset 0 0 5px #ffffff;
+    border-radius: 10px;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background: #FFB000;
-  border-radius: 10px;
+    background: #8971ea;
+    border-radius: 10px;
+}
+
+/* feature section  */
+
+.feature-img {
+    width: 100px;
+}
+
+.feature-text {
+    font-size: 16px;
+}
+
+/* gallery section  */
+
+/* customer feedback section */
+
+.customer-feedback-img {
+    width: 50px;
+    height: 50px;
+}
+
+.customer-name {
+    font-size: 20px;
+}
+
+.feedback-container {
+    width: 450px;
+}
+
+/* responsive */
+
+@media screen and (max-width: 1500px) {
+    .card-book {
+        width: 16rem;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .flavour-img {
+        width: 180px;
+        height: 180px;
+    }
+
+    .card-book {
+        width: 14rem;
+    }
+
+    .book-img {
+        height: 12rem;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .hero-section {
+        background-position-x: 950px;
+    }
+
+    .flavour-img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .hero-section {
+        background-position-x: 750px;
+    }
+
+    .flavour-img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .book-img {
+        height: 10rem;
+    }
+}
+
+@media screen and (max-width: 465px) {
+    .hero-section {
+        background-position-x: 500px;
+    }
+
+    .feature-img {
+        width: 80px;
+    }
+
+    .feature-text {
+        font-size: 13px;
+    }
+
+    .flavour-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .card-book {
+        width: 10rem;
+    }
+
+    .book-img {
+        height: 8rem;
+    }
+
+    .feedback-container {
+        width: 300px;
+    }
 }
