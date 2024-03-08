@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Books.command.CreateBook
 {
-    public class CreateBookCommandRequest : IRequest
+    public class CreateBookCommandRequest : IRequest<Unit>
     {
         public string Title { get; set; }
         public string Author { get; set; }

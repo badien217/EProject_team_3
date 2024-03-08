@@ -14,6 +14,7 @@ namespace Domain.Entities
         public string ImageURL { get; set; }
         public string SubMittedBy { get; set; }
         public string Ingredients { get; set; }
+        public ICollection<Step> steps { get; set; }
         public Recipe() { }
         public Recipe(string name, string description, string imageURL, string subMittedBy, string ingredients)
         {

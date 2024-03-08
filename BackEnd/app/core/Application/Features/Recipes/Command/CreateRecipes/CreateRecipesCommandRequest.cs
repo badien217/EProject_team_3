@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Domain.Entities;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,5 @@ namespace Application.Features.Recipes.Command.CreateRecipes
         public string ImageURL { get; set; }
         public string SubMittedBy { get; set; }
         public string Ingredients { get; set; }
-
     }
 }

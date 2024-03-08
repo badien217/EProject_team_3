@@ -1,5 +1,7 @@
 ﻿using Application.Interfaces.Reponsitory;
 using Domain.Common;
+using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using persistence.Context;
 using System;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace persistence.Repositories
 {
-    public class WriteReponsitory<T> : IWriteReponsitories<T> where T:class ,IEntityBase,new()
+    public class WriteReponsitory<T> : IWriteReponsitories<T> where T:class ,IEntityBase, new()
     {
         private readonly AddDbContexts _dbContext;
         public WriteReponsitory(AddDbContexts dbContext)
@@ -39,9 +41,6 @@ namespace persistence.Repositories
            await Task.Run(() => { Table.Remove(entity); });
            
         }
-
-        
-
         public async Task<T> UpdateAsync(T entity)
         {
             await Task.Run(()=> Table.Update(entity));

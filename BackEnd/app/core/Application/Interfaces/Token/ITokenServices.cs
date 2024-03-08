@@ -11,7 +11,7 @@ namespace Application.Interfaces.Token
 {
     public interface ITokenServices
     {
-        Task<JwtSecurityToken> CreateToken(Book user, IList<string> roles);
+        Task<JwtSecurityToken> CreateToken(User user, IList<string> roles);
         string GenerateRefreshToken();
         ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token);
     }

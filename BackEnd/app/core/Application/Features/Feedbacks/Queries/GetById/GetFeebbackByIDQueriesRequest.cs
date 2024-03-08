@@ -9,6 +9,6 @@ namespace Application.Features.Feedbacks.Queries.GetById
 {
     public class GetFeebbackByIDQueriesRequest : IRequest<GetFeebbackByIDQueriesReponse>
     {
-        public int Id;
+        public string name;
     }
 }

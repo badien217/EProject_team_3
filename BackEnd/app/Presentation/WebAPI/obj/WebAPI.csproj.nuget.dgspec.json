@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\Presentation\\WebAPI\\WebAPI.csproj": {}
+    "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Presentation\\WebAPI\\WebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj": {
+    "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj",
+        "projectUniqueName": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj",
-        "packagesPath": "C:\\Users\\Laptop MSI\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Application\\obj\\",
+        "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\Dien Bu's Cu's\\.nuget\\packages\\",
+        "outputPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Laptop MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dien Bu's Cu's\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -33,8 +33,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj"
+              "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj"
               }
             }
           }
@@ -52,6 +52,18 @@
             "FluentValidation": {
               "target": "Package",
               "version": "[11.9.0, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.9.0, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             },
             "MediatR": {
               "target": "Package",
@@ -83,6 +95,10 @@
               "target": "Package",
               "version": "[9.29.1, )"
             },
+            "System.Globalization": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[7.2.0, )"
@@ -108,24 +124,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj": {
+    "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj",
+        "projectUniqueName": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj",
         "projectName": "Mapper",
-        "projectPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj",
-        "packagesPath": "C:\\Users\\Laptop MSI\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\obj\\",
+        "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj",
+        "packagesPath": "C:\\Users\\Dien Bu's Cu's\\.nuget\\packages\\",
+        "outputPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Laptop MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dien Bu's Cu's\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -141,8 +157,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj"
+              "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj": {
+                "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj"
+              },
+              "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\persistence.csproj": {
+                "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\persistence.csproj"
               }
             }
           }
@@ -164,6 +183,26 @@
             "FluentValidation": {
               "target": "Package",
               "version": "[11.9.0, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.9.0, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
@@ -202,24 +241,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj": {
+    "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj",
+        "projectUniqueName": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\Laptop MSI\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Domain\\obj\\",
+        "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\Dien Bu's Cu's\\.nuget\\packages\\",
+        "outputPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Laptop MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dien Bu's Cu's\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -251,9 +290,25 @@
               "target": "Package",
               "version": "[11.9.0, )"
             },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.9.0, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[12.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.14, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
@@ -298,24 +353,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\persistence.csproj": {
+    "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\infrastructure\\infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\persistence.csproj",
-        "projectName": "persistence",
-        "projectPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\persistence.csproj",
-        "packagesPath": "C:\\Users\\Laptop MSI\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\obj\\",
+        "projectUniqueName": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\infrastructure\\infrastructure.csproj",
+        "projectName": "infrastructure",
+        "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\infrastructure\\infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Dien Bu's Cu's\\.nuget\\packages\\",
+        "outputPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Laptop MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dien Bu's Cu's\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -331,11 +386,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj"
-              },
-              "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj"
+              "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj": {
+                "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj"
               }
             }
           }
@@ -353,6 +405,141 @@
             "FluentValidation": {
               "target": "Package",
               "version": "[11.9.0, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.9.0, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.Extensions.Identity.Core": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "SendGrid": {
+              "target": "Package",
+              "version": "[9.29.1, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[7.2.0, )"
+            },
+            "System.Security.Claims": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\persistence.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\persistence.csproj",
+        "projectName": "persistence",
+        "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\persistence.csproj",
+        "packagesPath": "C:\\Users\\Dien Bu's Cu's\\.nuget\\packages\\",
+        "outputPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Dien Bu's Cu's\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj": {
+                "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj"
+              },
+              "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.9.0, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.9.0, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             },
             "MediatR": {
               "target": "Package",
@@ -411,24 +598,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\Presentation\\WebAPI\\WebAPI.csproj": {
+    "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Presentation\\WebAPI\\WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\Presentation\\WebAPI\\WebAPI.csproj",
+        "projectUniqueName": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Presentation\\WebAPI\\WebAPI.csproj",
         "projectName": "WebAPI",
-        "projectPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\Presentation\\WebAPI\\WebAPI.csproj",
-        "packagesPath": "C:\\Users\\Laptop MSI\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\Presentation\\WebAPI\\obj\\",
+        "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Presentation\\WebAPI\\WebAPI.csproj",
+        "packagesPath": "C:\\Users\\Dien Bu's Cu's\\.nuget\\packages\\",
+        "outputPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Presentation\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Laptop MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dien Bu's Cu's\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -444,14 +631,17 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj"
+              "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj": {
+                "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj"
               },
-              "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj": {
-                "projectPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj"
+              "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj": {
+                "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj"
               },
-              "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\persistence.csproj": {
-                "projectPath": "C:\\Users\\Laptop MSI\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\persistence.csproj"
+              "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\infrastructure\\infrastructure.csproj": {
+                "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\infrastructure\\infrastructure.csproj"
+              },
+              "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\persistence.csproj": {
+                "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\persistence.csproj"
               }
             }
           }
@@ -469,6 +659,18 @@
             "FluentValidation": {
               "target": "Package",
               "version": "[11.9.0, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.9.0, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             },
             "MediatR": {
               "target": "Package",
@@ -542,7 +744,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

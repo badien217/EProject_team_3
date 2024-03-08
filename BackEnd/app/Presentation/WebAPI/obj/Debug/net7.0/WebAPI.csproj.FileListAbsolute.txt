@@ -178,3 +178,29 @@ C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\ne
 C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Newtonsoft.Json.dll
 C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\SendGrid.dll
 C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\StarkbankEcdsa.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\FluentValidation.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Newtonsoft.Json.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\SendGrid.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\StarkbankEcdsa.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.Extensions.Configuration.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.Extensions.DependencyInjection.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.Extensions.Logging.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\Microsoft.Extensions.Primitives.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\infrastructure.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\infrastructure.pdb
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\BouncyCastle.Cryptography.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\MailKit.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\MimeKit.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\System.Security.Cryptography.Pkcs.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\Presentation\WebAPI\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll

@@ -32,3 +32,5 @@ C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0
 C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\refint\Mapper.dll
 C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\Mapper.pdb
 C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\ref\Mapper.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\core\AutoMapper\bin\Debug\net7.0\persistence.dll
+D:\eProject_team_3\EProject_team_3\BackEnd\app\core\AutoMapper\bin\Debug\net7.0\persistence.pdb

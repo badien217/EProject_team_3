@@ -9,8 +9,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LogoutComponent } from './components/logout/logout.component';
+import { AuthInterceptor } from './components/login/AuthInterceptor';
 
 
 @NgModule({
@@ -28,6 +29,10 @@ import { LogoutComponent } from './components/logout/logout.component';
     FormsModule,
     RouterModule,
     FontAwesomeModule,
+    
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

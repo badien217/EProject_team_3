@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Books.command.UpdateBook
 {
-    public class UpdateBookCommandReuquest : IRequest
+    public class UpdateBookCommandReuquest : IRequest<Unit>
     {
-        internal readonly int Id;
+        public  int Id { get; set; }
 
         public string Title { get; set; }
         public string Author { get; set; }

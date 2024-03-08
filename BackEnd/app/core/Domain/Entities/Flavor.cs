@@ -12,6 +12,9 @@ namespace Domain.Entities
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public Flavor() { }
-        public Flavor(string name, string imageUrl) { }
+        public Flavor(string name, string imageUrl) {
+            this.Name = name;
+            this.ImageUrl = imageUrl;
+        }
     }
 }

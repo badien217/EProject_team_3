@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Feedbacks.Command.UpdateFeedbacks
 {
-    public class UpdateFeedbackCommandRRequest : IRequest
+    public class UpdateFeedbackCommandRRequest : IRequest<Unit>
     {
         public int Id { get; set; }
         public string Name { get; set; }

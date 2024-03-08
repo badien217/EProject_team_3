@@ -15,7 +15,7 @@ namespace Domain.Entities
         public int BookId { get; set; }
         public ICollection<Book> Books { get; set; }
         public int Quatity { get; set; }
-        
+
         public OrderDetail() { }
         public OrderDetail(int orderId, int bookId, int quatity)
         {

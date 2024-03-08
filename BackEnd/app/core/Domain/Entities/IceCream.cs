@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 namespace Domain.Entities
 {
     public class IceCream : EntityBase,IEntityBase
-    {
+    {   
+        public IceCream() { }
         public string Name { get; set; }   
         public int Flavorld { get; set; }
         public string ImageUrl { get;set; }
         public ICollection<Flavor> Flavor { get; set; }
-        public IceCream() { }
+       
         public IceCream(string name, int flavorld, string imageUrl)
         {
             Name = name;

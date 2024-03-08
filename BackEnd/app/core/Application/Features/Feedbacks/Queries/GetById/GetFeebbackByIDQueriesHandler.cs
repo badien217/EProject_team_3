@@ -22,8 +22,8 @@ namespace Application.Features.Feedbacks.Queries.GetById
         }
         public async Task<GetFeebbackByIDQueriesReponse> Handle(GetFeebbackByIDQueriesRequest request, CancellationToken cancellationToken)
         {
-            int feedbackIdToFind = request.Id;
-            var feedback = await unitOfWork.GetReadReponsitory<Feedback>().Find(x => x.Id == feedbackIdToFind  );
+          string feedbackNameToFind = request.name;
+            var feedback = await unitOfWork.GetReadReponsitory<Feedback>().Find(x => x.Name == feedbackNameToFind  );
             return new GetFeebbackByIDQueriesReponse
             {
                 Feedback = (Feedback)feedback

@@ -1,4 +1,4 @@
-﻿using Application.Features.Users.command.UpdateUser;
+﻿
 using Application.Interfaces.AutoMapper;
 using Domain.Entities;
 using MediatR;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Feedbacks.Command.UpdateFeedbacks
 {
-    public class UpdateFeedbackCommandHandler : IRequestHandler<UpdateFeedbackCommandRRequest>
+    public class UpdateFeedbackCommandHandler : IRequestHandler<UpdateFeedbackCommandRRequest,Unit>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAutoMapper _autoMapper;
@@ -21,19 +21,14 @@ namespace Application.Features.Feedbacks.Command.UpdateFeedbacks
             _autoMapper = autoMapper;
         }
 
-        public async Task Handle(UpdateFeedbackCommandRRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateFeedbackCommandRRequest request, CancellationToken cancellationToken)
         {
             var feedback = await _unitOfWork.GetReadReponsitory<Feedback>().GetAsync(x => x.Id == request.Id && !x.IsDeleted);
-
-            /*
-            var map = _autoMapper.Map<User, UpdateUserCommandReuquest>(request);
-            var UserRole = await _unitOfWork.GetReadReponsitory<Role>().GetAsync(x => x.Id == users.Id);*/
-
-            /*await _unitOfWork.GetWriteReponsitory<Role>().HardDeleteRangerAsync(UserRole);
-            foreach (var RoleIds in request.RoleId) 
-                await _unitOfWork.GetWriteReponsitory<Role>().AddAsync(new() { Id = RoleIds ,UserID = users.Id});*/
-            await _unitOfWork.GetWriteReponsitory<Feedback>().UpdateAsync(feedback);
+            var map = _autoMapper.Map<Feedback, UpdateFeedbackCommandRRequest>(request);
+            await _unitOfWork.GetWriteReponsitory<Feedback>().UpdateAsync(map);
             await _unitOfWork.SaveAsync();
+            return Unit.Value;
+
         }
     }
 }

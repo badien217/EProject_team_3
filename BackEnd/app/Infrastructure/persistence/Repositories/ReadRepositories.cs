@@ -75,8 +75,6 @@ namespace persistence.Repositories
 
             }
             if (include is not null) { queryTable = include(queryTable); }
-            /*queryTable.Where(predicate)*/ 
-          
             return await queryTable.FirstOrDefaultAsync(predicate);
         }
     }
