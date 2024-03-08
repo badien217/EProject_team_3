@@ -9,14 +9,17 @@
   <ItemGroup>
     <Compile Remove="Features\Feedbacks\Exceptions\**" />
     <Compile Remove="Features\Feedbacks\FeedbacksRule\**" />
+    <Compile Remove="Features\Feedbacks\Rules\**" />
     <Compile Remove="Features\Flavors\**" />
     <Compile Remove="Features\IceCreams\**" />
     <EmbeddedResource Remove="Features\Feedbacks\Exceptions\**" />
     <EmbeddedResource Remove="Features\Feedbacks\FeedbacksRule\**" />
+    <EmbeddedResource Remove="Features\Feedbacks\Rules\**" />
     <EmbeddedResource Remove="Features\Flavors\**" />
     <EmbeddedResource Remove="Features\IceCreams\**" />
     <None Remove="Features\Feedbacks\Exceptions\**" />
     <None Remove="Features\Feedbacks\FeedbacksRule\**" />
+    <None Remove="Features\Feedbacks\Rules\**" />
     <None Remove="Features\Flavors\**" />
     <None Remove="Features\IceCreams\**" />
   </ItemGroup>
@@ -40,8 +43,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Auths\Exceptions\" />
-    <Folder Include="Features\Feedbacks\Exception\" />
-    <Folder Include="Features\Feedbacks\Rules\" />
     <Folder Include="Features\Orders\Exception\" />
     <Folder Include="Features\Orders\Queries\" />
     <Folder Include="Features\Recipes\" />
