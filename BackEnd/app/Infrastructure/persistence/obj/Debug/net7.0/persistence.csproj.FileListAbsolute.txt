@@ -36,3 +36,22 @@ C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\D
 C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.pdb
 C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.genruntimeconfig.cache
 C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\ref\persistence.dll
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\persistence.deps.json
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\persistence.runtimeconfig.json
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\persistence.dll
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\persistence.pdb
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\Application.dll
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\Domain.dll
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\Application.pdb
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\bin\Debug\net7.0\Domain.pdb
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.csproj.AssemblyReference.cache
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.GeneratedMSBuildEditorConfig.editorconfig
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.AssemblyInfoInputs.cache
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.AssemblyInfo.cs
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.csproj.CoreCompileInputs.cache
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.csproj.CopyComplete
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.dll
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\refint\persistence.dll
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.pdb
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\persistence.genruntimeconfig.cache
+D:\Fork\EProject_team_3\BackEnd\app\Infrastructure\persistence\obj\Debug\net7.0\ref\persistence.dll

@@ -32,3 +32,20 @@ C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0
 C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\refint\Mapper.dll
 C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\Mapper.pdb
 C:\Users\Laptop MSI\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\ref\Mapper.dll
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\bin\Debug\net7.0\Mapper.deps.json
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\bin\Debug\net7.0\Mapper.dll
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\bin\Debug\net7.0\Mapper.pdb
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\bin\Debug\net7.0\Application.dll
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\bin\Debug\net7.0\Domain.dll
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\bin\Debug\net7.0\Application.pdb
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\bin\Debug\net7.0\Domain.pdb
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\Mapper.csproj.AssemblyReference.cache
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\Mapper.GeneratedMSBuildEditorConfig.editorconfig
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\Mapper.AssemblyInfoInputs.cache
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\Mapper.AssemblyInfo.cs
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\Mapper.csproj.CoreCompileInputs.cache
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\Mapper.csproj.CopyComplete
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\Mapper.dll
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\refint\Mapper.dll
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\Mapper.pdb
+D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\obj\Debug\net7.0\ref\Mapper.dll
