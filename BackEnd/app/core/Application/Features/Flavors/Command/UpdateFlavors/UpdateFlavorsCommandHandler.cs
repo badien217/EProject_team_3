@@ -25,11 +25,11 @@ namespace Application.Features.Flavors.Command.UpdateFlavors
         public async Task Handle(UpdateFlavorsCommandReuquest request, CancellationToken cancellationToken)
         {
 
-            var flavor = await _unitOfWork.GetReadReponsitory<>(Flavor).GetAsync(x => x.Id == request.Id && !x.IsDeleted);
+            var flavor = await _unitOfWork.GetReadReponsitory<Flavor>().GetAsync(x => x.Id == request.id && !x.IsDeleted);
 
 
             var map = _autoMapper.Map<Flavor, UpdateFlavorsCommandReuquest>(request);
-            var flavo = await _unitOfWork.GetReadReponsitory<Role>().GetAsync(x => x.Id == flavor.Id);
+        
 
             
             await _unitOfWork.GetWriteReponsitory<Flavor>().UpdateAsync(flavor);
