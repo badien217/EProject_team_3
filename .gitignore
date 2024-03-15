@@ -1,1 +1,6 @@
 ﻿FrontEnd/IceCreamApp/src/assets/video/ice-cream-vid.mp4
+BackEnd/app/.vs
+BackEnd/app/core/Application/obj/Debug/net7.0/Application.csproj.AssemblyReference.cache
+BackEnd/app/core/AutoMapper/obj
+BackEnd/app/Infrastructure/persistence/obj
+BackEnd/app/Presentation/WebAPI/obj
