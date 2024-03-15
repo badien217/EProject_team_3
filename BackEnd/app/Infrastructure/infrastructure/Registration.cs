@@ -52,6 +52,7 @@ namespace infrastructure
                 opt.Configuration = configuration["RedisCacheSettings:ConnectionString"];
                 opt.InstanceName = configuration["RedisCacheSettings:InstanceName"];
             });
+           
         }
     }
 }

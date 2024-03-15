@@ -14,7 +14,7 @@ namespace infrastructure.RedisCache
     public class RedisCacheService : IRedisCache
     {
         private readonly ConnectionMultiplexer redisConnection;
-        private readonly IDatabase database;
+        private readonly StackExchange.Redis.IDatabase database;
         private readonly RedisCacheSettings settings;
         public RedisCacheService(IOptions<RedisCacheSettings> options)
         {

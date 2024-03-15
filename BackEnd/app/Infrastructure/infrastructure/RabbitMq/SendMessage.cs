@@ -17,9 +17,12 @@ namespace infrastructure.RabbitMq
             var factory = new ConnectionFactory
             {
                 HostName = "localhost",
-                UserName = "guest",
-                Password ="guest"
-            };
+                Port = 5672,
+                UserName = "admin",
+                Password ="badien217",
+                VirtualHost = "/",
+
+        };
             var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
             channel.QueueDeclare("e_project3", exclusive: false);
