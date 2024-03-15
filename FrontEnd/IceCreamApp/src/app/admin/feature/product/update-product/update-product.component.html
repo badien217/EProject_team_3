@@ -1,0 +1,30 @@
+<div class="d-flex align-items-center justify-content-between border-bottom">
+    <h2 mat-dialog-title class="update-product-dialog-container">Update Product</h2>
+    <button mat-dialog-title (click)="onNoClick()" class="btn border-0 rounded-cirlce"><fa-icon
+            [icon]="faX"></fa-icon></button>
+</div>
+<div mat-dialog-content class="add-product-dialog-container">
+    <form #productForm="ngForm" class="py-2">
+        <div class="form-group pb-3">
+            <label for="productName">Product Name:</label>
+            <input type="text" class="form-control" id="productName" name="name" [(ngModel)]="data.name" required>
+        </div>
+
+        <div class="form-group pb-3">
+            <label for="productImage">Product Image URL:</label>
+            <input type="text" class="form-control" id="productImage" name="imageUrl" [(ngModel)]="data.imageUrl"
+                required>
+        </div>
+
+        <div class="form-group pb-3">
+            <label for="productFlavor">Select Flavor:</label>
+            <select class="form-control" id="productFlavor" name="flavorId" [(ngModel)]="data.flavorId" required>
+                <option *ngFor="let flavor of flavors" [value]="flavor.id">{{ flavor.name }}</option>
+            </select>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions class="d-flex align-items-center justify-content-end gap-2 border-top pe-4">
+    <button (click)="onNoClick()" class="btn btn-secondary px-4">Cancel</button>
+    <button [mat-dialog-close]="data" [disabled]="!productForm.valid" class="btn btn-success px-4">Update</button>
+</div>

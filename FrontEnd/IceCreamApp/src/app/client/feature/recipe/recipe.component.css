@@ -1,17 +1,91 @@
-.card-recipe{
+.card-recipe {
     width: 25rem;
 }
 
-.card-img-top{
+.card-img-top {
     height: 18rem;
-    object-fit: cover;
 }
 
-.recipe-title{
+.recipe-title {
+    font-size: 20px;
     font-weight: 600;
 }
 
-.view-recipe-btn{
+.text-view {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.view-recipe-btn {
     width: 40px;
     height: 40px;
+}
+
+.btn-recipe-show {
+    background-color: #fff;
+    color: #000;
+}
+
+.btn-recipe-show.active {
+    background-color: #000;
+    color: #fff;
+}
+
+:host ::ng-deep .ck-editor__editable_inline {
+    min-height: 100px !important;
+}
+
+:host ::ng-deep .ck-editor__editable_inline p {
+    margin-bottom: 5px;
+}
+
+
+/* responsive */
+
+@media screen and (max-width: 1500px) {}
+
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 992px) {
+    .card-recipe {
+        width: 20rem;
+    }
+
+    .card-img-top {
+        height: 14rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .card-recipe {
+        width: 15rem;
+    }
+
+    .card-img-top {
+        height: 12rem;
+    }
+}
+
+@media screen and (max-width: 465px) {
+    .card-recipe {
+        width: 18rem;
+    }
+
+    .card-img-top {
+        height: 12rem;
+    }
+
+    .recipe-title {
+        font-size: 18px;
+    }
+
+    .text-view {
+        font-size: 18px;
+    }
+
+    .view-recipe-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
 }

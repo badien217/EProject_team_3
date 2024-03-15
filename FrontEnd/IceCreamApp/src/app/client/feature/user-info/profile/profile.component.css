@@ -1,0 +1,46 @@
+.profile-img {
+    width: 250px;
+    height: 250px;
+}
+
+.btn-edit-avatar {
+    width: 35px;
+    height: 35px;
+    transform: translateX(-180%);
+    margin-top: 200px;
+}
+
+.recipe-container {
+    width: 500px;
+}
+
+.recipe-img {
+    width: 180px;
+    height: 150px;
+}
+
+
+/* responsive */
+
+@media screen and (max-width: 1500px) {}
+
+@media screen and (max-width: 1200px) {
+    .recipe-container {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .recipe-container {
+        width: 500px;
+    }
+}
+
+@media screen and (max-width: 768px) {}
+
+@media screen and (max-width: 465px) {
+    .recipe-img {
+        width: 140px;
+        height: 120px;
+    }
+}

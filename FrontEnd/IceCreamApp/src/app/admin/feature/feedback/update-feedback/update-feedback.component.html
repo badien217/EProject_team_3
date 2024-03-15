@@ -1,0 +1,36 @@
+<div class="d-flex align-items-center justify-content-between border-bottom">
+    <h2 mat-dialog-title>Update Feedback</h2>
+    <button mat-dialog-title (click)="onNoClick()" class="btn border-0 rounded-cirlce"><fa-icon
+            [icon]="faX"></fa-icon></button>
+</div>
+<div mat-dialog-content class="update-feedback-dialog-container">
+    <form #feedbackForm="ngForm" class="py-2">
+        <div class="form-group pb-3">
+            <label for="feedbackName">Name:</label>
+            <input type="text" class="form-control" id="feedbackName" name="name" [(ngModel)]="data.name" required>
+        </div>
+        <div class="form-group pb-3">
+            <label for="feedbackEmail">Email:</label>
+            <input type="text" class="form-control" id="feedbackEmail" name="email" [(ngModel)]="data.email" required>
+        </div>
+        <div class="form-group pb-3">
+            <label for="feedbackPhone">Phone:</label>
+            <input type="text" class="form-control" id="feedbackPhone" name="phone" [(ngModel)]="data.phone" required>
+        </div>
+        <div class="form-group pb-3">
+            <label for="feedbackContent">Feedback Content:</label>
+            <textarea rows="3" class="form-control" id="feedbackContent" name="feedbackContent"
+                [(ngModel)]="data.feedbackContent" required></textarea>
+        </div>
+        <div class="form-group pb-3">
+            <label for="feedbackDate">Feedback Date:</label>
+            <input type="date" class="form-control" id="feedbackDate" name="feedbackDate"
+                [(ngModel)]="data.feedbackDate" required>
+        </div>
+    </form>
+</div>
+
+<div mat-dialog-actions class="d-flex align-items-center justify-content-end gap-2 border-top pe-4">
+    <button (click)="onNoClick()" class="btn btn-secondary px-4">Cancel</button>
+    <button [mat-dialog-close]="data" [disabled]="!feedbackForm.valid" class="btn btn-success px-4">Save</button>
+</div>

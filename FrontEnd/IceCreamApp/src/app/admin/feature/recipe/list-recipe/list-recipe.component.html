@@ -1,14 +1,74 @@
-<div class="py-4 px-5 bg-light overflow-y-auto main-admin">
+<div class="py-4 px-lg-5 px-md-3 px-sm-3 px-3 bg-light overflow-y-auto main-admin">
     <div class="h2 pb-3">Recipe Management</div>
     <div class="d-flex align-items-center justify-content-between mb-3">
-        <a [routerLink]="['/admin/recipe-management/add-recipe']" class="btn btn-success">Add new recipe</a>
-        <div class="input-group w-50 float-end">
-            <input type="text" class="form-control" placeholder="Search by name" >
-            <button class="btn btn-outline-warning" type="submit">Search</button>
+        <a [routerLink]="['/admin/recipe-management/add-recipe']"
+            class="border-0 rounded px-3 py-2 text-white text-decoration-none btn-success">Add new recipe</a>
+
+        <div class="col-4 d-flex align-items-center">
+            <input type="text" class="form-control py-2 px-3 shadow-sm border-0" [(ngModel)]="searchTerm"
+                (input)="applyFilter()" placeholder="Search...">
+            <fa-icon [icon]="faMagnifyingGlass" class="icon-search"></fa-icon>
         </div>
     </div>
 
-    <table class="table table-bordered">
+    <table mat-table [dataSource]="dataSource" matSort class="table table-bordered">
+
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef>#</th>
+            <td mat-cell *matCellDef="let row">{{ getIndex(row) }}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="submittedBy">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Submitted By </th>
+            <td mat-cell *matCellDef="let element"> {{element.submittedBy}} </td>
+        </ng-container>
+        <ng-container matColumnDef="image">
+            <th mat-header-cell *matHeaderCellDef> Image </th>
+            <td mat-cell *matCellDef="let element">
+                <img src="../../../../assets/images/{{element.imageUrl}}" alt="{{element.name}}" class="recipe-img">
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+        <ng-container matColumnDef="isShow">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let element">
+                <select [(ngModel)]="element.isShow" (change)="updateStatus(element.id, element.isShow)"
+                    class="form-select me-4">
+                    <option [ngValue]="true">Show</option>
+                    <option [ngValue]="false">Hide</option>
+                </select>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+                <div class="d-flex gap-1">
+                    <a [routerLink]="['/admin/recipe-management/update-recipe', element.id]"
+                        class="btn bg-warning-subtle text-warning border-0 rounded"><fa-icon
+                            [icon]="faPenToSquare"></fa-icon></a>
+                    <button (click)="deleteRecipe(element.id)"
+                        class="btn bg-danger-subtle text-danger border-0 rounded"><fa-icon
+                            [icon]="faTrash"></fa-icon></button>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons
+        class="d-flex align-items-center justify-content-center bg-light">
+    </mat-paginator>
+
+
+    <!-- <table class="table table-bordered">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -37,9 +97,9 @@
                 </td>
             </tr>
         </tbody>
-    </table>
-    <div class="d-flex align-items-center justify-content-center mt-5">
+    </table> -->
+    <!-- <div class="d-flex align-items-center justify-content-center mt-5">
         <pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="Prev"
             nextLabel="Next"></pagination-controls>
-    </div>
+    </div> -->
 </div>

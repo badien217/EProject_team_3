@@ -7,18 +7,16 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'IceCreamApp';
-
-  
+  title = 'Ice Cream Shop';
 
   constructor(private router: Router) { }
   ngOnInit() {
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
-      }
-      window.scrollTo(0, 0);
-    });
+    // this.router.events.subscribe((evt) => {
+    //   if (!(evt instanceof NavigationEnd)) {
+    //     return;
+    //   }
+    //   window.scrollTo(0, 0);
+    // });
   }
   get isAuthRoute() {
     return this.router.url.startsWith('/auth');

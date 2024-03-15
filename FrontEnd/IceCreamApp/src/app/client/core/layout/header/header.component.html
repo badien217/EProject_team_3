@@ -1,6 +1,6 @@
 <header>
     <div
-        class="d-flex flex-wrap align-items-center justify-content-md-between justify-content-sm-between justify-content-between px-3 py-2  fixed-top header">
+        class="d-flex flex-wrap align-items-center justify-content-md-between justify-content-sm-between justify-content-between px-3 py-2  fixed-top z-2 header">
         <div class="">
             <a [routerLink]="['/']" class="d-inline-flex ms-3">
                 <img src="../../../../assets/images/logo.png" alt="logo" class="logo-img">
@@ -13,34 +13,91 @@
             <li><a [routerLink]="['/menu']" routerLinkActive="active"
                     class="nav-link rounded py-1 px-3 text-capitalize fs-normal text-large text-chocolate">Menu</a></li>
             <li><a [routerLink]="['/recipes']" routerLinkActive="active"
-                    class="nav-link rounded py-1 px-3 text-capitalize fs-normal text-large text-chocolate">Recipe</a></li>
+                    class="nav-link rounded py-1 px-3 text-capitalize fs-normal text-large text-chocolate">Recipe</a>
+            </li>
             <li><a [routerLink]="['/books']" routerLinkActive="active"
                     class="nav-link rounded py-1 px-3 text-capitalize fs-normal text-large text-chocolate">Book</a></li>
             <li><a [routerLink]="['/feedback']" routerLinkActive="active"
-                    class="nav-link rounded py-1 px-3 text-capitalize fs-normal text-large text-chocolate">Feedback</a></li>
+                    class="nav-link rounded py-1 px-3 text-capitalize fs-normal text-large text-chocolate">Feedback</a>
+            </li>
             <li><a [routerLink]="['/contact-us']" routerLinkActive="active"
-                    class="nav-link rounded py-1 px-3 text-capitalize fs-normal text-large text-chocolate">Contact</a></li>
+                    class="nav-link rounded py-1 px-3 text-capitalize fs-normal text-large text-chocolate">Contact</a>
+            </li>
             <li><a [routerLink]="['/about-us']" routerLinkActive="active"
-                    class="nav-link rounded py-1 px-3 text-capitalize fs-normal text-large text-chocolate">About</a></li>
+                    class="nav-link rounded py-1 px-3 text-capitalize fs-normal text-large text-chocolate">About</a>
+            </li>
             <li><a [routerLink]="['/faq']" routerLinkActive="active"
-                    class="nav-link rounded py-1 px-3 text-capitalize fs-normal text-large text-chocolate">FAQ's</a></li>
+                    class="nav-link rounded py-1 px-3 text-capitalize fs-normal text-large text-chocolate">FAQ's</a>
+            </li>
         </ul>
 
-        <div class=" text-end d-flex align-items-center justify-content-end d-lg-flex d-md-none d-sm-none d-none">
-            <a [routerLink]="['/auth/login']" class="fs-normal border border-0  btn-header text-chocolate"><fa-icon
-                    [icon]="faUser"></fa-icon></a>
-            <a  [routerLink]="['/order']" class="fs-normal border border-0  btn-header text-chocolate">
+        <div
+            class=" text-end d-flex align-items-center justify-content-end d-lg-flex d-md-none d-sm-none d-none gap-2 me-3">
+            <div *ngIf="!isClientLoggedIn" class="dropdown">
+                <button
+                    class="fs-normal rounded-circle d-flex align-items-center justify-content-center p-3 text-chocolate btn-header btn-icon"
+                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <fa-icon [icon]="faUser"></fa-icon>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a [routerLink]="['/auth/login']" class="dropdown-item">Login</a></li>
+                    <li><a [routerLink]="['/auth/register']" class="dropdown-item">Register</a></li>
+                </ul>
+            </div>
+            <div *ngIf="isClientLoggedIn" class="dropdown">
+                <button
+                    class="fs-normal rounded-circle d-flex align-items-center justify-content-center p-3 fw-bold btn-icon"
+                    type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                    [style.background]="avatarBackgroundColor" [style.color]="avatarTextColor">
+                    {{ avatarFirstLetter }}
+                </button>
+
+                <ul class="dropdown-menu">
+                    <li><a [routerLink]="['/profile']" class="dropdown-item">Profile</a></li>
+                    <li><button (click)="logoutClient()" class="dropdown-item">Logout</button></li>
+                </ul>
+            </div>
+            <a [routerLink]="['/order']"
+                class="fs-normal rounded-circle d-flex align-items-center justify-content-center p-3 text-chocolate btn-icon">
                 <fa-icon class="fs-normal" [icon]="faCartShopping"></fa-icon>
+                <span class="position-absolute badge rounded-pill bg-danger">
+                    <!-- Check if user is not logged in, show sessionStorage cart items -->
+                    <ng-container *ngIf="!isClientLoggedIn">
+                        {{ sessionStorageService.cartItemsLength || 0 }}
+                    </ng-container>
+
+                    <!-- Check if user is logged in, show cart detail length -->
+                    <ng-container *ngIf="isClientLoggedIn">
+                        {{ cartDetailLengthFromServer || 0 }}
+                    </ng-container>
+                </span>
             </a>
         </div>
-        <button class="btn fs-5 d-lg-none d-md-block d-sm-block d-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
-            aria-controls="offcanvasExample">
-            <fa-icon [icon]="faBars"></fa-icon>
-        </button>
+
+        <div class="d-lg-none d-md-flex d-sm-flex d-flex gap-2">
+            <a [routerLink]="['/order']"
+                class="fs-normal rounded-circle  d-lg-none d-md-flex d-sm-flex d-flex align-items-center justify-content-center p-3 text-chocolate btn-icon">
+                <fa-icon class="fs-normal" [icon]="faCartShopping"></fa-icon>
+                <span class="position-absolute badge rounded-pill bg-danger">
+                    <!-- Check if user is not logged in, show sessionStorage cart items -->
+                    <ng-container *ngIf="!isClientLoggedIn">
+                        {{ sessionStorageService.cartItemsLength || 0 }}
+                    </ng-container>
+
+                    <!-- Check if user is logged in, show cart detail length -->
+                    <ng-container *ngIf="isClientLoggedIn">
+                        {{ cartDetailLengthFromServer || 0 }}
+                    </ng-container>
+                </span>
+            </a>
+            <button class="bg-none border-0 fs-5 d-lg-none d-md-block d-sm-block d-block" type="button"
+                data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+                <fa-icon [icon]="faBars"></fa-icon>
+            </button>
+        </div>
     </div>
 
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
-        aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
         <div class="offcanvas-header">
             <a [routerLink]="['/']" class="d-inline-flex ms-4">
                 <img src="../../../../assets/images/logo.png" alt="logo" class="object-fit-contain logo-img">
@@ -69,19 +126,32 @@
         </div>
         <div class="p-3">
             <div class="btn-group dropup">
-                <button type="button" class="btn border-0 dropdown-toggle" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <span class="btn btn-warning rounded-circle fs-5 border border-0 text-chocolate">
+                <div *ngIf="!isClientLoggedIn">
+                    <button
+                        class="fs-normal rounded-circle d-flex align-items-center justify-content-center p-3 text-chocolate btn-header btn-icon"
+                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <fa-icon [icon]="faUser"></fa-icon>
-                    </span>
-                    <span class="px-1">username</span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a [routerLink]="['/login']" class="dropdown-item">Login</a></li>
-                    <li><a [routerLink]="['/login']" class="dropdown-item">Register</a></li>
-                </ul>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a [routerLink]="['/auth/login']" class="dropdown-item">Login</a></li>
+                        <li><a [routerLink]="['/auth/register']" class="dropdown-item">Register</a></li>
+                    </ul>
+                </div>
+                <div *ngIf="isClientLoggedIn">
+                    <div class="d-flex align-items-center gap-2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button
+                            class="fs-normal rounded-circle d-flex align-items-center justify-content-center p-3 fw-bold btn-icon"
+                            type="button" [style.background]="avatarBackgroundColor" [style.color]="avatarTextColor">
+                            {{ avatarFirstLetter }}
+                        </button>
+                        <span>{{userInfo.name}}</span>
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li><a [routerLink]="['/profile']" class="dropdown-item">Profile</a></li>
+                        <li><button (click)="logoutClient()" class="dropdown-item">Logout</button></li>
+                    </ul>
+                </div>
             </div>
-
         </div>
     </div>
 </header>

@@ -1,0 +1,24 @@
+<div class="d-flex align-items-center justify-content-between border-bottom">
+    <h2 mat-dialog-title>Update FAQs</h2>
+    <button mat-dialog-title (click)="onNoClick()" class="btn border-0 rounded-cirlce"><fa-icon
+            [icon]="faX"></fa-icon></button>
+</div>
+<div mat-dialog-content class="update-faq-dialog-container">
+    <form #faqForm="ngForm" class="py-2">
+        <div class="form-group pb-3">
+            <label for="faqQuestion">Question:</label>
+            <textarea rows="2" class="form-control" id="faqQuestion" name="question" [(ngModel)]="data.question"
+                required></textarea>
+        </div>
+
+        <div class="form-group pb-3">
+            <label for="faqAnswer">Answer:</label>
+            <textarea rows="8" class="form-control" id="faqAnswer" name="answer" [(ngModel)]="data.answer"
+                required></textarea>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions class="d-flex align-items-center justify-content-end gap-2 border-top pe-4">
+    <button (click)="onNoClick()" class="btn btn-secondary px-4">Cancel</button>
+    <button [mat-dialog-close]="data" [disabled]="!faqForm.valid" class="btn btn-success px-4">Update</button>
+</div>

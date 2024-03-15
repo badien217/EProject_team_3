@@ -8,4 +8,5 @@ export interface Recipe {
     submittedBy?: string;
     steps: Step[];
     ingredient?: string;
+    isShow: boolean;
 }

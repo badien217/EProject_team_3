@@ -1,25 +1,31 @@
-<!-- <div class="py-4 px-5 bg-light overflow-y-auto main-admin">
-        <a [routerLink]="['/admin/product-management']" class="btn btn-outline-dark mb-3"><fa-icon [icon]="faArrowLeft"></fa-icon></a>
-<div class="h2 pb-3">Add New Ice Cream</div>
-    <form *ngIf="!submitted">
-        <div class="mb-3">
-            <label for="nameInput" class="form-label">Name</label>
-            <input type="text" class="form-control" id="nameInput" name="name" [(ngModel)]="product.name" required>
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+<div class="d-flex align-items-center justify-content-between border-bottom">
+    <h2 mat-dialog-title>Add New Product</h2>
+    <button mat-dialog-title (click)="onNoClick()" class="btn border-0 rounded-cirlce"><fa-icon
+            [icon]="faX"></fa-icon></button>
+</div>
+<div mat-dialog-content class="add-product-dialog-container">
+    <form #productForm="ngForm" class="py-2">
+        <div class="form-group pb-3">
+            <label for="productName">Product Name:</label>
+            <input type="text" class="form-control" id="productName" name="name" [(ngModel)]="data.name" required>
         </div>
-        <div class="mb-3">
-            <label for="flavorInput" class="form-label">Flavor</label>
-            <input type="text" class="form-control" id="flavorInput" name="flavorId" [(ngModel)]="product.flavorId" required>
-        </div>
-        <div class="mb-3">
-            <label for="imageFileInput" class="form-label">Image</label>
-            <input class="form-control" type="file" id="imageFileInput" name="imageUrl" [(ngModel)]="product.imageUrl"
+
+        <div class="form-group pb-3">
+            <label for="productImage">Product Image URL:</label>
+            <input type="file" class="form-control" id="productImage" name="imageUrl" [(ngModel)]="data.imageUrl"
                 required>
         </div>
-        <button class="btn btn-success px-5" (click)="saveProduct()">Save</button>
+
+        <div class="form-group pb-3">
+            <label for="productFlavor">Select Flavor:</label>
+            <select class="form-control" id="productFlavor" name="flavorId" [(ngModel)]="data.flavorId" required>
+                <option *ngFor="let flavor of flavors" [value]="flavor.id">{{ flavor.name }}</option>
+            </select>
+        </div>
     </form>
-    <div *ngIf="submitted">
-        <h4>Tutorial was submitted successfully!</h4>
-        <button class="btn btn-success" (click)="newProduct()">Add</button>
-    </div>
-</div> -->
+</div>
+
+<div mat-dialog-actions class="d-flex align-items-center justify-content-end gap-2 border-top pe-4">
+    <button (click)="onNoClick()" class="btn btn-secondary px-4">Cancel</button>
+    <button [mat-dialog-close]="data" [disabled]="!productForm.valid" class="btn btn-success px-4">Save</button>
+</div>

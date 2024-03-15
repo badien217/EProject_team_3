@@ -8,4 +8,8 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Mapper
+<<<<<<< HEAD
 build_property.ProjectDir = D:\eProject_team_3\EProject_team_3\BackEnd\app\core\AutoMapper\
+=======
+build_property.ProjectDir = D:\Fork\EProject_team_3\BackEnd\app\core\AutoMapper\
+>>>>>>> thao

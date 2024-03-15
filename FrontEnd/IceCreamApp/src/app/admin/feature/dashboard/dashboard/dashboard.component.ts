@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faIceCream, faUser, faCartShopping, faComment, faBook , faBookOpen} from '@fortawesome/free-solid-svg-icons';
+import { faIceCream, faUser, faCartShopping, faComment, faBook, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import { DashboardService } from 'src/app/admin/core/services/dashboard.service';
 
 @Component({
@@ -12,8 +12,8 @@ export class DashboardComponent implements OnInit {
   faUser = faUser;
   faCartShopping = faCartShopping;
   faComment = faComment;
-  faBook=faBook;
-  faBookOpen=faBookOpen;
+  faBook = faBook;
+  faBookOpen = faBookOpen;
 
   totalFeedback: number = 0;
   totalRecipes: number = 0;
@@ -28,7 +28,6 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getTotalFeedbacks().subscribe({
       next: (data) => {
         this.totalFeedback = data;
-        console.log(data);
       },
       error: (e) => console.error(e)
     });
@@ -36,7 +35,6 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getTotalRecipes().subscribe({
       next: (data) => {
         this.totalRecipes = data;
-        console.log(data);
       },
       error: (e) => console.error(e)
     });
@@ -44,7 +42,6 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getTotalUsers().subscribe({
       next: (data) => {
         this.totalUsers = data;
-        console.log(data);
       },
       error: (e) => console.error(e)
     });
@@ -52,7 +49,6 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getTotalOrders().subscribe({
       next: (data) => {
         this.totalOrders = data;
-        console.log(data);
       },
       error: (e) => console.error(e)
     });
@@ -60,7 +56,6 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getTotalBooks().subscribe({
       next: (data) => {
         this.totalBooks = data;
-        console.log(data);
       },
       error: (e) => console.error(e)
     });
@@ -68,7 +63,6 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getTotalProducts().subscribe({
       next: (data) => {
         this.totalProducts = data;
-        console.log(data);
       },
       error: (e) => console.error(e)
     });

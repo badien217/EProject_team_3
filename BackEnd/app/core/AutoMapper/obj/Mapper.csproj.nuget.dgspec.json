@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj": {}
   },
   "projects": {
@@ -12,13 +13,27 @@
         "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\Dien Bu's Cu's\\.nuget\\packages\\",
         "outputPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\obj\\",
+=======
+    "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj": {}
+  },
+  "projects": {
+    "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj",
+        "projectName": "Application",
+        "projectPath": "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+        "outputPath": "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\Application\\obj\\",
+>>>>>>> thao
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
+<<<<<<< HEAD
           "C:\\Users\\Dien Bu's Cu's\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+=======
+          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> thao
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,15 +41,19 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
+<<<<<<< HEAD
               "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj": {
                 "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj"
+=======
+              "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj"
+>>>>>>> thao
               }
             }
           }
@@ -132,6 +151,7 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
@@ -144,13 +164,28 @@
         "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj",
         "packagesPath": "C:\\Users\\Dien Bu's Cu's\\.nuget\\packages\\",
         "outputPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\obj\\",
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj",
+        "projectName": "Mapper",
+        "projectPath": "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\Mapper.csproj",
+        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+        "outputPath": "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\AutoMapper\\obj\\",
+>>>>>>> thao
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
+<<<<<<< HEAD
           "C:\\Users\\Dien Bu's Cu's\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+=======
+          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> thao
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -158,18 +193,22 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
+<<<<<<< HEAD
               "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj": {
                 "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj"
               },
               "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\persistence.csproj": {
                 "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\Infrastructure\\persistence\\persistence.csproj"
+=======
+              "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj": {
+                "projectPath": "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\Application\\Application.csproj"
+>>>>>>> thao
               }
             }
           }
@@ -257,6 +296,7 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
@@ -269,13 +309,28 @@
         "projectPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\Dien Bu's Cu's\\.nuget\\packages\\",
         "outputPath": "D:\\eProject_team_3\\EProject_team_3\\BackEnd\\app\\core\\Domain\\obj\\",
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj",
+        "projectName": "Domain",
+        "projectPath": "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+        "outputPath": "D:\\Fork\\EProject_team_3\\BackEnd\\app\\core\\Domain\\obj\\",
+>>>>>>> thao
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
+<<<<<<< HEAD
           "C:\\Users\\Dien Bu's Cu's\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+=======
+          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> thao
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -283,7 +338,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -377,6 +431,7 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
@@ -511,6 +566,9 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+>>>>>>> thao
         }
       }
     }

@@ -3,3 +3,11 @@ textarea {
     box-sizing: border-box;
     resize: none;
 }
+
+:host ::ng-deep .ck-editor__editable_inline {
+    min-height: 100px !important;
+}
+
+:host ::ng-deep .ck-editor__editable_inline p {
+    margin-bottom: 5px;
+}

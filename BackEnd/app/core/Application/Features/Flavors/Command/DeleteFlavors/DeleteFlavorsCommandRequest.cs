@@ -9,6 +9,6 @@ namespace Application.Features.Flavors.Command.DeleteFlavors
 {
     public class DeleteFlavorsCommandRequest : IRequest<Unit>
     {
-
+        public int id { get; set; } 
     }
 }
