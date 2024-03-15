@@ -1,25 +1,24 @@
 <div class="container pt-5">
-    <div class="d-flex justify-content-center row pt-5 mt-5 mb-5">
+    <div class="d-flex flex-lg-row flex-column gap-3 justify-content-center pt-5 mt-5 mb-5">
         <div class="col d-flex align-items-center justify-content-center border">
             <img src="../../../assets/images/{{book.imageUrl}}" alt="ice-cream-book-1" class="w-75">
         </div>
         <div class="col px-5">
             <h2 class="fs-2 lh-base ">{{book.title}}</h2>
-            <div class="d-flex gap-3 mb-4">
+            <div class="d-flex align-items-center gap-lg-3 gap-md-2 gap-sm-2 gap-1 mb-4">
                 <div class="d-flex align-items-center gap-3 stars-rating">
-                    <fa-icon class="fs-5" [icon]="faStar"></fa-icon>
-                    <fa-icon class="fs-5" [icon]="faStar"></fa-icon>
-                    <fa-icon class="fs-5" [icon]="faStar"></fa-icon>
-                    <fa-icon class="fs-5" [icon]="faStar"></fa-icon>
-                    <fa-icon class="fs-5" [icon]="faStarHalfStroke"></fa-icon>
+                    <ng-container *ngFor="let star of getAvgStarArray()">
+                        <fa-icon class="fs-5" [icon]="star.icon"></fa-icon>
+                    </ng-container>
                 </div>
-                <div class="fs-6 text-secondary">100 Ratings</div>
+                <div class="fs-6 text-secondary">{{bookRatings.length}} Ratings</div>
             </div>
             <p class="fs-5 lh-base"><strong>Price: </strong><span class="fs-3 ps-2 price">${{book.price}}</span></p>
             <p class="fs-5 lh-base"><strong>Description: </strong>{{book.description}}</p>
             <p class="fs-5 lh-base"><strong>Author: </strong>{{book.author}}</p>
             <p class="fs-5 lh-base"><strong>First Publish: </strong>{{book.publishedDate | date}}</p>
-            <button class="btn btn-outline-warning rounded-5 px-5 fs-5 mt-3">Add to cart</button>
+            <button (click)="addToCart(book)" class="btn-outline-accent-color rounded-5 px-5 py-1 fs-5 mt-3">Add to
+                cart</button>
         </div>
 
     </div>
@@ -27,78 +26,102 @@
 
 <div class="container py-5">
     <p class="display-5 text-center pb-2 fw-bold">Other books</p>
-    <swiper-container #swiper navigation="true" slides-per-view="4" autoplay="true" loop="true">
-        <swiper-slide *ngFor="let book of books">
-            <div class="card"
-            style="width: 18rem;">
-            <img src="../../../assets/images/{{book.imageUrl}}" class="card-img-top object-fit-contain"
-                alt="{{book.title}}" style="height: 20rem;">
-            <div class="card-body text-center rounded-bottom">
-                <div class="d-flex align-items-center justify-content-center overflow-hidden" style="height: 4rem;">
-                    <a [routerLink]="['/book-detail', book.id]"
-                        class="text-decoration-none text-dark fs-5 two-line-text">{{book.title}}</a>
+    <div class='d-flex flex-wrap gap-lg-4 gap-md-3 gap-sm-2 gap-2 justify-content-around'>
+        <div *ngFor="let book of books" class="card card-book rounded-0 shadow">
+            <span *ngIf="isNew(book.publishedDate)" class="card-tag"></span>
+            <img src="../../../assets/images/{{book.imageUrl}}"
+                class="card-img-top book-img object-fit-contain mt-4 mb-2" alt="{{book.title}}">
+            <div class="card-body card-body-book rounded-bottom">
+                <div class="overflow-hidden">
+                    <a [routerLink]="['/books/book-detail', book.id]"
+                        class="text-decoration-none text-dark fs-normal fw-500 two-line-text">{{book.title}}</a>
                 </div>
                 <div class="d-flex align-items-center justify-content-between mt-2">
-                    <div>
-                        <span class="">${{book.price}}</span>
-                        <div class="d-flex align-items-center justify-content-center stars-rating small">
-                            <fa-icon class="small" [icon]="faStar"></fa-icon>
-                            <fa-icon class="small" [icon]="faStar"></fa-icon>
-                            <fa-icon class="small" [icon]="faStar"></fa-icon>
-                            <fa-icon class="small" [icon]="faStar"></fa-icon>
-                            <fa-icon class="small" [icon]="faStarHalfStroke"></fa-icon>
+                    <div class="d-flex flex-column align-items-start">
+                        <span class="fw-bold book-price">${{book.price}}</span>
+                        <div class="d-flex align-items-center justify-content-center book-rating">
+                            <ng-container *ngFor="let star of getAvgStarIconArray(book.averageRating)">
+                                <fa-icon class="small" [icon]="star.icon"></fa-icon>
+                            </ng-container>
                         </div>
                     </div>
                     <div>
-                        <button
-                            class="d-flex align-items-center justify-content-center btn btn-outline-warning rounded-circle cart-btn"><fa-icon
-                                class="small" [icon]="faCartShopping"></fa-icon></button>
+                        <button (click)="addToCart(book)"
+                            class="d-flex align-items-center justify-content-center btn btn-outline-accent-color rounded-circle cart-btn">
+                            <fa-icon class="small" [icon]="faCartShopping"></fa-icon>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-
-        </swiper-slide>
-    </swiper-container>
+    </div>
 
     <div class="d-flex align-items-center justify-content-center mt-5">
-        <a [routerLink]="['/books']" class="btn btn-outline-warning rounded-5 px-5 fs-5">View all books<fa-icon [icon]="faArrowRight"
-                class="small ps-1"></fa-icon></a>
+        <a [routerLink]="['/books']" class="btn-outline-accent-color rounded-5 px-5 py-1 text-decoration-none fs-5">View
+            all books<fa-icon [icon]="faArrowRight" class="small ps-1"></fa-icon></a>
     </div>
 </div>
 
 
-<!-- 
-<div class="container py-5">
-    <p class="display-5 text-center pb-2 fw-bold">Other books</p>
-    <div class='d-flex flex-wrap gap-lg-4 gap-md-3 gap-sm-2 gap-2 align-items-center justify-content-center'>
+<form class="container py-5" id="review">
+    <p class="display-5 text-center pb-2 fw-bold">Leave a review</p>
+    <p class="h5 text-center">Click the stars to rate us*</p>
+    <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
+        <div>
+            <input type="radio" [(ngModel)]="bookRatingDto.rating" name="rating" id="rate-5" value="5"
+                class="input-rating">
+            <label for="rate-5" class="label-rating"><fa-icon [icon]="faStar"></fa-icon></label>
+            <input type="radio" [(ngModel)]="bookRatingDto.rating" name="rating" id="rate-4" value="4"
+                class="input-rating">
+            <label for="rate-4" class="label-rating"><fa-icon [icon]="faStar"></fa-icon></label>
+            <input type="radio" [(ngModel)]="bookRatingDto.rating" name="rating" id="rate-3" value="3"
+                class="input-rating">
+            <label for="rate-3" class="label-rating"><fa-icon [icon]="faStar"></fa-icon></label>
+            <input type="radio" [(ngModel)]="bookRatingDto.rating" name="rating" id="rate-2" value="2"
+                class="input-rating">
+            <label for="rate-2" class="label-rating"><fa-icon [icon]="faStar"></fa-icon></label>
+            <input type="radio" [(ngModel)]="bookRatingDto.rating" name="rating" id="rate-1" value="1"
+                class="input-rating">
+            <label for="rate-1" class="label-rating"><fa-icon [icon]="faStar"></fa-icon></label>
+        </div>
+    </div>
+    <div>
+        <input type="text" [(ngModel)]="bookRatingDto.name" name="name" class="form-control mb-2"
+            placeholder="Your name">
+        <textarea [(ngModel)]="bookRatingDto.comment" name="comment" class="form-control" placeholder="Your comment..."
+            rows="3"></textarea>
+        <button type="submit" class="border-0 btn-accent-color rounded px-5 py-1 mt-2 fs-5 text-white"
+            (click)="createBookRating()">Send</button>
+    </div>
+    <hr class="border-2 border-dark">
+    <div class="py-3 mx-0">
+        <p class="display-6 fw-bold">{{avgRating}}/5</p>
+        <div class="d-flex align-items-center gap-1 stars-rating">
+            <ng-container *ngFor="let star of getAvgStarArray()">
+                <fa-icon class="fs-4" [icon]="star.icon"></fa-icon>
+            </ng-container>
+        </div>
+    </div>
+    <div class="mt-4">
+        <div class="d-flex" *ngFor="let bookRating of bookRatings; index as i">
+            <div class="me-3">
+                <img src="../../../assets/images/auth-img.png" alt="reviewer-avatar"
+                    class="rounded-circle reviewer-avatar">
+            </div>
 
-       
-
-        <div *ngFor="let book of books; index as i" class="card" style="width: 18rem;">
-            <img src="../../../assets/images/{{book.imageUrl}}" class="card-img-top" alt="{{book.title}}">
-            <div class="card-body text-center rounded-bottom">
-                <a href="/book-detail/{{book.id}}" class="text-decoration-none text-dark fs-5 card-title">{{book.title}}</a>
-                <div class="d-flex align-items-center justify-content-between mt-2">
-                    <div>
-                        <span class="fs-5">${{book.price}}</span>
-                        <div class="d-flex align-items-center justify-content-center stars-rating small">
-                            <fa-icon class="small" [icon]="faStar"></fa-icon>
-                            <fa-icon class="small" [icon]="faStar"></fa-icon>
-                            <fa-icon class="small" [icon]="faStar"></fa-icon>
-                            <fa-icon class="small" [icon]="faStar"></fa-icon>
-                            <fa-icon class="small" [icon]="faStarHalfStroke"></fa-icon>
-                        </div>
+            <div class="lh-sm">
+                <span class="fs-7">{{bookRating.name}}</span>
+                <div class="d-flex align-items-center stars-rating star-sm">
+                    <div class="d-flex align-items-center stars-rating star-sm">
+                        <ng-container *ngFor="let star of getStarArray(bookRating.rating)">
+                            <fa-icon [icon]="star.icon"></fa-icon>
+                        </ng-container>
                     </div>
-                    <div>
-                        <button class="d-flex align-items-center justify-content-center btn btn-outline-warning rounded-circle cart-btn"><fa-icon class="small" [icon]="faCartShopping"></fa-icon></button>
-                    </div>
+                    <span class="text-body-tertiary px-1">|</span>
+                    <small class="text-secondary fs-8">{{bookRating.ratingDate | date}}</small>
                 </div>
+                <p class="fs-6 pt-2">{{bookRating.comment}}</p>
             </div>
         </div>
     </div>
-    <div class="d-flex align-items-center justify-content-center mt-5">
-        <a href="/books" class="btn btn-outline-warning rounded-5 px-5 fs-5">View all books<fa-icon [icon]="faArrowRight"
-                class="small ps-1"></fa-icon></a>
-    </div>
-</div> -->
+</form>

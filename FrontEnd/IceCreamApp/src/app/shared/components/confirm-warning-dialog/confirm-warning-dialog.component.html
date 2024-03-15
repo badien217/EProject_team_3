@@ -1,0 +1,10 @@
+<div mat-dialog-content
+    class="confirm-warning-dialog-container px-5 d-flex flex-column align-items-center justify-content-center text-dark">
+    <img src="../../../../assets/images/warning.png" alt="warning" class="warning-img">
+    <h2>Are you sure?</h2>
+    <p class="text-center ">{{ data.message }}</p>
+</div>
+<div mat-dialog-actions class="d-flex align-items-center justify-content-center gap-3 pb-4">
+    <button (click)="onNoClick()" class="border-0 rounded py-1 text-white bg-secondary px-5">No</button>
+    <button (click)="onYesClick()" class="border-0 rounded py-1 text-white bg-danger px-5">Yes</button>
+</div>

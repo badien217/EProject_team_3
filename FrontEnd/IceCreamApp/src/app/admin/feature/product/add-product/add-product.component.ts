@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { Component, Inject } from '@angular/core';
+import { faX } from '@fortawesome/free-solid-svg-icons';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Product } from 'src/app/interfaces/product';
+import { Flavor } from 'src/app/interfaces/flavor';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-add-product',
@@ -7,39 +11,29 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent {
-  faArrowLeft =faArrowLeft;
+  faX = faX;
 
-  // product: IceCream = {
-  //   name: '',
-  //   flavorId: 0,
-  //   imageUrl: '',
-  // };
-  // submitted = false;
+  flavors: Flavor[] = [];
 
-  // constructor(private productService: ProductService) { }
+  constructor(
+    public dialogRef: MatDialogRef<AddProductComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Product,
+    private productService: ProductService
+  ) { }
 
-  // saveProduct(): void {
-  //   const data = {
-  //     name: this.product.name,
-  //     flavorId: this.product.flavorId,
-  //     imageUrl: this.product.imageUrl,
-  //   };
+  ngOnInit(): void {
+    // Fetch flavors when the component is initialized
+    this.productService.getAllFlavors().subscribe({
+      next: (flavors) => {
+        this.flavors = flavors;
+      },
+      error: (error) => {
+        console.error('Error fetching flavors:', error);
+      }
+    });
+  }
 
-  //   this.productService.createProduct(data).subscribe({
-  //     next: (res) => {
-  //       console.log(res);
-  //       this.submitted = true;
-  //     },
-  //     error: (e) => console.error(e)
-  //   });
-  // }
-
-  // newProduct(): void {
-  //   this.submitted = false;
-  //   this.product = {
-  //     name: '',
-  //     flavorId: 0,
-  //     imageUrl: '',
-  //   };
-  // }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

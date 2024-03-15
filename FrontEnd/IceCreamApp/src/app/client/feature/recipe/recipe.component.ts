@@ -5,8 +5,14 @@ import { Subject, takeUntil } from 'rxjs';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
 import { Recipe } from 'src/app/interfaces/recipe';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SuccessSnackbarComponent } from 'src/app/shared/components/success-snackbar/success-snackbar.component';
+import { ErrorSnackbarComponent } from 'src/app/shared/components/error-snackbar/error-snackbar.component';
+import { UserRecipeService } from 'src/app/services/user-recipe.service';
+import { UserRecipe } from 'src/app/interfaces/user-recipe';
+import { AuthenticationService } from 'src/app/auth/services/authentication.service';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-recipe',
@@ -28,7 +34,7 @@ import { Recipe } from 'src/app/interfaces/recipe';
     ]),
   ],
 })
-export class RecipeComponent  implements OnInit {
+export class RecipeComponent implements OnInit {
   faStar = faStar;
   faStarHalfStroke = faStarHalfStroke;
   faArrowRight = faArrowRight;
@@ -36,47 +42,60 @@ export class RecipeComponent  implements OnInit {
   faAngleUp = faAngleUp;
   faAngleDown = faAngleDown;
 
-
   recipe: Recipe = {
+    id: 0,
     name: '',
     description: '',
     submittedBy: '',
     imageUrl: '',
     steps: [],
     ingredient: '',
+    isShow: false,
+  };
+
+  userRecipe: UserRecipe = {
+    id: 0,
+    userId: 0,
+    recipeId: 0,
+    submissionDate: new Date(),
+    isSelected: false,
   };
 
   showAllRecipes = true;
   showAddRecipeForm = false;
   activeButton: 'allRecipes' | 'addRecipe' = 'allRecipes';
 
-  ingredients: string[] = [];
-  listIngredientInput = new FormControl('');
-
   stepOpenStates: boolean[] = [];
+  page: number = 1;
 
+  public Editor = ClassicEditor;
 
+  editorConfig = {
+    toolbar: ['bold', 'italic', '|', 'NumberedList', 'BulletedList'],
+    placeholder: 'Type the content here!'
+  }
+
+  get isClientLoggedIn(): boolean {
+    return this.authService.isClientLoggedIn();
+  }
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
   recipes: Recipe[] = [];
 
   constructor(
     private recipeService: RecipeService,
+    private userRecipeService: UserRecipeService,
+    private authService: AuthenticationService,
     private http: HttpClient,
     private router: Router,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private snackBar: MatSnackBar
   ) {
-    this.listIngredientInput.valueChanges.subscribe(value => {
-      if (value !== null) {
-        this.ingredients = value.split('\n').filter(item => item.trim() !== "");
-      }
-    });
-
     this.recipe.steps.forEach(() => this.stepOpenStates.push(true));
   }
 
   ngOnInit() {
-    this.recipeService.getAllRecipes().pipe(takeUntil(this.destroy$)).subscribe(
+    this.recipeService.getAllShowRecipes().pipe(takeUntil(this.destroy$)).subscribe(
       (data: Recipe[]) => {
         this.recipes = data;
         console.log(this.recipes);
@@ -85,40 +104,70 @@ export class RecipeComponent  implements OnInit {
   }
 
   createRecipe() {
-    this.recipeService.createRecipe(this.recipe).subscribe(
-      (createdRecipe) => {
-        // Handle the response as needed
-        console.log('Recipe created:', createdRecipe);
+    if (this.isClientLoggedIn) {
+      const token = localStorage.getItem('isClientLoggedIn');
+      if (token) {
+        this.authService.getUserInfo(token).pipe(takeUntil(this.destroy$)).subscribe(
+          (data) => {
+            this.recipeService.createRecipe(this.recipe).subscribe(
+              (response) => {
+                if (response) {
+                  this.userRecipe.userId = data.userInfo.id;
+                  this.userRecipe.recipeId = response.id;
 
-        // Clear the form fields
-        this.recipe = {
-          name: '',
-          description: '',
-          submittedBy: '',
-          imageUrl: '',
-          steps: [],
-          ingredient: '',
-        };
+                  this.userRecipeService.createUserRecipe(this.userRecipe).subscribe(
+                    (data) => {
+                      this.snackBar.openFromComponent(SuccessSnackbarComponent, {
+                        data: { message: 'Recipe created successfully!' },
+                        panelClass: ['custom-snackbar'],
+                        duration: 3000,
+                        horizontalPosition: 'end',
+                        verticalPosition: 'top'
+                      });
+                    },
+                    (error) => {
+                      console.error('Error creating user recipe:', error);
 
-        // Go back to "All Recipes" section
-        this.showAllRecipes = true;
-        this.showAddRecipeForm = false;
-        this.activeButton = 'allRecipes';
+                      this.snackBar.openFromComponent(ErrorSnackbarComponent, {
+                        data: { message: 'Failed to create recipe. Please try again later' },
+                        panelClass: ['custom-snackbar'],
+                        duration: 3000,
+                        horizontalPosition: 'end',
+                        verticalPosition: 'top'
+                      });
+                    }
+                  );
 
-        // Display success alert
-        alert('Recipe created successfully!');
-      },
-      (error) => {
-        // Handle error if needed
-        console.error('Error creating recipe:', error);
-        alert('Error creating recipe. Please try again.');
+
+                }
+              },
+              (error) => {
+                console.error('Error creating recipe:', error);
+
+                this.snackBar.openFromComponent(ErrorSnackbarComponent, {
+                  data: { message: 'Failed to create recipe. Please try again later' },
+                  panelClass: ['custom-snackbar'],
+                  duration: 3000,
+                  horizontalPosition: 'end',
+                  verticalPosition: 'top'
+                });
+              }
+            );
+          }
+        );
       }
-    );
+    }
   }
+
+
   addStep(event: Event): void {
     event.preventDefault(); // Prevent form submission
     this.recipe.steps.push({ id: 0, recipeId: 0, content: '', imageUrl: '' });
     this.stepOpenStates.push(true); // Open the newly added step by default
+  }
+
+  toggleStep(index: number): void {
+    this.stepOpenStates[index] = !this.stepOpenStates[index];
   }
 
   autoResize(event: Event) {
@@ -128,11 +177,6 @@ export class RecipeComponent  implements OnInit {
       textarea.style.height = textarea.scrollHeight + 'px';
     }
   }
-
-  toggleStep(index: number): void {
-    this.stepOpenStates[index] = !this.stepOpenStates[index];
-  }
-
 
   ngOnDestroy(): void {
     this.destroy$.next(true);

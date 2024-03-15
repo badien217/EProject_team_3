@@ -1,3 +1,11 @@
-.book-img{
+.book-img {
     width: 80px;
+}
+
+.table-bordered {
+    border-color: #ccc;
+}
+
+.icon-search {
+    margin-left: -30px;
 }

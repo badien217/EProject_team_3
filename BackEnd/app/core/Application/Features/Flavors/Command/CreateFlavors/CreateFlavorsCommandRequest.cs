@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Flavors.Command.CreateFlavors
 {
-    public class CreateFlavorsCommandRequest
+    public class CreateFlavorsCommandRequest : IRequest
     {
         public string Name { get; set; }
         public string ImageUrl { get; set; }
-        public IceCream iceCream { get; set; }
+       
 
     }
 }

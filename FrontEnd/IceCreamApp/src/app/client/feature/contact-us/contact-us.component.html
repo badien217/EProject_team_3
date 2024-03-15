@@ -1,21 +1,41 @@
 <div class=" pt-5 mt-5">
     <p class="display-1 text-center mb-4">Contact Us</p>
     <div class="container d-flex justify-content-center mb-5">
-        <div class="row">
-            <div class="col px-5 me-5">
-                <h2 class="fs-2">Visit Us</h2>
-                <p class="fs-5 lh-base">19 Le Thanh Nghi Street, <br />Hai Ba Trung District, <br />Hanoi</p>
-                <h4 class="mt-4 fs-4 fw-bold">Opening Hours</h4>
-                <p class="fs-5 lh-base">Monday – Sunday</p>
-                <p class="fs-5 lh-base">8a.m - 10pm</p>
-                <h4 class="mt-4 fs-4 fw-bold">Phone</h4>
-                <p class="fs-5 lh-base">0123456789</p>
+        <div class="d-flex flex-wrap align-items-stretch gap-4">
+            <div class="d-flex flex-lg-column flex-sm-wrap flex-wrap gap-3 px-5 py-5 bg-contact rounded w-100 col">
+                <div>
+                    <h4 class="fs-4 fw-bold">Address</h4>
+                    <p class="fs-normal">19 Le Thanh Nghi Street, <br />Hai Ba Trung District, <br />Hanoi</p>
+                </div>
+                <div>
+                    <h4 class="fs-4 fw-bold">Opening Hours</h4>
+                    <p class="fs-normal">Monday – Sunday<br>8a.m - 10pm</p>
+                </div>
+                <div>
+                    <h4 class="fs-4 fw-bold">Phone</h4>
+                    <p class="fs-normal">0123 456 789</p>
+                </div>
+                <div>
+                    <h4 class="fs-4 fw-bold">Social Media</h4>
+                    <div class="d-flex gap-2 mt-2">
+                        <button class="border-0 rounded px-2 py-1 btn-accent-color text-white shadow"><fa-icon
+                                [icon]="faFacebook"></fa-icon></button>
+                        <button class="border-0 rounded px-2 py-1 btn-accent-color text-white shadow"><fa-icon
+                                [icon]="faInstagram"></fa-icon></button>
+                        <button class="border-0 rounded px-2 py-1 btn-accent-color text-white shadow"><fa-icon
+                                [icon]="faTiktok"></fa-icon></button>
+                        <button class="border-0 rounded px-2 py-1 btn-accent-color text-white shadow"><fa-icon
+                                [icon]="faYoutube"></fa-icon></button>
+                    </div>
+                </div>
             </div>
-            <div class="col">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.740297082297!2d105.84525807749552!3d21.003044938766216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac748cd9d447%3A0xaf1371c17f07550c!2zMTkgUC4gTMOqIFRoYW5oIE5naOG7iywgQuG6oWNoIE1haSwgSGFpIELDoCBUcsawbmcsIEjDoCBO4buZaSwgVmlldG5hbQ!5e0!3m2!1sen!2s!4v1703270383572!5m2!1sen!2s"
-                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="px-lg-5 px-md-5 px-sm-4 px-3 py-lg-5 py-md-5 py-3 bg-contact rounded w-100 col">
+                <div class="iframe-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.740297082297!2d105.84525807749552!3d21.003044938766216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac748cd9d447%3A0xaf1371c17f07550c!2zMTkgUC4gTMOqIFRoYW5oIE5naOG7iywgQuG6oWNoIE1haSwgSGFpIELDoCBUcsawbmcsIEjDoCBO4buZaSwgVmlldG5hbQ!5e0!3m2!1sen!2s!4v1703270383572!5m2!1sen!2s"
+                        class="responsive-iframe" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
             </div>
         </div>
     </div>

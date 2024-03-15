@@ -2,7 +2,7 @@
     max-width: 300px;
 }
 
-.footer-icon{
+.footer-icon {
     width: 35px;
     height: 35px;
 }
@@ -12,6 +12,75 @@
     right: 20px;
 }
 
-.scroll-up-img{
+.scroll-up-img {
     width: 50px;
+}
+
+.text-coral-light {
+    color: var(--pale-pink);
+}
+
+.footer-top {
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-block: 100px;
+    background-position: bottom;
+    border-block-end: 2px solid hsla(245, 17%, 29%, 0.3);
+    transition: all .5s;
+}
+
+.footer-top::after {
+    content: "";
+    /* Empty content to allow pseudo-element to generate */
+    background-image: url(../../../../../assets/images/ice-cream-truck.svg);
+    background-size: cover;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    bottom: -15px;
+    left: -160px;
+    animation: running-cycle 20s linear infinite;
+}
+
+
+@keyframes running-cycle {
+    0% {
+        left: -160px;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+
+/* responsive */
+
+@media screen and (max-width: 1500px) {}
+
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 992px) {
+    .footer-top::after {
+        width: 120px;
+        height: 120px;
+        bottom: -12px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .footer-top::after {
+        width: 100px;
+        height: 100px;
+        bottom: -10px;
+    }
+}
+
+@media screen and (max-width: 465px) {
+    .footer-top::after {
+        width: 80px;
+        height: 80px;
+        bottom: -8px;
+    }
+
 }

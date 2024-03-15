@@ -22,7 +22,7 @@ namespace Application.Features.Flavors.Command.CreateFlavors
         }
         public async System.Threading.Tasks.Task Handle(CreateFlavorsCommandRequest request, CancellationToken cancellationToken)
         {
-            Flavor flavorCustomer = new(request.Name, request.ImageUrl, request.iceCream);
+            Flavor flavorCustomer = new(request.Name, request.ImageUrl);
             await _unitOfWork.GetWriteReponsitory<Flavor>().AddAsync(flavorCustomer);
             await _unitOfWork.SaveAsync();
 

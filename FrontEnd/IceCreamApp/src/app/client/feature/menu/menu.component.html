@@ -4,24 +4,24 @@
 </div>
 <div class="container my-5">
     <div class='d-flex flex-wrap gap-lg-4 gap-md-3 gap-sm-2 gap-2 align-items-center justify-content-center'>
-        <div *ngFor="let iceCream of iceCreams; index as i" class="card card-ice-cream">
-            <img src="../../../assets/images/{{iceCream.imageUrl}}" class="card-img-top object-fit-contain"
-                alt="{{iceCream.name}}">
-            <div class="card-body text-center rounded-bottom">
-                <div class="d-flex align-items-center justify-content-center overflow-hidden" style="height: 4rem;">
-                    <span class="fs-5 two-line-text">{{iceCream.name}}</span>
+        <div *ngFor="let iceCream of iceCreams  | paginate: { itemsPerPage: 12, currentPage: page }; index as i">
+            <div class=" rounded-3 border-0 shadow card-ice-cream  d-flex align-items-end justify-content-start"
+                style="background-image: url('../../../assets/images/{{iceCream.imageUrl}}');">
+                <div
+                    class="bg-accent-color text-white rounded-end shadow text-center mb-3 px-2 py-1 position-relative flavor-container">
+                    <span> {{ iceCream.flavorName }} </span>
+                    <div></div>
                 </div>
-                <div class="d-flex align-items-center justify-content-center stars-rating small">
-                    <fa-icon class="small" [icon]="faStar"></fa-icon>
-                    <fa-icon class="small" [icon]="faStar"></fa-icon>
-                    <fa-icon class="small" [icon]="faStar"></fa-icon>
-                    <fa-icon class="small" [icon]="faStar"></fa-icon>
-                    <fa-icon class="small" [icon]="faStarHalfStroke"></fa-icon>
-                </div>
-                <div class="d-flex align-items-center justify-content-center overflow-hidden" style="height: 2.5rem;">
-                    <span class="two-line-text">{{ iceCream.flavorId ? getFlavorName(iceCream.flavorId) : '' }}</span>
+            </div>
+            <div class=" text-center rounded-bottom rounded-3">
+                <div class="text-center px-3">
+                    <span class="fs-5 fw-500">{{iceCream.name}}</span>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-center mt-5">
+        <pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="Prev"
+            nextLabel="Next"></pagination-controls>
     </div>
 </div>

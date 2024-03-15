@@ -26,8 +26,8 @@ import { FaqService } from 'src/app/services/faq.service';
   ],
 })
 export class FaqComponent {
-  faAngleDown=faAngleDown;
-  faAngleUp=faAngleUp;
+  faAngleDown = faAngleDown;
+  faAngleUp = faAngleUp;
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
   faqs: Faq[] = [];
@@ -42,16 +42,16 @@ export class FaqComponent {
       (data: Faq[]) => {
         this.faqs = data;
 
-          // Set the isFaqOpen property of the first FAQ to true
-          if (this.faqs.length > 0) {
-            this.faqs[0].isFaqOpen = true;
-          }
-          
+        // Set the isFaqOpen property of the first FAQ to true
+        if (this.faqs.length > 0) {
+          this.faqs[0].isFaqOpen = true;
+        }
+
         console.log(this.faqs);
       }
     );
   }
-  
+
   toggleFaq(faq: Faq): void {
     faq.isFaqOpen = !faq.isFaqOpen;
   }

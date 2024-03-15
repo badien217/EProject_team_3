@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './admin.component';
-import { AddFaqComponent } from './feature/faq/add-faq/add-faq.component';
 import { ListFaqComponent } from './feature/faq/list-faq/list-faq.component';
-import { AddProductComponent } from './feature/product/add-product/add-product.component';
 import { ListProductComponent } from './feature/product/list-product/list-product.component';
-import { AddBookComponent } from './feature/book/add-book/add-book.component';
 import { ListBookComponent } from './feature/book/list-book/list-book.component';
 import { ListFeedbackComponent } from './feature/feedback/list-feedback/list-feedback.component';
 import { AddRecipeComponent } from './feature/recipe/add-recipe/add-recipe.component';
 import { DashboardComponent } from './feature/dashboard/dashboard/dashboard.component';
 import { ListRecipeComponent } from './feature/recipe/list-recipe/list-recipe.component';
-import { AuthGuard } from './auth.guard';
+import { AdminAuthGuard } from './admin-auth.guard';
+import { ListOrderComponent } from './feature/order/list-order/list-order.component';
+import { ListUserComponent } from './feature/user/list-user/list-user.component';
+import { UpdateRecipeComponent } from './feature/recipe/update-recipe/update-recipe.component';
+import { ListFlavorComponent } from './feature/flavor/list-flavor/list-flavor.component';
 
 const routes: Routes = [
   {
@@ -21,64 +21,68 @@ const routes: Routes = [
   },
   {
     path: 'admin/dashboard',
-    canActivate: [AuthGuard],
+    canActivate: [AdminAuthGuard],
+    title: 'Admin | Dashboard',
     component: DashboardComponent,
   },
   {
     path: 'admin',
-    canActivate: [AuthGuard],
+    canActivate: [AdminAuthGuard],
     children: [
       {
         path: 'dashboard',
+        title: 'Admin | Dashboard',
         component: DashboardComponent,
       },
       {
         path: 'recipe-management',
+        title: 'Admin | Recipe Management',
         component: ListRecipeComponent,
       },
       {
         path: 'recipe-management/add-recipe',
+        title: 'Admin | Create Recipe',
         component: AddRecipeComponent,
       },
-      // {
-      //   path: 'user-management',
-      //   component: ListUserComponent,
-      // },
-      // {
-      //   path: 'order-management',
-      //   component: ListOrderComponent,
-      // },
+      {
+        path: 'recipe-management/update-recipe/:id',
+        title: 'Admin | Update Recipe',
+        component: UpdateRecipeComponent,
+      },
+      {
+        path: 'user-management',
+        title: 'Admin | User Management',
+        component: ListUserComponent,
+      },
       {
         path: 'feedback-management',
+        title: 'Admin | Feedback Management',
         component: ListFeedbackComponent,
       },
       {
         path: 'book-management',
+        title: 'Admin | Book Management',
         component: ListBookComponent,
       },
       {
-        path: 'book-management/add-book',
-        component: AddBookComponent,
+        path: 'flavor-management',
+        title: 'Admin | Flavor Management',
+        component: ListFlavorComponent,
       },
-      // {
-      //   path: 'book-management/detail-book',
-      //   component: DetailBookComponent,
-      // },
       {
         path: 'product-management',
+        title: 'Admin | Product Management',
         component: ListProductComponent,
       },
       {
-        path: 'product-management/add-product',
-        component: AddProductComponent,
-      },
-      {
         path: 'faq-management',
+        title: 'Admin | FAQs Management',
         component: ListFaqComponent,
       },
       {
-        path: 'faq-management/add-faq',
-        component: AddFaqComponent,
+        path: 'order-management',
+        title: 'Admin | Order Management',
+        component: ListOrderComponent,
       },
     ]
   },

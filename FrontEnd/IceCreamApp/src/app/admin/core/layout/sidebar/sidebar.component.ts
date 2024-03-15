@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { faHouse, faIceCream, faUser, faCartShopping, faComment, faBook, faPowerOff, faBookOpen, faComments } from '@fortawesome/free-solid-svg-icons';
-import { AuthResult } from 'src/app/auth/interfaces/auth-result';
+import { faHouse, faIceCream, faUser, faCartShopping, faComment, faBook, faArrowRightFromBracket, faBellConcierge, faComments, faBottleDroplet, faBars } from '@fortawesome/free-solid-svg-icons';
+import { AuthResponse } from 'src/app/auth/interfaces/auth-response';
 import { AuthenticationService } from 'src/app/auth/services/authentication.service';
 
 @Component({
@@ -16,24 +16,23 @@ export class SidebarComponent {
   faCartShopping = faCartShopping;
   faComment = faComment;
   faBook = faBook;
-  faPowerOff = faPowerOff;
-  faBookOpen = faBookOpen;
+  faArrowRightFromBracket = faArrowRightFromBracket;
   faComments = faComments;
+  faBellConcierge = faBellConcierge;
+  faBottleDroplet = faBottleDroplet;
+  faBars = faBars;
 
-  // loginDto: Login = {
-  //   username: '',
-  //   password: ''
-  // };
-
-  authResult: AuthResult = {
+  authResponse: AuthResponse = {
     result: true,
-    message: ''
+    message: '',
+    token: '',
+    errors: [],
   };
   constructor(private authService: AuthenticationService, private router: Router) { }
 
   // New method for logout
   logoutAdmin(): void {
-    this.authService.logout();
+    this.authService.logoutAdmin();
     this.router.navigate(['/auth/admin/login-admin']); // Redirect to login page after logout
   }
 }

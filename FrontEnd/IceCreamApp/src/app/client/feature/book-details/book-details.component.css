@@ -1,26 +1,174 @@
-.stars-rating {
-    color: #FFB000;
+.card-book {
+    width: 18rem;
 }
-.card-body{
-    background-color: #FFFBEB;
-}
-.cart-btn{
+
+.cart-btn {
     width: 40px;
     height: 40px;
 }
 
-.card-img-top{
-    height: 350px;
+.book-img {
     width: 100%;
-    object-fit: cover;
+    height: 18rem;
 }
 
-.card-title{
+.book-price {
+    font-size: 20px;
+}
+
+.book-rating {
+    color: #F09819;
+    font-size: 14px;
+}
+
+
+.card-tag {
+    position: absolute;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    top: -8px;
+    left: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-tag::before {
+    content: 'New';
+    position: absolute;
+    width: 135%;
+    height: 30px;
+    background-image: linear-gradient(45deg, #ff6547 0%, #ffb144 51%, #ff7053 100%);
+    transform: rotate(-45deg) translateY(-20px) scale(1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.23);
+}
+
+.card-tag::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    bottom: 7px;
+    left: 0;
+    z-index: -10;
+    box-shadow: 85.5px -85.5px #cc3f47;
+    background-image: linear-gradient(45deg, #FF512F 0%, #F09819 51%, #FF512F 100%);
+}
+
+.card-title {
     font-weight: 600;
 }
 
 .price {
-    color: #FFB000;
+    color: var(--light-coral);
     letter-spacing: 2px;
     font-weight: 600;
+}
+
+.reviewer-avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.input-rating {
+    display: none;
+}
+
+.label-rating {
+    font-size: 40px;
+    color: #E6E6E6;
+    padding: 10px;
+    float: right;
+    transition: all 0.2s ease;
+}
+
+.input-rating:not(:checked)~.label-rating:hover,
+.input-rating:not(:checked)~.label-rating:hover~.label-rating {
+    color: #FFB000;
+}
+
+.input-rating:checked~.label-rating {
+    color: #ffca2c;
+}
+
+
+
+/* responsive */
+
+@media screen and (max-width: 1500px) {}
+
+@media screen and (max-width: 1200px) {
+    .card-book {
+        width: 16rem;
+    }
+
+    .book-img {
+        height: 12rem;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .card-book {
+        width: 14rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .book-img {
+        height: 10rem;
+    }
+}
+
+@media screen and (max-width: 465px) {
+    .card-book {
+        width: 10rem;
+    }
+
+    .book-img {
+        height: 8rem;
+    }
+
+    .book-price {
+        font-size: 16px;
+    }
+
+    .book-rating {
+        font-size: 10px;
+    }
+
+    .cart-btn {
+        width: 30px;
+        height: 30px;
+    }
+
+    .cart-btn fa-icon {
+        font-size: 12px;
+    }
+
+    .card-tag {
+        width: 80px;
+        height: 80px;
+        top: -6px;
+        left: -6px;
+        font-size: 14px;
+    }
+
+    .card-tag::before {
+        height: 25px;
+        transform: rotate(-45deg) translateY(-18px) scale(1);
+    }
+
+    .card-tag::after {
+        bottom: 8px;
+        box-shadow: 64px -64px #cc3f47;
+    }
 }
