@@ -18,8 +18,8 @@
 }
 
 .payment-option .selected {
-    border: 1px solid var(--light-coral);
-    color: var(--light-coral);
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
     border-radius: 6px;
 }
 
@@ -82,12 +82,12 @@
     border-radius: 3px;
     position: absolute;
     display: flex;
-    z-index: 10;
+    z-index: 2;
     flex-direction: column;
     align-items: center;
-    -webkit-box-shadow: 9px 9px 9px -2px rgba(248, 232, 170, 0.72);
-    -moz-box-shadow: 9px 9px 9px -2px rgba(248, 232, 170, 0.72);
-    -webkit-box-shadow: 9px 9px 9px -2px rgba(248, 232, 170, 0.72);
+    -webkit-box-shadow: 9px 9px 9px -2px rgba(170, 248, 235, 0.72);
+    -moz-box-shadow: 9px 9px 9px -2px rgba(170, 248, 235, 0.72);
+    -webkit-box-shadow: 9px 9px 9px -2px rgba(170, 248, 235, 0.72);
 }
 
 .card-line {
@@ -111,8 +111,8 @@
 .buttons {
     width: 5px;
     height: 5px;
-    background-color: #fcd581e1;
-    box-shadow: 0 -6px 0 0 var(--accent-color), 0 6px 0 0 #fcd581ad;
+    background-color: #52adb0e1;
+    box-shadow: 0 -6px 0 0 var(--accent-color), 0 6px 0 0 #4ab7bcaa;
     border-radius: 50%;
     /* margin-top: 5px; */
     transform: rotate(90deg);
@@ -154,7 +154,7 @@
     height: 75px;
     background-color: #dddde0;
     position: absolute;
-    z-index: 11;
+    z-index: 2;
     bottom: 10px;
     top: 93px;
     border-radius: 4px;

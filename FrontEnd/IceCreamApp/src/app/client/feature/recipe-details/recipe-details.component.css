@@ -3,7 +3,7 @@
 }
 
 .recipe-container {
-    background: var(--lavender-brush);
+    background: var(--secondary-color);
 }
 
 .card-recipe {
@@ -17,6 +17,11 @@
 .recipe-title {
     font-size: 20px;
     font-weight: 600;
+}
+
+.step-img {
+    height: 500px;
+    width: 100%;
 }
 
 .text-view {
@@ -123,6 +128,10 @@
 
     .card-img-top {
         height: 12rem;
+    }
+
+    .step-img {
+        height: 400px;
     }
 }
 

@@ -1,6 +1,6 @@
 <header>
     <div
-        class="d-flex flex-wrap align-items-center justify-content-md-between justify-content-sm-between justify-content-between px-3 py-2  fixed-top z-2 header">
+        class="d-flex flex-wrap align-items-center justify-content-md-between justify-content-sm-between justify-content-between px-3 py-2  fixed-top z-3 header">
         <div class="">
             <a [routerLink]="['/']" class="d-inline-flex ms-3">
                 <img src="../../../../assets/images/logo.png" alt="logo" class="logo-img">
@@ -45,12 +45,15 @@
                 </ul>
             </div>
             <div *ngIf="isClientLoggedIn" class="dropdown">
-                <button
-                    class="fs-normal rounded-circle d-flex align-items-center justify-content-center p-3 fw-bold btn-icon"
-                    type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                    [style.background]="avatarBackgroundColor" [style.color]="avatarTextColor">
-                    {{ avatarFirstLetter }}
+                <button *ngIf="userInfo.avatar?.length === 1"
+                    class="fs-normal rounded-circle d-flex align-items-center justify-content-center p-3 fw-bold text-white bg-accent-color btn-icon"
+                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ userInfo.avatar }}
                 </button>
+
+                <img *ngIf="userInfo.avatar?.length != 1" src="{{userInfo.avatar}}" alt="user-avatar"
+                    class="rounded-circle d-flex align-items-center justify-content-center avatar-img object-fit-cover"
+                    data-bs-toggle="dropdown" aria-expanded="false">
 
                 <ul class="dropdown-menu">
                     <li><a [routerLink]="['/profile']" class="dropdown-item">Profile</a></li>
@@ -139,11 +142,16 @@
                 </div>
                 <div *ngIf="isClientLoggedIn">
                     <div class="d-flex align-items-center gap-2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <button
-                            class="fs-normal rounded-circle d-flex align-items-center justify-content-center p-3 fw-bold btn-icon"
-                            type="button" [style.background]="avatarBackgroundColor" [style.color]="avatarTextColor">
-                            {{ avatarFirstLetter }}
+                        <button *ngIf="userInfo.avatar?.length === 1"
+                            class="fs-normal rounded-circle d-flex align-items-center justify-content-center p-3 fw-bold text-white bg-accent-color btn-icon"
+                            type="button">
+                            {{ userInfo.avatar }}
                         </button>
+
+                        <img *ngIf="userInfo.avatar?.length != 1" src="{{userInfo.avatar}}" alt="user-avatar"
+                            class="rounded-circle d-flex align-items-center justify-content-center avatar-img object-fit-cover"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+
                         <span>{{userInfo.name}}</span>
                     </div>
                     <ul class="dropdown-menu">

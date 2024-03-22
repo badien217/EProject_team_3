@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { faTrash, faPenToSquare, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -10,8 +9,7 @@ import { FaqService } from 'src/app/services/faq.service';
 import { AddFaqComponent } from '../add-faq/add-faq.component';
 import { UpdateFaqComponent } from '../update-faq/update-faq.component';
 import { ConfirmDeletionDialogComponent } from 'src/app/shared/components/confirm-deletion-dialog/confirm-deletion-dialog.component';
-import { SuccessSnackbarComponent } from 'src/app/shared/components/success-snackbar/success-snackbar.component';
-import { ErrorSnackbarComponent } from 'src/app/shared/components/error-snackbar/error-snackbar.component';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-list-faq',
@@ -31,7 +29,10 @@ export class ListFaqComponent {
 
   searchTerm: string = '';
 
-  constructor(private faqService: FaqService, private dialog: MatDialog, private snackBar: MatSnackBar) { }
+  constructor(private faqService: FaqService,
+    private dialog: MatDialog,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
     this.retrieveFaqs();
@@ -45,7 +46,7 @@ export class ListFaqComponent {
         this.dataSource.sort = this.sort;
 
       },
-      error: (e) => console.error(e),
+      error: (e) => this.messageService.openError('FAQs data retrieval error')
     });
   }
 
@@ -58,37 +59,10 @@ export class ListFaqComponent {
   }
 
   openAddFaqDialog(): void {
-    const dialogRef = this.dialog.open(AddFaqComponent, {
-      data: { question: '', answer: '' }
-    });
+    const dialogRef = this.dialog.open(AddFaqComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.faqService.createFaq(result).subscribe(() => {
-          this.retrieveFaqs();
-
-          this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-            data: { message: 'Faq created successfully!' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        }, (error) => {
-          // Log the error here
-          console.error('Error while creating faq:', error);
-
-          this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-            data: { message: 'Failed to create faq. Please try again later' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        });
-
-        console.log('result', result);
-      }
+      this.retrieveFaqs();
     });
   }
 
@@ -96,38 +70,14 @@ export class ListFaqComponent {
   openUpdateFaqDialog(faq: Faq): void {
     const dialogRef = this.dialog.open(UpdateFaqComponent, {
       data: {
+        id: faq.id,
         question: faq.question,
         answer: faq.answer
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.faqService.updateFaq(faq.id, result).subscribe(() => {
-          this.retrieveFaqs();
-
-          this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-            data: { message: 'Faq updated successfully!' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        }, (error) => {
-          // Log the error here
-          console.error('Error while updating faq:', error);
-
-          this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-            data: { message: 'Failed to update faq. Please try again later' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        });
-
-        console.log('result', result);
-      }
+      this.retrieveFaqs();
     });
   }
 
@@ -142,24 +92,12 @@ export class ListFaqComponent {
         this.faqService.deleteFaq(faqId).subscribe(() => {
           this.retrieveFaqs();
 
-          this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-            data: { message: 'Faq deleted successfully!' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          this.messageService.openSuccess('Faq deleted successfully');
         }, (error) => {
           // Log the error here
           console.error('Error while deleting faq:', error);
 
-          this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-            data: { message: 'Failed to delete faq. Please try again later' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          this.messageService.openError('Failed to delete faq. Please try again later');
         });
       }
     });

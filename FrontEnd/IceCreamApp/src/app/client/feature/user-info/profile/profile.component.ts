@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/auth/services/authentication.service';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
-import { ErrorSnackbarComponent } from 'src/app/shared/components/error-snackbar/error-snackbar.component';
-import { SuccessSnackbarComponent } from 'src/app/shared/components/success-snackbar/success-snackbar.component';
 import { UpdateUserComponent } from '../update-user/update-user.component';
 import { MatDialog } from '@angular/material/dialog';
 import { faArrowRight, faCamera } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +10,8 @@ import { UserRecipe } from 'src/app/interfaces/user-recipe';
 import { UserRecipeService } from 'src/app/services/user-recipe.service';
 import { Subject, takeUntil } from 'rxjs';
 import { RecipeService } from 'src/app/services/recipe.service';
+import { UpdateAvatarComponent } from '../update-avatar/update-avatar.component';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-profile',
@@ -31,8 +30,8 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private userRecipeService: UserRecipeService,
     private recipeService: RecipeService,
+    private messageService: MessageService,
     private router: Router,
-    private snackBar: MatSnackBar,
     private dialog: MatDialog,
   ) { }
 
@@ -43,6 +42,10 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.retrieveUserData();
+  }
+
+  retrieveUserData(): void {
     if (this.isClientLoggedIn) {
       const token = localStorage.getItem('isClientLoggedIn');
       if (token) {
@@ -53,13 +56,11 @@ export class ProfileComponent implements OnInit {
             this.retrieveUserRecipeByUserId(data.userInfo.id);
           },
           (error) => {
-            console.error('Error fetching user information:', error);
+            this.messageService.openError('User information retrieval error')
           }
         );
       } else {
-        // Token is expired, handle logout or redirect
         this.authService.logoutClient();
-        // Redirect or any other action...
       }
     }
   }
@@ -74,17 +75,16 @@ export class ProfileComponent implements OnInit {
               userRecipe.recipeName = recipeData.name;
               userRecipe.recipeDescription = recipeData.description;
             },
-            error => {
-              console.error(`Error fetching username for user with userId ${userRecipe.userId}: `, error);
+            (error) => {
+              this.messageService.openError('User recipes data retrieval error')
             }
           );
         });
 
         this.userRecipes = data;
-        console.log(data);
       },
       (error) => {
-        console.log(error);
+        this.messageService.openError('User recipes data retrieval error')
       }
     )
   }
@@ -92,52 +92,32 @@ export class ProfileComponent implements OnInit {
   openUpdateUserDialog(user: User): void {
     const dialogRef = this.dialog.open(UpdateUserComponent, {
       data: {
+        id: user.id,
         name: user.name,
-        username: user.username,
-        email: user.email,
         phone: user.phone
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.userService.updateUser(user.id, result).subscribe(updatedUser => {
-          // Check which fields have changed
-          const changedFields: string[] = [];
-          if (updatedUser.name !== this.userInfo.name) {
-            changedFields.push('name');
-          }
-          if (updatedUser.phone !== this.userInfo.phone) {
-            changedFields.push('phone');
-          }
-          // You can add more comparisons for other fields if needed
-
-          // Update userInfo with changed fields only
-          changedFields.forEach(field => {
-            this.userInfo[field] = updatedUser[field];
-          });
-
-          this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-            data: { message: 'User updated successfully!' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        }, (error) => {
-          console.error('Error while updating user:', error);
-
-          this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-            data: { message: 'Failed to update user. Please try again later' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        });
+        this.retrieveUserData();
       }
     });
   }
 
+  openUploadAvatarDialog(user: User): void {
+    const dialogRef = this.dialog.open(UpdateAvatarComponent, {
+      data: {
+        id: user.id,
+        avatar: user.avatar
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.retrieveUserData();
+      }
+    });
+  }
 
 }

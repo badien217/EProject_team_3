@@ -1,15 +1,21 @@
-<div class="container py-5">
+<div *ngIf="userInfo" class="container py-5">
     <div class="d-flex pt-5">
         <div class="col-3">
-            <img src="../../../../assets/images/profile-img.png" alt="profile-img"
-                class="object-fit-cover rounded-circle profile-img">
-            <button
+            <div *ngIf="userInfo.avatar?.length ===1"
+                class="d-flex align-items-center justify-content-center text-white bg-accent-color rounded-circle fs-avatar profile-img">
+                {{ userInfo.avatar }}
+            </div>
+
+            <div *ngIf="userInfo.avatar?.length != 1">
+                <img src="{{userInfo.avatar}}" alt="profile-img" class="object-fit-cover rounded-circle profile-img">
+            </div>
+            <button (click)="openUploadAvatarDialog(userInfo)"
                 class="position-absolute btn btn-dark d-inline-flex align-items-center justify-content-center rounded-circle btn-edit-avatar"><fa-icon
                     [icon]="faCamera" class="small"></fa-icon></button>
         </div>
         <div class="col">
             <h2>My profile</h2>
-            <div *ngIf="userInfo" class="d-flex mt-4">
+            <div class="d-flex mt-4">
                 <div class="col fs-5">
                     <p><strong class="pe-1">Name: </strong><span>{{userInfo.name}}</span></p>
                     <p><strong class="pe-1">Username: </strong><span>{{userInfo.username}}</span></p>

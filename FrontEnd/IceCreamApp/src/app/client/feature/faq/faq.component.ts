@@ -46,8 +46,6 @@ export class FaqComponent {
         if (this.faqs.length > 0) {
           this.faqs[0].isFaqOpen = true;
         }
-
-        console.log(this.faqs);
       }
     );
   }

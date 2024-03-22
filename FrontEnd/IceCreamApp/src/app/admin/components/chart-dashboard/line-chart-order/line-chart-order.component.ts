@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { Order } from 'src/app/interfaces/order';
+import { MessageService } from 'src/app/services/message.service';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -10,7 +11,10 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class LineChartOrderComponent {
 
-  constructor(private orderService: OrderService) { }
+  constructor(
+    private orderService: OrderService,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
     this.fetchOrders();
@@ -26,7 +30,7 @@ export class LineChartOrderComponent {
         this.createChart();
       },
       (error) => {
-        console.log('Error fetching orders:', error);
+        this.messageService.openError('Orders data retrieval error');
       }
     );
   }

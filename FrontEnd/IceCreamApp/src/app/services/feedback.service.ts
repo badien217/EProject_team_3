@@ -20,11 +20,11 @@ export class FeedbackService {
     return this.http.post(baseUrl, data);
   }
 
-  updateFeedback(id: any, data: any): Observable<any> {
+  updateFeedback(id: number, data: any): Observable<any> {
     return this.http.put(`${baseUrl}/${id}`, data);
   }
 
-  deleteFeedback(id: any): Observable<any> {
+  deleteFeedback(id: number): Observable<any> {
     return this.http.delete(`${baseUrl}/${id}`);
   }
 }

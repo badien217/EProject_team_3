@@ -1,15 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/admin/core/interfaces/user';
 import { UserService } from 'src/app/admin/core/services/user.service';
+import { MessageService } from 'src/app/services/message.service';
 import { ConfirmDeletionDialogComponent } from 'src/app/shared/components/confirm-deletion-dialog/confirm-deletion-dialog.component';
-import { ErrorSnackbarComponent } from 'src/app/shared/components/error-snackbar/error-snackbar.component';
-import { SuccessSnackbarComponent } from 'src/app/shared/components/success-snackbar/success-snackbar.component';
 
 @Component({
   selector: 'app-list-user',
@@ -27,7 +25,10 @@ export class ListUserComponent {
 
   searchTerm: string = '';
 
-  constructor(private userService: UserService, private dialog: MatDialog, private snackBar: MatSnackBar) { }
+  constructor(private userService: UserService,
+    private dialog: MatDialog,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
     this.retrieveUsers();
@@ -40,7 +41,7 @@ export class ListUserComponent {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
-      error: (e) => console.error(e),
+      error: (e) => this.messageService.openError('Users data retrieval error')
     });
   }
 
@@ -63,26 +64,22 @@ export class ListUserComponent {
         this.userService.deleteUser(userId).subscribe(() => {
           this.retrieveUsers();
 
-          this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-            data: { message: 'User deleted successfully!' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          this.messageService.openSuccess('User deleted successfully');
         }, (error) => {
-          // Log the error here
-          console.error('Error while deleting product:', error);
-
-          this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-            data: { message: 'Failed to delete user. Please try again later' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          this.messageService.openError('Failed to delete user. Please try again later');
         });
       }
     });
   }
+
+  getSubscriptionClass(subscriptionType: string): string {
+    if (subscriptionType === 'monthly') {
+      return 'monthly-subscription'; // Define 'monthly-subscription' class in your CSS
+    } else if (subscriptionType === 'yearly') {
+      return 'yearly-subscription'; // Define 'yearly-subscription' class in your CSS
+    } else {
+      return ''; // Default class or handle other cases
+    }
+  }
+
 }

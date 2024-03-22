@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { faTrash, faPenToSquare, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -9,8 +8,7 @@ import { Order } from 'src/app/interfaces/order';
 import { OrderService } from 'src/app/services/order.service';
 import { UpdateOrderComponent } from '../update-order/update-order.component';
 import { ConfirmDeletionDialogComponent } from 'src/app/shared/components/confirm-deletion-dialog/confirm-deletion-dialog.component';
-import { SuccessSnackbarComponent } from 'src/app/shared/components/success-snackbar/success-snackbar.component';
-import { ErrorSnackbarComponent } from 'src/app/shared/components/error-snackbar/error-snackbar.component';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-list-order',
@@ -30,7 +28,10 @@ export class ListOrderComponent {
 
   searchTerm: string = '';
 
-  constructor(private orderService: OrderService, private dialog: MatDialog, private snackBar: MatSnackBar) { }
+  constructor(private orderService: OrderService,
+    private dialog: MatDialog,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
     this.retrieveOrders();
@@ -42,10 +43,8 @@ export class ListOrderComponent {
         this.dataSource = new MatTableDataSource<Order>(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-
-        console.log(this.dataSource)
       },
-      error: (e) => console.error(e),
+      error: (e) => this.messageService.openError('Order data retrieval error')
     });
   }
 
@@ -61,6 +60,7 @@ export class ListOrderComponent {
   openUpdateOrderDialog(order: Order): void {
     const dialogRef = this.dialog.open(UpdateOrderComponent, {
       data: {
+        id: order.id,
         name: order.name,
         email: order.email,
         phone: order.phone,
@@ -73,32 +73,7 @@ export class ListOrderComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.orderService.updateOrder(order.id, result).subscribe(() => {
-          this.retrieveOrders();
-
-          this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-            data: { message: 'Recipe updated successfully!' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        }, (error) => {
-          // Log the error here
-          console.error('Error while updating order:', error);
-
-          this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-            data: { message: 'Failed to update order. Please try again later' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        });
-
-        console.log('result', result);
-      }
+      this.retrieveOrders();
     });
   }
 
@@ -113,24 +88,9 @@ export class ListOrderComponent {
         this.orderService.deleteOrder(orderId).subscribe(() => {
           this.retrieveOrders();
 
-          this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-            data: { message: 'Order deleted successfully!' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          this.messageService.openSuccess('Order deleted successfully');
         }, (error) => {
-          // Log the error here
-          console.error('Error while deleting order:', error);
-
-          this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-            data: { message: 'Failed to delete order. Please try again later' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          this.messageService.openError('Failed to delete order. Please try again later');
         });
       }
     });

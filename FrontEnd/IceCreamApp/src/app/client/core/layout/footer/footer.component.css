@@ -31,7 +31,6 @@
 
 .footer-top::after {
     content: "";
-    /* Empty content to allow pseudo-element to generate */
     background-image: url(../../../../../assets/images/ice-cream-truck.svg);
     background-size: cover;
     width: 150px;

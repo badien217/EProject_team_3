@@ -23,11 +23,11 @@ export class CartService {
     return this.http.get<Cart[]>(`${baseUrl}/Cart`);
   }
 
-  getCartById(id: any): Observable<Cart> {
+  getCartById(id: number): Observable<Cart> {
     return this.http.get<Cart>(`${baseUrl}/Cart/${id}`);
   }
 
-  getLatestCartByUserId(userId: any): Observable<Cart> {
+  getLatestCartByUserId(userId: number): Observable<Cart> {
     return this.http.get<Cart>(`${baseUrl}/Cart/user/${userId}`);
   }
 
@@ -39,11 +39,11 @@ export class CartService {
     return this.http.post(`${baseUrl}/CartDetail`, data);
   }
 
-  updateCartDetail(cartDetailId: any, data: any): Observable<any> {
+  updateCartDetail(cartDetailId: number, data: any): Observable<any> {
     return this.http.put(`${baseUrl}/CartDetail/${cartDetailId}`, data);
   }
 
-  deleteCartDetail(id: any): Observable<any> {
+  deleteCartDetail(id: number): Observable<any> {
     return this.http.delete(`${baseUrl}/CartDetail/${id}`);
   }
 

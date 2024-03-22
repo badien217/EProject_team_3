@@ -1,5 +1,5 @@
 export interface OrderDetail {
-    id?: number;
+    id: number;
     orderId: number;
     bookId: number;
     quantity: number;

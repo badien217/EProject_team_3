@@ -1,0 +1,32 @@
+.update-user-dialog-container {
+    min-width: 500px;
+}
+
+.selected-img {
+    width: 250px;
+    height: 250px;
+}
+
+/* responsive */
+
+@media screen and (max-width: 1500px) {}
+
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 992px) {
+    .update-user-dialog-container {
+        min-width: 500px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .update-user-dialog-container {
+        min-width: 400px;
+    }
+}
+
+@media screen and (max-width: 465px) {
+    .update-user-dialog-container {
+        min-width: 300px;
+    }
+}

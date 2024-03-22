@@ -1,12 +1,9 @@
 .login-section {
-    /* margin-block: 30px;
-    margin-inline: 50px; */
     min-height: 100vh;
 }
 
 .login-container {
     width: 550px;
-    /* min-height: calc(100vh - 60px); */
 }
 
 .back-home {
@@ -20,17 +17,9 @@
 
 .login-container {
     background: rgba(255, 255, 255, 0.2);
-    /* Adjust opacity as needed */
     backdrop-filter: blur(50px);
-    /* Adjust blur strength as needed */
     border-radius: 20px;
-    /* Adjust border radius as needed */
 }
-
-/* .form-label {
-    color: rgba(255, 255, 255, 0.85); 
-} */
-
 
 input {
     font-size: 16px;

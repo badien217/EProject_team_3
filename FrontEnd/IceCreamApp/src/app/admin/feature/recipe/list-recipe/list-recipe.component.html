@@ -28,7 +28,7 @@
         <ng-container matColumnDef="image">
             <th mat-header-cell *matHeaderCellDef> Image </th>
             <td mat-cell *matCellDef="let element">
-                <img src="../../../../assets/images/{{element.imageUrl}}" alt="{{element.name}}" class="recipe-img">
+                <img src="{{element.imageUrl}}" alt="{{element.name}}" class="recipe-img">
             </td>
         </ng-container>
         <ng-container matColumnDef="description">
@@ -37,7 +37,7 @@
         </ng-container>
         <ng-container matColumnDef="isShow">
             <th mat-header-cell *matHeaderCellDef> Status </th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element" class="w-fit fs-6">
                 <select [(ngModel)]="element.isShow" (change)="updateStatus(element.id, element.isShow)"
                     class="form-select me-4">
                     <option [ngValue]="true">Show</option>
@@ -66,40 +66,4 @@
     <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons
         class="d-flex align-items-center justify-content-center bg-light">
     </mat-paginator>
-
-
-    <!-- <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Submitted By</th>
-                <th scope="col">Image</th>
-                <th scope="col">Description</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody *ngFor="let recipe of recipes | paginate: { itemsPerPage: 10, currentPage: page }; let i = index" [class.active]="i == currentIndex">
-            <tr>
-                <th scope="row">{{i+1}}</th>
-                <td>{{recipe.name}}</td>
-                <td>{{recipe.submittedBy}}</td>
-                <td><img src="../../../../assets/images/{{recipe.imageUrl}}" alt="{{recipe.name}}" class="recipe-img"> </td>
-                <td>{{recipe.description}}</td>
-                <td>
-                    <div class="d-flex flex-column gap-1">
-                        <button class="bg-warning-subtle text-warning border-0 rounded btn-action"><fa-icon
-                                [icon]="faPenToSquare"></fa-icon></button>
-                        <button class="bg-danger-subtle text-danger border-0 rounded btn-action"><fa-icon
-                                [icon]="faTrash"></fa-icon></button>
-                    </div>
-
-                </td>
-            </tr>
-        </tbody>
-    </table> -->
-    <!-- <div class="d-flex align-items-center justify-content-center mt-5">
-        <pagination-controls class="my-pagination" (pageChange)="page = $event" previousLabel="Prev"
-            nextLabel="Next"></pagination-controls>
-    </div> -->
 </div>

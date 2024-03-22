@@ -19,24 +19,24 @@
 <section class="feature-section py-5 container">
     <div class="d-flex flex-wrap align-items-stretch justify-content-center">
         <div class="col-lg-3 col-6 d-flex flex-column align-items-center text-center">
-            <img src="../../../../assets//images/organic-fruit.jpeg" alt="organic-fruit" class="feature-img mb-3">
+            <img src="../../../../assets/images/organic-fruit.jpeg" alt="organic-fruit" class="feature-img mb-3">
             <h5 class="fw-bold text-capitalize">Organic Fruit</h5>
             <p class="feature-text px-2">Indulge guilt-free with luscious ice cream crafted from premium organic fruits
             </p>
         </div>
         <div class="col-lg-3 col-6 d-flex flex-column align-items-center text-center">
-            <img src="../../../../assets//images/made-with-love.jpeg" alt="made-with-love" class="feature-img mb-3">
+            <img src="../../../../assets/images/made-with-love.jpeg" alt="made-with-love" class="feature-img mb-3">
             <h5 class="fw-bold text-capitalize">Made with love</h5>
             <p class="feature-text px-2">Crafted passionately, each scoop embodies care, creating a heartfelt experience
             </p>
         </div>
         <div class="col-lg-3 col-6 d-flex flex-column align-items-center text-center">
-            <img src="../../../../assets//images/amazing-flavor.jpeg" alt="amazing-flavor" class="feature-img mb-3">
+            <img src="../../../../assets/images/amazing-flavor.jpeg" alt="amazing-flavor" class="feature-img mb-3">
             <h5 class="fw-bold text-capitalize">Amazing Flavor</h5>
             <p class="feature-text px-2">Savor a symphony of flavors, each scoop a mouthwatering journey of delight </p>
         </div>
         <div class="col-lg-3 col-6 d-flex flex-column align-items-center text-center">
-            <img src="../../../../assets//images/perfectly-chilled.jpeg" alt="perfectly-chilled"
+            <img src="../../../../assets/images/perfectly-chilled.jpeg" alt="perfectly-chilled"
                 class="feature-img mb-3">
             <h5 class="fw-bold text-capitalize">Perfectly chilled</h5>
             <p class="feature-text px-2">Immerse yourself in a blissful, refreshing sensation with our flawlessly frozen
@@ -56,7 +56,7 @@
             <swiper-container #swiperProduct [slidesPerView]="slidesPerViewProduct" autoplay="true" loop="true">
                 <swiper-slide *ngFor="let iceCream of iceCreams; index as i"
                     class="product-item d-inline-block position-relative mx-2 rounded-3">
-                    <img src="../../../assets/images/{{iceCream.imageUrl}}" alt="{{iceCream.name}}"
+                    <img src="{{iceCream.imageUrl}}" alt="{{iceCream.name}}"
                         class="product-image object-fit-cover rounded-3">
                     <div
                         class="product-details d-flex position-absolute top-0 bottom-0 start-0 end-0 align-items-end rounded-3 p-3">
@@ -86,10 +86,10 @@
 
         <div class="col px-4">
             <h3 class="fw-bold pb-2">Why choose us?</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis delectus atque nulla,
-                exercitationem
-                laboriosam, enim labore ipsa illo accusantium molestiae quod. Quia ipsam asperiores iure! Architecto
-                et nemo doloribus autem!</p>
+            <p>Choose us for a delectable journey into frozen delights! With our artisanal craftsmanship and premium
+                ingredients, we offer unparalleled taste and quality. From classic flavors to inventive creations, every
+                scoop is a symphony of flavor. Indulge in the joy of exceptional ice cream, and let us sweeten your day!
+            </p>
             <div class="pt-2">
                 <a [routerLink]="['/about-us']" class="btn btn-outline-accent-color rounded-5 px-4">Learn more</a>
             </div>
@@ -103,7 +103,7 @@
         <swiper-container #swiperFlavor [slidesPerView]="slidesPerViewFlavor" autoplay="true" loop="true">
             <swiper-slide *ngFor="let flavor of flavors; index as i">
                 <div class="d-flex flex-column align-items-center gap-2">
-                    <img src="../../../assets/images/{{flavor.imageUrl}}" alt="{{flavor.name}}"
+                    <img src="{{flavor.imageUrl}}" alt="{{flavor.name}}"
                         class="object-fit-cover rounded-circle flavour-img image">
                     <span class="text-center">{{flavor.name}}</span>
                 </div>
@@ -116,14 +116,10 @@
     <div class="row d-lg-flex d-md-flex d-sm-block d-block align-items-center justify-content-center">
         <div class="col">
             <h3 class="fw-bold pb-2">It was great experience!</h3>
-            <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis delectus atque nulla,
-                exercitationem
-                laboriosam, enim labore ipsa illo accusantium molestiae quod. Quia ipsam asperiores iure! Architecto
-                et nemo doloribus autem!</p>
-            <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis delectus atque nulla,
-                exercitationem
-                laboriosam, enim labore ipsa illo accusantium molestiae quod. Quia ipsam asperiores iure! Architecto
-                et nemo doloribus autem!</p>
+            <p class="">Our aim is to provide you with a memorable experience every time you indulge in our delicious
+                ice cream creations.</p>
+            <p class="">From the moment you take your first bite to the lingering satisfaction afterward, we strive to
+                make every scoop unforgettable.</p>
         </div>
         <div class="col">
             <img src="../../../../assets/images/ice-cream-experience.png" alt="experience-img" class="w-100 rounded-3">
@@ -136,8 +132,8 @@
     <div class='d-flex flex-wrap gap-lg-3 gap-md-3 gap-sm-2 gap-2 align-items-center justify-content-around'>
         <div *ngFor="let book of books; index as i" class="card card-book rounded-0 shadow">
             <span *ngIf="isNew(book.publishedDate)" class="card-tag"></span>
-            <img src="../../../assets/images/{{book.imageUrl}}"
-                class="card-img-top book-img object-fit-contain mt-4 mb-2" alt="{{book.title}}">
+            <img src="{{book.imageUrl}}" class="card-img-top book-img object-fit-contain mt-4 mb-2"
+                alt="{{book.title}}">
             <div class="card-body card-body-book rounded-bottom">
                 <div class="overflow-hidden">
                     <a [routerLink]="['/books/book-detail', book.id]"
@@ -206,7 +202,7 @@
         <div *ngFor="let recipe of recipes; index as i" class="card card-recipe hover:shine">
             <div class="card-body card-body-recipe d-flex flex-column justify-content-end rounded-bottom p-0">
                 <div class="has-bg-image"
-                    style=" background-image: url('../../../assets/images/{{recipe.imageUrl}}'); background-size: cover;background-repeat:no-repeat;background-position: center;">
+                    style=" background-image: url('{{recipe.imageUrl}}'); background-size: cover;background-repeat:no-repeat;background-position: center;">
                 </div>
                 <a [routerLink]="['/recipes/recipe-detail', recipe.id]"
                     class="d-flex align-items-center gap-2 text-white text-decoration-none overflow-hidden px-3 py-1 recipe-title text-blur">
@@ -313,39 +309,6 @@
     </div>
 </section>
 
-<section class="remaining-time-section py-5">
-    <div class="container">
-        <div class="d-flex align-items-center justify-content-center text-accent-color">
-            <div class="border shadow w-25 text-center py-3 d-flex flex-column">
-                <span class="display-4 fw-bold">{{ days }}</span>
-                <span class="text-capitalize fw-bold fs-5">days</span>
-            </div>
-            <div>
-                <span class="display-4 fw-bold px-lg-3 px-0">:</span>
-            </div>
-            <div class="border shadow w-25 text-center py-3 d-flex flex-column">
-                <span class="display-4 fw-bold">{{ hours }}</span>
-                <span class="text-capitalize fw-bold fs-5">hours</span>
-            </div>
-            <div>
-                <span class="display-4 fw-bold px-lg-3 px-0">:</span>
-            </div>
-            <div class="border shadow w-25 text-center py-3 d-flex flex-column">
-                <span class="display-4 fw-bold">{{ minutes }}</span>
-                <span class="text-capitalize fw-bold fs-5">minutes</span>
-            </div>
-            <div>
-                <span class="display-4 fw-bold px-lg-3 px-0">:</span>
-            </div>
-            <div class="border shadow w-25 text-center py-3 d-flex flex-column">
-                <span class="display-4 fw-bold">{{ seconds }}</span>
-                <span class="text-capitalize fw-bold fs-5">seconds</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-
 <section class="competition-section section-divider bg-secondary-color py-5">
     <div class="container">
         <p class="display-5 fw-bold text-center"><span class="text-main">Participate</span> us</p>
@@ -385,64 +348,4 @@
 
 <section class="gallery-section py-5">
 
-</section>
-
-<section class="feedback-section">
-    <div class="container">
-        <p class="display-5 fw-bold text-center mb-4"><span class="text-main">Thousands</span> of customers <span
-                class="text-main">Trust us</span></p>
-        <div class="d-flex flex-lg-row flex-column align-items-stretch gap-3">
-            <div class="border rounded-3 py-3 px-3 feedback-container">
-                <div class="d-flex justify-content-between mb-3">
-                    <div class="d-flex gap-2">
-                        <img src="../../../../assets/images/ice-cream-about-2.jpg" alt="customer-avatar"
-                            class="rounded-circle object-fit-cover customer-feedback-img">
-                        <span class="customer-name fw-bold">John Doe</span>
-                    </div>
-                    <span class="display-5 text-accent-color">
-                        <fa-icon [icon]="faQuoteRight"></fa-icon>
-                    </span>
-                </div>
-                <div>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut scelerisque arcu, at porttitor
-                    lacus. Integer iaculis quis magna a aliquam. Vestibulum iaculis.Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit. Donec ut scelerisque arcu, at porttitor
-                </div>
-
-            </div>
-            <div class="border rounded-3 py-3 px-3 feedback-container">
-                <div class="d-flex justify-content-between mb-3">
-                    <div class="d-flex gap-2">
-                        <img src="../../../../assets/images/ice-cream-about-2.jpg" alt="customer-avatar"
-                            class="rounded-circle object-fit-cover customer-feedback-img">
-                        <span class="customer-name fw-bold">John Doe</span>
-                    </div>
-                    <span class="display-5 text-accent-color">
-                        <fa-icon [icon]="faQuoteRight"></fa-icon>
-                    </span>
-                </div>
-                <div>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut scelerisque arcu, at porttitor
-                    lacus. Integer iaculis quis magna a aliquam. Vestibulum iaculis.
-                </div>
-
-            </div>
-            <div class="border rounded-3 py-3 px-3 feedback-container">
-                <div class="d-flex justify-content-between mb-3">
-                    <div class="d-flex gap-2">
-                        <img src="../../../../assets/images/ice-cream-about-2.jpg" alt="customer-avatar"
-                            class="rounded-circle object-fit-cover customer-feedback-img">
-                        <span class="customer-name fw-bold">John Doe</span>
-                    </div>
-                    <span class="display-5 text-accent-color">
-                        <fa-icon [icon]="faQuoteRight"></fa-icon>
-                    </span>
-                </div>
-                <div>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut scelerisque arcu, at porttitor
-                    lacus. Integer iaculis quis magna a aliquam. Vestibulum iaculis.
-                </div>
-            </div>
-        </div>
-    </div>
 </section>

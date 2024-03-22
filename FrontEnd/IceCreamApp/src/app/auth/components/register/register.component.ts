@@ -2,14 +2,12 @@ import { Component } from '@angular/core';
 import { faHome, faEyeSlash, faEye, faCheck, faAngleRight, faArrowLeft, faAngleLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
-import { Register } from '../../interfaces/register';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SuccessSnackbarComponent } from 'src/app/shared/components/success-snackbar/success-snackbar.component';
-import { ErrorSnackbarComponent } from 'src/app/shared/components/error-snackbar/error-snackbar.component';
 import { CartService } from 'src/app/services/cart.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, of, takeUntil } from 'rxjs';
 import { User } from 'src/app/interfaces/user';
 import { Cart } from 'src/app/interfaces/cart';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-register',
@@ -33,16 +31,7 @@ export class RegisterComponent {
   selectedSubscription: string = 'monthly'; // Default to 'monthly'
   selectedPaymentOption: string = 'creditDebitCard';
 
-  registerDto: Register = {
-    username: '',
-    name: '',
-    email: '',
-    password: '',
-    phone: '',
-    subscriptionType: 'monthly',
-    paymentOption: 'creditDebitCard'
-  }
-
+  registerForm: FormGroup;
   user: User;
 
   cart: Cart = {
@@ -54,52 +43,117 @@ export class RegisterComponent {
   constructor(
     private authService: AuthenticationService,
     private router: Router,
-    private snackBar: MatSnackBar,
-    private cartService: CartService
+    private cartService: CartService,
+    private fb: FormBuilder,
+    private messageService: MessageService
   ) {
     this.user = <any>{};
+    this.registerForm = this.fb.group({
+      name: ['', Validators.required, this.isNameValidAsync],
+      username: ['', Validators.required, this.isUsernameValidAsync],
+      phone: ['', [Validators.required, this.isPhoneValidAsync]],
+      email: ['', Validators.required, this.isEmailValidAsync],
+      password: ['', Validators.required, this.isPasswordValidAsync],
+      subscriptionType: ['monthly', Validators.required],
+      paymentOption: ['creditDebitCard', Validators.required],
+      paymentStatus: [true],
+      avatar: ['']
+    });
+  }
+
+  isNameValidAsync(control: AbstractControl):
+    Observable<ValidationErrors | null> {
+    const regex = /^[^\d!@#$%^&*()\-\+=\[\]{};:'",.<>\/?|`~]*$/;
+    const valid = regex.test(control.value);
+
+    if (!valid) {
+      return of({ 'invalidName': true });
+    }
+    return of(null);
+  }
+
+  isUsernameValidAsync(control: AbstractControl):
+    Observable<ValidationErrors | null> {
+    const username = control.value;
+    const minLength = 6;
+    const maxLength = 30;
+
+    // Check if username length is within the specified range
+    if (username.length < minLength || username.length > maxLength) {
+      return of({ 'invalidLength': true });
+    }
+
+    // Regular expression for allowed characters
+    const regex = /^[a-zA-Z0-9_\-@#!]+$/;
+    const valid = regex.test(username);
+
+    if (!valid) {
+      return of({ 'invalidUsername': true });
+    }
+
+    return of(null);
+  }
+
+  isPhoneValidAsync(control: AbstractControl):
+    Observable<ValidationErrors | null> {
+    const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+    const valid = regex.test(control.value);
+
+    if (valid) {
+      return of({ 'invalidPhoneNumber': true });
+    }
+    return of(null);
+  }
+
+  isPasswordValidAsync(control: AbstractControl):
+    Observable<ValidationErrors | null> {
+    const password = control.value;
+    const minLength = 6;
+    const maxLength = 30;
+
+    if (password.length < minLength || password.length > maxLength) {
+      return of({ 'invalidLength': true });
+    }
+
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
+    const valid = regex.test(password);
+
+    if (!valid) {
+      return of({ 'invalidPassword': true });
+    }
+
+    return of(null);
+  }
+
+  isEmailValidAsync(control: AbstractControl):
+    Observable<ValidationErrors | null> {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const valid = regex.test(control.value);
+
+    if (!valid) {
+      return of({ 'invalidEmail': true });
+    }
+    return of(null);
   }
 
   register(): void {
-    const data = {
-      username: this.registerDto.username,
-      name: this.registerDto.name,
-      email: this.registerDto.email,
-      phone: this.registerDto.phone,
-      password: this.registerDto.password,
-      subscriptionType: this.registerDto.subscriptionType,
-      paymentOption: this.registerDto.paymentOption,
-      avatar: ''
+    if (this.registerForm) {
+      const registerData = this.registerForm.value;
+
+      this.authService.register(registerData).subscribe(
+        (authResponse) => {
+          const token = authResponse.token;
+
+          this.createCartForUser(token);
+          this.router.navigate(['/auth/login']);
+
+          this.messageService.openSuccess('Register successfully');
+        },
+        (error) => {
+          this.messageService.openError('Register fail. Please try again');
+        }
+      );
     }
-
-    this.authService.register(data).subscribe(
-      (authResponse) => {
-        console.log(authResponse);
-
-        const token = authResponse.token;
-
-        this.createCartForUser(token);
-        this.router.navigate(['/auth/login']);
-
-        this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-          data: { message: 'Register success!' },
-          panelClass: ['custom-snackbar'],
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
-      },
-      (error) => {
-        console.log(error);
-        this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-          data: { message: 'Error register. Please try again.' },
-          panelClass: ['custom-snackbar', 'error'],
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
-      }
-    );
   }
 
   // Method to create a cart for the user
@@ -122,8 +176,7 @@ export class RegisterComponent {
             );
           },
           error => {
-            // Handle error if user information cannot be fetched
-            console.error('Error fetching user information', error);
+            this.messageService.openError('User data retrieval error')
           }
         );
       } else {
@@ -141,13 +194,13 @@ export class RegisterComponent {
     this.selectedPaymentOption = paymentOption;
   }
 
-  nextStep() {
+  nextStep(form: FormGroup) {
     if (this.currentStep < 3) {
       this.currentStep++;
     }
   }
 
-  previousStep() {
+  previousStep(form: FormGroup) {
     if (this.currentStep > 1) {
       this.currentStep--;
     }
@@ -156,4 +209,5 @@ export class RegisterComponent {
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
+
 }

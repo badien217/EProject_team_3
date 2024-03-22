@@ -6,4 +6,5 @@ export interface RecipeRating {
     rating: number;
     comment: number;
     ratingDate: Date;
+    avatar?: string;
 }

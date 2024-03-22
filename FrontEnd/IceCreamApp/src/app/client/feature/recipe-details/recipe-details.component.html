@@ -12,10 +12,10 @@
                 <span class="fs-6 text-secondary">({{recipeRatings.length}} Ratings)</span>
             </div>
             <p>Owner: <strong>{{recipe.submittedBy}}</strong></p>
-            <p class="fs-5 lh-sm">{{recipe.description}}</p>
+            <p class="lh-sm">{{recipe.description}}</p>
         </div>
         <div class="col mx-0 px-0">
-            <img src="../../../assets/images/{{recipe.imageUrl}}" alt="{{recipe.name}}" class="w-100 recipe-main-img">
+            <img src="{{recipe.imageUrl}}" alt="{{recipe.name}}" class="w-100 recipe-main-img">
         </div>
     </div>
 </div>
@@ -43,8 +43,8 @@
                         </div>
                         <div [@fadeInOut]="step.isStepOpen ? 'open' : 'closed'">
                             <p class="pb-3" *ngIf="step.isStepOpen">{{step.content}}</p>
-                            <img *ngIf="step.isStepOpen && step.imageUrl" src="../../../assets/images/{{step.imageUrl}}"
-                                alt="{{step.imageUrl}}" class="w-100">
+                            <img *ngIf="step.isStepOpen && step.imageUrl" src="{{step.imageUrl}}"
+                                alt="{{step.imageUrl}}" class="step-img object-fit-contain">
                         </div>
                     </div>
                     <hr class="border-2 border-dark">
@@ -59,8 +59,7 @@
         <p class="display-5 text-center pb-2 fw-bold">Other recipes</p>
         <div class='d-flex flex-wrap gap-lg-4 gap-md-3 gap-sm-2 gap-2 align-items-stretch justify-content-around'>
             <div *ngFor="let recipe of recipes; index as i " class="card card-recipe">
-                <img src="../../../assets/images/{{recipe.imageUrl}}" class="card-img-top object-fit-cover"
-                    alt="{{recipe.name}}">
+                <img src="{{recipe.imageUrl}}" class="card-img-top object-fit-cover" alt="{{recipe.name}}">
                 <div class="card-body rounded-bottom">
                     <div class="d-flex align-items-center justify-content-center overflow-hidden">
                         <p class="lh-sm two-line-text recipe-title">{{recipe.name}}</p>
@@ -86,35 +85,29 @@
 
 
 <div class="container py-5" id="review">
-    <div class="py-5 px-3 rounded-3 border shadow">
+    <form [formGroup]="recipeRatingForm" class="py-5 px-3 rounded-3 border shadow">
         <p class="display-5 text-center pb-2 fw-bold">Leave a review</p>
         <p class="h5 text-center">Click the stars to rate us*</p>
         <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
             <div>
-                <input type="radio" [(ngModel)]="recipeRatingDto.rating" name="rating" id="rate-5" value="5"
-                    class="input-rating">
+                <input type="radio" formControlName="rating" id="rate-5" value="5" class="input-rating">
                 <label for="rate-5" class="label-rating"><fa-icon [icon]="faStar"></fa-icon></label>
-                <input type="radio" [(ngModel)]="recipeRatingDto.rating" name="rating" id="rate-4" value="4"
-                    class="input-rating">
+                <input type="radio" formControlName="rating" name="rating" id="rate-4" value="4" class="input-rating">
                 <label for="rate-4" class="label-rating"><fa-icon [icon]="faStar"></fa-icon></label>
-                <input type="radio" [(ngModel)]="recipeRatingDto.rating" name="rating" id="rate-3" value="3"
-                    class="input-rating">
+                <input type="radio" formControlName="rating" name="rating" id="rate-3" value="3" class="input-rating">
                 <label for="rate-3" class="label-rating"><fa-icon [icon]="faStar"></fa-icon></label>
-                <input type="radio" [(ngModel)]="recipeRatingDto.rating" name="rating" id="rate-2" value="2"
-                    class="input-rating">
+                <input type="radio" formControlName="rating" name="rating" id="rate-2" value="2" class="input-rating">
                 <label for="rate-2" class="label-rating"><fa-icon [icon]="faStar"></fa-icon></label>
-                <input type="radio" [(ngModel)]="recipeRatingDto.rating" name="rating" id="rate-1" value="1"
-                    class="input-rating">
+                <input type="radio" formControlName="rating" name="rating" id="rate-1" value="1" class="input-rating">
                 <label for="rate-1" class="label-rating"><fa-icon [icon]="faStar"></fa-icon></label>
             </div>
         </div>
         <div>
-            <textarea [(ngModel)]="recipeRatingDto.comment" name="comment" class="form-control"
-                placeholder="Your comment..." rows="3"></textarea>
+            <textarea formControlName="comment" class="form-control" placeholder="Your comment..." rows="3"></textarea>
             <button type="submit" class="border-0 btn-accent-color rounded py-1 px-5 mt-2 fs-5 text-white"
                 (click)="createRecipeRating()">Send</button>
         </div>
-    </div>
+    </form>
     <hr class="border-2 border-dark">
     <div class="py-3 mx-0">
         <p class="display-6 fw-bold">{{avgRating}}/5</p>
@@ -127,12 +120,15 @@
     <div class="mt-4">
         <div class="d-flex" *ngFor="let recipeRating of recipeRatings; index as i">
             <div class="me-3">
-                <img src="../../../assets/images/auth-img.png" alt="reviewer-avatar"
+                <img *ngIf="recipeRating.avatar?.length != 1" src="{{recipeRating.avatar}}" alt="{{recipeRating.name}}"
                     class="rounded-circle reviewer-avatar">
+                <div *ngIf="recipeRating.avatar?.length === 1"
+                    class="rounded-circle reviewer-avatar bg-accent-color fs-5 fw-bold text-white d-flex align-items-center justify-content-center">
+                    {{recipeRating.avatar}}</div>
             </div>
             <div class="lh-sm">
                 <span class="fs-7">{{recipeRating.name}}</span>
-                <div class="d-flex align-items-center justify-content-center">
+                <div class="d-flex align-items-center justify-content-start">
                     <div class="d-flex align-items-center stars-rating star-sm">
                         <ng-container *ngFor="let star of getStarArray(recipeRating.rating)">
                             <fa-icon [icon]="star.icon"></fa-icon>

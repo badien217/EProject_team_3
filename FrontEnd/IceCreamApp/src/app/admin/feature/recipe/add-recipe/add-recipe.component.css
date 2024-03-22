@@ -11,3 +11,13 @@ textarea {
 :host ::ng-deep .ck-editor__editable_inline p {
     margin-bottom: 5px;
 }
+
+.selected-recipe-img {
+    width: 200px;
+    height: 180px;
+}
+
+.selected-step-img {
+    width: 200px;
+    height: 180px;
+}

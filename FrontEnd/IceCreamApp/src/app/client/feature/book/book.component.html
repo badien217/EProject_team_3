@@ -7,8 +7,8 @@
         <div *ngFor="let book of books | paginate: { itemsPerPage: 8, currentPage: page }"
             class="card card-book rounded-0 shadow">
             <span *ngIf="isNew(book.publishedDate)" class="card-tag"></span>
-            <img src="../../../assets/images/{{book.imageUrl}}"
-                class="card-img-top book-img object-fit-contain mt-4 mb-2" alt="{{book.title}}">
+            <img src="{{book.imageUrl}}" class="card-img-top book-img object-fit-contain mt-4 mb-2"
+                alt="{{book.title}}">
             <div class="d-flex flex-column justify-content-between card-body card-body-book rounded-bottom">
                 <div class="overflow-hidden">
                     <a [routerLink]="['/books/book-detail', book.id]"

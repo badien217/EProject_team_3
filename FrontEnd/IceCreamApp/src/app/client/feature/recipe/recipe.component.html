@@ -3,7 +3,7 @@
     <span class="display-1 text-center text-white py-2 text-page-header">Recipe</span>
 </div>
 
-<div class="container d-flex  mt-4 gap-2">
+<div *ngIf="isClientLoggedIn" class="container d-flex  mt-4 gap-2">
     <button class="border-1 rounded px-3 py-1 btn-recipe-show" [class.active]="activeButton === 'allRecipes'"
         (click)="showAllRecipes = true; showAddRecipeForm = false;activeButton = 'allRecipes'">All Recipes</button>
     <button class="border-1 rounded px-3 py-1 btn-recipe-show" [class.active]="activeButton === 'addRecipe'"
@@ -13,37 +13,37 @@
 
 <div class="container my-5 px-3" *ngIf="showAddRecipeForm">
     <h1>Add Your Own Recipe</h1>
-    <form #recipeForm="ngForm" (ngSubmit)="createRecipe()">
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" [(ngModel)]="recipe.name" name="name" required>
-        </div>
+    <form [formGroup]="recipeForm">
         <div class="row g-3 mb-3">
             <div class="col">
-                <label for="submittedBy" class="form-label">Submitted By</label>
-                <input type="text" class="form-control" id="submittedBy" [(ngModel)]="recipe.submittedBy"
-                    name="submittedBy" required>
-            </div>
-            <div class="col">
-                <label for="imageUrl" class="form-label">Main Image</label>
-                <input class="form-control" type="text" id="imageUrl" [(ngModel)]="recipe.imageUrl" name="imageUrl"
-                    required>
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea [(ngModel)]="recipe.description" id="description" name="description" class="form-control" rows="5"
-                required></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="ingredient" class="form-label">Ingredients
-            </label>
-            <div class="content" role="main">
-                <ckeditor [editor]="Editor" [(ngModel)]="recipe.ingredient" name="ingredient" id="ingredient"
-                    [config]="editorConfig">
-                </ckeditor>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" formControlName="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="ingredient" class="form-label">Ingredients
+                    </label>
+                    <div class="content" role="main">
+                        <ckeditor [editor]="Editor" formControlName="ingredient" id="ingredient"
+                            [config]="editorConfig">
+                        </ckeditor>
+                    </div>
+                </div>
             </div>
 
+            <div class="col d-flex flex-column align-items-start pt-4">
+                <img [src]="selectedRecipeImage" alt="selectedRecipeImage"
+                    class="selected-recipe-img pb-3 object-fit-contain" [hidden]="!selectedRecipeImage">
+                <label for="imageUrl" class="bg-white border btn rounded cursor-pointer mt-2">Main
+                    Image</label>
+                <input class="form-control" type="file" id="imageUrl" (change)="onFileRecipeSelected($event)"
+                    accept="image/*" required hidden>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea formControlName="description" id="description" class="form-control" rows="5" required></textarea>
         </div>
 
         <div class="mb-3">
@@ -51,33 +51,42 @@
                 <label class="form-label m-0">Instructions</label>
             </div>
 
-            <div *ngFor="let step of recipe.steps; let i = index" class="ms-3 mt-3">
-                <div class="d-flex align-items-center pb-3">
+            <div *ngFor="let step of steps; let i = index" class="step" [formGroup]="step">
+                <div class="d-flex align-items-center gap-3 pb-3">
                     <button type="button" class="border-0 bg-light" (click)="toggleStep(i)">
                         <fa-icon [icon]="stepOpenStates[i] ? faAngleUp : faAngleDown" class="pe-2"></fa-icon>
-                        <strong>Step {{ i + 1}}</strong>
+                        <strong>Step {{ i + 1 }}</strong>
+                    </button>
+
+                    <button type="button" class="btn btn-outline-danger" (click)="removeStep(i)">
+                        <fa-icon [icon]="faTrash"></fa-icon>
                     </button>
                 </div>
-                <div [hidden]="!stepOpenStates[i]" [@fadeInOut]="stepOpenStates[i] ? 'open' : 'closed'">
-                    <div class="mb-2">
-                        <label class="form-label" for="stepContent{{ i }}">Content</label>
-                        <textarea id="stepContent{{ i }}" [(ngModel)]="step.content" name="content{{ i }}"
-                            class="form-control" rows="4" required></textarea>
+                <div class="row g-3 mb-3" [hidden]="!stepOpenStates[i]"
+                    [@fadeInOut]="stepOpenStates[i] ? 'open' : 'closed'">
+                    <div class="col">
+                        <label class="form-label" for="stepContent">Content</label>
+                        <textarea id="stepContent" formControlName="content" class="form-control" rows="5"
+                            required></textarea>
                     </div>
-                    <div class="mb-2">
-                        <label for="illustrationImage{{ i }}" class="form-label">Illustration Image</label>
-                        <input id="illustrationImage{{ i }}" [(ngModel)]="step.imageUrl" name="imageUrl{{ i }}"
-                            class="form-control" type="file" required>
+                    <div class="col d-flex flex-column align-items-start pt-4">
+                        <img [src]="selectedStepImages[i]" alt="selectedStepImage-{{i}}"
+                            class="selected-step-img pb-3 object-fit-contain" [hidden]="!selectedStepImages[i]">
+                        <label for="stepImage{{i}}" class="bg-white border btn rounded cursor-pointer mt-2">Illustration
+                            Image</label>
+                        <input id="stepImage{{i}}" class="form-control" type="file"
+                            (change)="onStepImageSelected($event, i)" accept="image/*" required hidden>
                     </div>
+
                 </div>
                 <hr class="border-1 border-dark">
             </div>
-            <button class="btn btn-outline-success d-flex align-items-center ms-2" (click)="addStep($event)"><span>Add
+            <button class="btn btn-outline-success d-flex align-items-center ms-2" (click)="addStep()"><span>Add
                     step</span><fa-icon [icon]="faPlus" class="ps-1"></fa-icon> </button>
+
+
         </div>
-
-
-        <button class="btn btn-success px-5" [disabled]="!recipeForm.valid" type="submit">Save</button>
+        <button class="btn btn-success px-5" (click)="createRecipe()">Save</button>
     </form>
 </div>
 
@@ -85,8 +94,7 @@
     <div class='d-flex flex-wrap gap-lg-4 gap-md-3 gap-sm-2 gap-2 align-items-stretch justify-content-around'>
         <div *ngFor="let recipe of recipes | paginate: { itemsPerPage: 9, currentPage: page }; index as i "
             class="card card-recipe shadow-sm">
-            <img src="../../../assets/images/{{recipe.imageUrl}}" class="card-img-top object-fit-cover"
-                alt="{{recipe.name}}">
+            <img src="{{recipe.imageUrl}}" class="card-img-top object-fit-cover" alt="{{recipe.name}}">
             <div class="card-body rounded-bottom">
                 <div class="d-flex align-items-center justify-content-center overflow-hidden">
                     <p class="lh-sm two-line-text recipe-title">{{recipe.name}}</p>
@@ -107,4 +115,8 @@
         <pagination-controls class="text-decoration-none" (pageChange)="page = $event" previousLabel="Prev"
             nextLabel="Next"></pagination-controls>
     </div>
+</div>
+
+<div *ngIf="isCreating" class="d-flex align-items-center justify-content-center position-fixed top-0 start-0 overlay">
+    <div class="spinner-border text-accent-color"></div>
 </div>

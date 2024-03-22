@@ -8,12 +8,11 @@ import { RecipeService } from 'src/app/services/recipe.service';
 import { ActivatedRoute } from '@angular/router';
 import { Step } from 'src/app/interfaces/step';
 import { RecipeRating } from 'src/app/interfaces/recipe-rating';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SuccessSnackbarComponent } from 'src/app/shared/components/success-snackbar/success-snackbar.component';
-import { ErrorSnackbarComponent } from 'src/app/shared/components/error-snackbar/error-snackbar.component';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/interfaces/user';
 import { AuthenticationService } from 'src/app/auth/services/authentication.service';
+import { MessageService } from 'src/app/services/message.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-recipe-details',
@@ -35,6 +34,7 @@ import { AuthenticationService } from 'src/app/auth/services/authentication.serv
     ]),
   ],
 })
+
 export class RecipeDetailsComponent implements OnInit, OnDestroy {
   faStar = faStar;
   faStarHalfStroke = faStarHalfStroke;
@@ -49,8 +49,9 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   recipeId!: number;
   recipes: Recipe[] = [];
   recipeRatings: RecipeRating[] = [];
-  recipeRatingDto: RecipeRating;
   avgRating: number = 0;
+  recipeRatingForm: FormGroup;
+  isUserRated: boolean = false;
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -58,13 +59,20 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
-    private snackBar: MatSnackBar,
+    private messageService: MessageService,
     private userService: UserService,
     private authService: AuthenticationService,
+    private fb: FormBuilder
   ) {
     this.recipe = <any>{};
-    this.recipeRatingDto = <any>{};
     this.userInfo = <any>{};
+    this.recipeRatingForm = this.fb.group({
+      recipeId: [0],
+      userId: [0],
+      rating: [0, Validators.required],
+      comment: ['', Validators.required],
+      ratingDate: [new Date()]
+    });
   }
 
   ngOnInit() {
@@ -73,9 +81,10 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
       this.retrieveRecipeDetails();
       this.retrieveRecipeRating();
       this.retrieveAvgRating();
+      this.retrieveAllRecipes();
+      this.getUserInfo();
     });
-    this.retrieveAllRecipes();
-    this.getUserInfo();
+
   }
 
   retrieveRecipeDetails(): void {
@@ -95,7 +104,6 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     this.recipeService.getAllShowRecipes().pipe(takeUntil(this.destroy$)).subscribe(
       (data: Recipe[]) => {
         this.recipes = data.slice(0, 6);
-        console.log(this.recipes);
       }
     );
   }
@@ -110,14 +118,13 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
           this.userService.getUserById(rating.userId).subscribe(
             (user: User) => {
               rating.name = user.name; // Assuming 'name' is the property containing the user's name
+              rating.avatar = user.avatar;
             },
             error => {
-              console.log(error);
+              this.messageService.openError('Recipe rating data retrieval error')
             }
           );
         });
-
-        console.log('ratings', this.recipeRatings);
       }
     );
   }
@@ -173,12 +180,17 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
         this.authService.getUserInfo(token).pipe(takeUntil(this.destroy$)).subscribe(
           (data) => {
             this.userInfo = data.userInfo;
-
-            console.log('useing userInfo', this.userInfo);
+            this.checkIfUserRated(data.userInfo.id);
+            this.recipeRatingForm = this.fb.group({
+              recipeId: [this.recipeId],
+              userId: [this.userInfo.id],
+              rating: [0, Validators.required],
+              comment: ['', Validators.required],
+              ratingDate: [new Date()]
+            });
           },
           error => {
-            // Handle error if user information cannot be fetched
-            console.error('Error fetching user information', error);
+            this.messageService.openError('User information data retrieval error')
           }
         );
       } else {
@@ -189,37 +201,22 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Add method to check if user has rated
+  checkIfUserRated(userId: number): void {
+    this.isUserRated = this.recipeRatings.some(rating => rating.userId === userId);
+  }
+
   createRecipeRating(): void {
-    const data = {
-      recipeId: this.recipeId,
-      userId: this.userInfo.id,
-      rating: this.recipeRatingDto.rating,
-      comment: this.recipeRatingDto.comment,
-      ratingDate: new Date()
-    }
+    const data = this.recipeRatingForm.value
 
     this.recipeService.createRecipeRating(data).subscribe(
       response => {
         this.retrieveRecipeRating();
         this.retrieveAvgRating();
-
-        this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-          data: { message: 'Rating successfully!' },
-          panelClass: ['custom-snackbar'],
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
+        this.messageService.openSuccess('Rating successfully');
       },
       error => {
-        console.log(error);
-        this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-          data: { message: 'Error rating. Please check your credentials and try again.' },
-          panelClass: ['custom-snackbar', 'error'],
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
+        this.messageService.openError('Error rating. Please check your credentials');
       }
     );
   }

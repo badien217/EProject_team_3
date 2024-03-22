@@ -32,11 +32,11 @@ export class UserRecipeService {
     return this.http.post(baseUrl, data);
   }
 
-  updateUserRecipe(id: any, data: any): Observable<any> {
+  updateUserRecipe(id: number, data: any): Observable<any> {
     return this.http.put(`${baseUrl}/${id}`, data);
   }
 
-  deleteUserRecipe(id: any): Observable<any> {
+  deleteUserRecipe(id: number): Observable<any> {
     return this.http.delete(`${baseUrl}/${id}`);
   }
 

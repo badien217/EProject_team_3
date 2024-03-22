@@ -1,17 +1,16 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { faStar, faStarHalfStroke, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { Book } from 'src/app/interfaces/book';
 import { BookService } from 'src/app/services/book.service';
 import { SessionStorageService } from 'src/app/services/session-storage.service';
-import { SuccessSnackbarComponent } from 'src/app/shared/components/success-snackbar/success-snackbar.component';
 import { User } from 'src/app/interfaces/user';
 import { AuthenticationService } from 'src/app/auth/services/authentication.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Cart } from 'src/app/interfaces/cart';
 import { CartDetail } from 'src/app/interfaces/cart-detail';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-book',
@@ -33,9 +32,9 @@ export class BookComponent implements OnInit {
   constructor(
     private bookService: BookService,
     private sessionStorageService: SessionStorageService,
-    private snackBar: MatSnackBar,
     private authService: AuthenticationService,
-    private cartService: CartService
+    private cartService: CartService,
+    private messageService: MessageService
   ) {
     this.user = <any>{};
   }
@@ -69,11 +68,10 @@ export class BookComponent implements OnInit {
                     existingDetail.quantity += 1;
                     this.cartService.updateCartDetail(existingDetail.id, existingDetail).subscribe(
                       () => {
-                        console.log('Cart detail updated successfully.');
                         this.cartService.updateCartDetailTotal(cart.cartDetails.length);
                       },
-                      error => {
-                        console.error('Error updating cart detail:', error);
+                      (error) => {
+                        this.messageService.openError('Error add book to cart')
                       }
                     );
                   } else {
@@ -85,20 +83,19 @@ export class BookComponent implements OnInit {
                     };
                     this.cartService.createCartDetail(newCartDetail).subscribe(
                       () => {
-                        console.log('New cart detail added successfully.');
                         this.cartService.updateCartDetailTotal(cart.cartDetails.length + 1);
                       },
                       error => {
-                        console.error('Error adding new cart detail:', error);
+                        this.messageService.openError('Error add book to cart')
                       }
                     );
                   }
                 } else {
-                  console.log('No cart found for the user.');
+                  this.messageService.openError('Error add book to cart')
                 }
               },
               error => {
-                console.error('Error fetching cart:', error);
+                this.messageService.openError('Cart data retrieval error')
               }
             );
           }
@@ -127,12 +124,7 @@ export class BookComponent implements OnInit {
         storedCartDetails.push(newCartDetail);
       }
 
-      // Save updated details back to session storage
-      // sessionStorage.setItem('cartDetails', JSON.stringify(storedCartDetails));
       this.sessionStorageService.set('cartDetails', storedCartDetails);
-
-      // Optionally, you can perform any additional logic or UI updates here
-      console.log('Cart detail added to session storage successfully.');
     }
   }
 
@@ -143,7 +135,7 @@ export class BookComponent implements OnInit {
           book.averageRating = avgRating;
         },
         error => {
-          console.error(`Error fetching average rating for book ${book.id}: `, error);
+          this.messageService.openError('Book rating data retrieval error')
         }
       );
     });

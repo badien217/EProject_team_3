@@ -30,8 +30,6 @@ import { UpdateRecipeComponent } from './feature/recipe/update-recipe/update-rec
 import { UpdateProductComponent } from './feature/product/update-product/update-product.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UpdateFaqComponent } from './feature/faq/update-faq/update-faq.component';
-import { AddFeedbackComponent } from './feature/feedback/add-feedback/add-feedback.component';
-import { UpdateFeedbackComponent } from './feature/feedback/update-feedback/update-feedback.component';
 import { UpdateOrderComponent } from './feature/order/update-order/update-order.component';
 import { ListFlavorComponent } from './feature/flavor/list-flavor/list-flavor.component';
 import { AddFlavorComponent } from './feature/flavor/add-flavor/add-flavor.component';
@@ -62,8 +60,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
     UpdateRecipeComponent,
     UpdateProductComponent,
     UpdateFaqComponent,
-    AddFeedbackComponent,
-    UpdateFeedbackComponent,
     UpdateOrderComponent,
     ListFlavorComponent,
     AddFlavorComponent,

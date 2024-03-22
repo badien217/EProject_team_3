@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { faXmark, faAngleRight, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService } from 'src/app/auth/services/authentication.service';
@@ -11,10 +10,9 @@ import { OrderDetail } from 'src/app/interfaces/order-detail';
 import { User } from 'src/app/interfaces/user';
 import { BookService } from 'src/app/services/book.service';
 import { CartService } from 'src/app/services/cart.service';
+import { MessageService } from 'src/app/services/message.service';
 import { OrderService } from 'src/app/services/order.service';
 import { SessionStorageService } from 'src/app/services/session-storage.service';
-import { ErrorSnackbarComponent } from 'src/app/shared/components/error-snackbar/error-snackbar.component';
-import { InfoSnackbarComponent } from 'src/app/shared/components/info-snackbar/info-snackbar.component';
 
 @Component({
   selector: 'app-order',
@@ -30,6 +28,7 @@ export class OrderComponent {
   selectedPaymentOption: string = 'paymentOnDelivery';
 
   order: Order = {
+    id: 0,
     name: '',
     email: '',
     phone: '',
@@ -37,7 +36,7 @@ export class OrderComponent {
     paymentOption: 'Payment on delivery',
     amount: 0,
     transactionStatus: false,
-    orderDate: new Date(''),
+    orderDate: new Date(),
     orderDetails: [],
   };
 
@@ -55,7 +54,7 @@ export class OrderComponent {
     private orderService: OrderService,
     private cartService: CartService,
     private bookService: BookService,
-    private snackBar: MatSnackBar,
+    private messageService: MessageService,
     private authService: AuthenticationService
   ) {
     this.userInfo = <User>{};
@@ -73,6 +72,7 @@ export class OrderComponent {
             this.userInfo = data.userInfo;
 
             this.order = {
+              id: 0,
               name: this.userInfo.name,
               email: this.userInfo.email,
               phone: this.userInfo.phone,
@@ -85,7 +85,7 @@ export class OrderComponent {
             };
           },
           (error) => {
-            console.error('Error fetching user information', error);
+            this.messageService.openError('User information data retrieval error')
           }
         );
       } else {
@@ -120,21 +120,19 @@ export class OrderComponent {
                   // Push the pair of CartDetail and Book to the array
                   this.cartDetailsWithBooks.push({ cartDetail, book } as { cartDetail: CartDetail, book: Book });
                 } else {
-                  console.error('Book not found for CartDetail:', cartDetail);
+                  this.messageService.openError('Book data could not be found')
                 }
               } catch (error) {
-                console.error('Error fetching book data:', error);
+                this.messageService.openError('Book data retrieval error')
               }
             }
 
           },
           (error) => {
-            console.error('Error fetching cart data:', error);
+            this.messageService.openError('Cart data retrieval error')
           }
         );
       } catch (error) {
-        // Handle error
-        console.error('Error fetching user info:', error);
         this.authService.logoutClient();
       }
     } else {
@@ -155,10 +153,10 @@ export class OrderComponent {
               // Push the pair of CartDetail and Book to the array
               this.cartDetailsWithBooks.push({ cartDetail, book } as { cartDetail: CartDetail, book: Book });
             } else {
-              console.error('Book not found for CartDetail:', cartDetail);
+              this.messageService.openError('Book data could not be found')
             }
           } catch (error) {
-            console.error('Error fetching book data:', error);
+            this.messageService.openError('Book data retrieval error')
           }
         }
       }
@@ -176,14 +174,10 @@ export class OrderComponent {
     if (this.isClientLoggedIn) {
       this.cartService.deleteCartDetail(cartDetailId).subscribe(
         () => {
-          // Successful deletion, you may want to update the cart data or do additional actions
-          console.log(`Cart Detail with ID ${cartDetailId} removed successfully.`);
-          // Optionally, you can retrieve the updated cart data after removal
           this.retrieveCartData();
         },
         (error) => {
-          console.error('Error removing cart detail:', error);
-          // Handle the error as needed
+          this.messageService.openError('Fail to remove cart data')
         }
       );
     } else {
@@ -204,9 +198,8 @@ export class OrderComponent {
           this.sessionStorageService.set('cartDetails', storedCartDetails);
           // Optionally, you can update the component with the new session storage data
           this.retrieveCartData();
-          console.log(`Cart Detail with ID ${cartDetailId} removed from session storage successfully.`);
         } else {
-          console.warn(`Cart Detail with ID ${cartDetailId} not found in session storage.`);
+          this.messageService.openError('Cart data retrieval error')
         }
       }
     }
@@ -224,12 +217,10 @@ export class OrderComponent {
       // Call the CartService to update the cart detail quantity
       this.cartService.updateCartDetail(cartDetail.id, { quantity: cartDetail.quantity }).subscribe(
         () => {
-          // Successful update, you may want to retrieve the updated cart data or do additional actions
-          console.log(`Cart Detail with ID ${cartDetail.id} quantity updated successfully.`);
+
         },
         (error) => {
-          console.error('Error updating cart detail quantity:', error);
-          // Handle the error as needed, you may want to revert the quantity change on error
+          this.messageService.openError('Fail to update quantity')
         }
       );
     } else {
@@ -251,12 +242,8 @@ export class OrderComponent {
 
           // Save the updated cart details back to session storage
           sessionStorage.setItem('cartDetails', JSON.stringify(storedCartDetails));
-
-          // Optionally, you can update the component with the new session storage data
-          // this.retrieveCartData();
-          console.log(`Cart Detail with bookId ${cartDetail.bookId} quantity updated in session storage successfully.`);
         } else {
-          console.warn(`Cart Detail with bookId ${cartDetail.bookId} not found in session storage.`);
+          this.messageService.openError('Cart data could not be found')
         }
       }
     }
@@ -274,6 +261,7 @@ export class OrderComponent {
 
       // Simulate order creation (replace this with your actual logic)
       const simulatedOrder: Order = {
+        id: this.order.id,
         name: this.order.name,
         email: this.order.email,
         phone: this.order.phone,
@@ -287,26 +275,14 @@ export class OrderComponent {
 
       this.orderService.createOrder(simulatedOrder).subscribe(
         (data) => {
-          this.snackBar.openFromComponent(InfoSnackbarComponent, {
-            duration: 3000,
-            data: { message: 'Order Confirmed! Check your email for updates.' },
-            panelClass: ['custom-snackbar'],
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          this.messageService.openInfo('Order Confirmed! Check your email for updates');
 
           // Successfully created order, now delete cart details
           this.deleteAllCartDetails();
           this.retrieveCartData();
         },
         (error) => {
-          this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-            duration: 3000,
-            data: { message: 'Failed to create order. Please try again.' },
-            panelClass: ['custom-snackbar'],
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          this.messageService.openError('Failed to create order. Please try again');
         }
       );
     } else {
@@ -326,6 +302,7 @@ export class OrderComponent {
 
         // Simulate order creation (replace this with your actual logic)
         const simulatedOrder: Order = {
+          id: this.order.id,
           name: this.order.name,
           email: this.order.email,
           phone: this.order.phone,
@@ -339,14 +316,7 @@ export class OrderComponent {
 
         this.orderService.createOrder(simulatedOrder).subscribe(
           (data) => {
-            // Show success message
-            this.snackBar.openFromComponent(InfoSnackbarComponent, {
-              duration: 3000,
-              data: { message: 'Order Confirmed! Check your email for updates.' },
-              panelClass: ['custom-snackbar'],
-              horizontalPosition: 'end',
-              verticalPosition: 'top'
-            });
+            this.messageService.openInfo('Order Confirmed! Check your email for updates');
 
             // Clear the cart and update the component
             this.sessionStorageService.remove('cartDetails');
@@ -357,12 +327,10 @@ export class OrderComponent {
 
             // Optionally, you can retrieve the updated cart data after removal
             this.retrieveCartData();
-
-            console.log('Simulated order created:', simulatedOrder);
           }
         );
       } else {
-        console.warn('No cart details found in session storage.');
+        this.messageService.openError('Cart data could not be found')
       }
 
     }
@@ -378,19 +346,17 @@ export class OrderComponent {
             this.cartService.deleteCartDetail(cartDetail.id).subscribe(
               () => {
                 this.retrieveCartData();
-                console.log(`Cart Detail with ID ${cartDetail.id} removed successfully.`);
               },
               (error) => {
-                console.error('Error removing cart detail:', error);
+                this.messageService.openError('Fail to refresh cart data');
               }
             );
           }
           // Clear the cart details after deletion
           this.cartDetailsWithBooks = [];
-          console.log('All cart details deleted successfully.');
         },
         (error) => {
-          console.error('Error fetching cart data:', error);
+          this.messageService.openError('Cart data retrieval error')
         }
       );
     }

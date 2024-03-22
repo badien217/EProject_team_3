@@ -4,21 +4,23 @@
             [icon]="faX"></fa-icon></button>
 </div>
 <div mat-dialog-content class="add-product-dialog-container">
-    <form #productForm="ngForm" class="py-2">
-        <div class="form-group pb-3">
-            <label for="productName">Product Name:</label>
-            <input type="text" class="form-control" id="productName" name="name" [(ngModel)]="data.name" required>
+    <form [formGroup]="productForm" class="py-2">
+        <img [src]="selectedImage" alt="selectedImage" class="selected-img pb-3 object-fit-contain"
+            [hidden]="!selectedImage">
+        <div class="form-group pb-4">
+            <label for="imageUrl" class="bg-body-tertiary border py-2 px-3 rounded cursor-pointer">Choose an
+                image</label>
+            <input type="file" (change)="onFileSelected($event)" id="imageUrl" accept="image/*" hidden>
         </div>
 
         <div class="form-group pb-3">
-            <label for="productImage">Product Image URL:</label>
-            <input type="text" class="form-control" id="productImage" name="imageUrl" [(ngModel)]="data.imageUrl"
-                required>
+            <label for="productName">Product Name:</label>
+            <input type="text" class="form-control" id="productName" formControlName="name" required>
         </div>
 
         <div class="form-group pb-3">
             <label for="productFlavor">Select Flavor:</label>
-            <select class="form-control" id="productFlavor" name="flavorId" [(ngModel)]="data.flavorId" required>
+            <select class="form-control" id="productFlavor" formControlName="flavorId" required>
                 <option *ngFor="let flavor of flavors" [value]="flavor.id">{{ flavor.name }}</option>
             </select>
         </div>
@@ -26,5 +28,9 @@
 </div>
 <div mat-dialog-actions class="d-flex align-items-center justify-content-end gap-2 border-top pe-4">
     <button (click)="onNoClick()" class="btn btn-secondary px-4">Cancel</button>
-    <button [mat-dialog-close]="data" [disabled]="!productForm.valid" class="btn btn-success px-4">Update</button>
+    <button (click)="onSubmit()" [disabled]="productForm.invalid" class="btn btn-success px-4">Update</button>
+</div>
+
+<div *ngIf="updating" class="d-flex align-items-center justify-content-center position-fixed top-0 start-0 overlay">
+    <div class="spinner-border text-accent-color"></div>
 </div>

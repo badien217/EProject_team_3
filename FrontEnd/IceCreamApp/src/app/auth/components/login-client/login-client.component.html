@@ -11,22 +11,30 @@
         </div>
         <div class="shadow py-5 px-lg-5 px-4 rounded-4 login-container bg-white">
             <a [routerLink]="['/home']"> <img src="../../../../assets/images/logo.png" alt="logo" class="logo"></a>
-            <h2 class="pt-4 fs-2">Welcome back!</h2>
+            <h2 class="pt-4 fs-2">Welcome <span class="waving-hand">👋</span></h2>
             <p class="fs-6 mb-4">Login your account</p>
-            <div>
+            <form [formGroup]="loginForm">
                 <div class="mb-3">
                     <label for="usernameInput" class="form-label h6">Username</label>
-                    <input type="text" [(ngModel)]="loginDto.username" class="form-control" id="usernameInput" />
+                    <input type="text" formControlName="username" class="form-control" id="usernameInput" />
+                    <small class="text-danger d-inline-flex error-message"
+                        *ngIf="loginForm.get('username')?.errors?.['required'] && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)">
+                        Username is required.
+                    </small>
                 </div>
                 <div class="mb-2">
                     <label for="passwordInput" class="form-label h6">Password</label>
-                    <input type="{{ showPassword ? 'text' : 'password' }}" [(ngModel)]="loginDto.password"
+                    <input type="{{ showPassword ? 'text' : 'password' }}" formControlName="password"
                         class="form-control pe-5" id="passwordInput" />
                     <div (click)="togglePasswordVisibility()" [class.zoom-in]="showPassword"
                         [class.zoom-out]="!showPassword" class="position-relative float-end text-dark pe-3 z-3 "
                         style="margin-top: -30px;">
                         <fa-icon [icon]="showPassword ? faEyeSlash : faEye" class="cursor-pointer"></fa-icon>
                     </div>
+                    <small class="text-danger d-inline-flex error-message"
+                        *ngIf="loginForm.get('password')?.errors?.['required'] && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+                        Password is required.
+                    </small>
                 </div>
                 <div class="d-flex align-items-center justify-content-between mb-3 form-check">
                     <div class="invisible">
@@ -39,15 +47,14 @@
                     </div>
                 </div>
                 <div class="d-flex flex-column align-items-center justify-content-center mb-4 pt-3">
-                    <button type="submit" (click)="login()"
-                        class="border-0 bg-dark text-white px-5 py-2 rounded-5">Login</button>
+                    <button (click)="login()" class="border-0 bg-dark text-white px-5 py-2 rounded-5">Login</button>
                 </div>
 
                 <div class="text-center">
                     <span>No Account Yet? </span><a [routerLink]="['/auth/register']"
                         class="text-decoration-none">Register</a>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

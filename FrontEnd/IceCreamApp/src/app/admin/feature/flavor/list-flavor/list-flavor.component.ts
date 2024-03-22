@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { faTrash, faPenToSquare, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -10,8 +9,7 @@ import { FlavorService } from 'src/app/services/flavor.service';
 import { AddFlavorComponent } from '../add-flavor/add-flavor.component';
 import { UpdateFlavorComponent } from '../update-flavor/update-flavor.component';
 import { ConfirmDeletionDialogComponent } from 'src/app/shared/components/confirm-deletion-dialog/confirm-deletion-dialog.component';
-import { SuccessSnackbarComponent } from 'src/app/shared/components/success-snackbar/success-snackbar.component';
-import { ErrorSnackbarComponent } from 'src/app/shared/components/error-snackbar/error-snackbar.component';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-list-flavor',
@@ -31,7 +29,10 @@ export class ListFlavorComponent {
 
   searchTerm: string = '';
 
-  constructor(private flavorService: FlavorService, private dialog: MatDialog, private snackBar: MatSnackBar) { }
+  constructor(private flavorService: FlavorService,
+    private dialog: MatDialog,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
     this.retrieveFlavors();
@@ -43,10 +44,8 @@ export class ListFlavorComponent {
         this.dataSource = new MatTableDataSource<Flavor>(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-
-        console.log(this.dataSource)
       },
-      error: (e) => console.error(e),
+      error: (e) => this.messageService.openError('Flavor data retrieval error')
     });
   }
 
@@ -60,76 +59,24 @@ export class ListFlavorComponent {
 
 
   openAddFlavorDialog(): void {
-    const dialogRef = this.dialog.open(AddFlavorComponent, {
-      data: { name: '', email: '', phone: '', flavorContent: '', flavorDate: Date.now }
-    });
+    const dialogRef = this.dialog.open(AddFlavorComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.flavorService.createFlavor(result).subscribe(() => {
-          this.retrieveFlavors();
-
-          this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-            data: { message: 'Flavor created successfully!' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        }, (error) => {
-          // Log the error here
-          console.error('Error while creating flavor:', error);
-
-          this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-            data: { message: 'Failed to create flavor. Please try again later' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        });
-
-        console.log('result', result);
-      }
+      this.retrieveFlavors();
     });
   }
-
 
   openUpdateFlavorDialog(flavor: Flavor): void {
     const dialogRef = this.dialog.open(UpdateFlavorComponent, {
       data: {
+        id: flavor.id,
         name: flavor.name,
         imageUrl: flavor.imageUrl
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.flavorService.updateFlavor(flavor.id, result).subscribe(() => {
-          this.retrieveFlavors();
-
-          this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-            data: { message: 'Flavor updated successfully!' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        }, (error) => {
-          // Log the error here
-          console.error('Error while updating flavor:', error);
-
-          this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-            data: { message: 'Failed to update flavor. Please try again later' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        });
-
-        console.log('result', result);
-      }
+      this.retrieveFlavors();
     });
   }
 
@@ -144,24 +91,9 @@ export class ListFlavorComponent {
         this.flavorService.deleteFlavor(flavorId).subscribe(() => {
           this.retrieveFlavors();
 
-          this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-            data: { message: 'Flavor deleted successfully!' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          this.messageService.openSuccess('Flavor deleted successfully');
         }, (error) => {
-          // Log the error here
-          console.error('Error while deleting flavor:', error);
-
-          this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-            data: { message: 'Failed to delete flavor. Please try again later' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          this.messageService.openError('Failed to delete flavor. Please try again');
         });
       }
     });

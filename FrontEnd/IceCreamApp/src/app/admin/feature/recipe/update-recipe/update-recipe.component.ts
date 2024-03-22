@@ -2,14 +2,12 @@ import { Component } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { faMinus, faPlus, faAngleDown, faAngleUp, faArrowLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { RecipeService } from 'src/app/services/recipe.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Recipe } from 'src/app/interfaces/recipe';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StepService } from 'src/app/services/step.service';
-import { SuccessSnackbarComponent } from 'src/app/shared/components/success-snackbar/success-snackbar.component';
-import { ErrorSnackbarComponent } from 'src/app/shared/components/error-snackbar/error-snackbar.component';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'src/app/services/message.service';
+import { StepService } from 'src/app/services/step.service';
 
 @Component({
   selector: 'app-update-recipe',
@@ -38,20 +36,13 @@ export class UpdateRecipeComponent {
   faAngleUp = faAngleUp;
   faArrowLeft = faArrowLeft;
   faTrash = faTrash;
-
+  isUpdating = false;
   stepOpenStates: boolean[] = [];
-
-  recipeId?: number;
-  recipe: Recipe = {
-    id: 0,
-    name: '',
-    description: '',
-    imageUrl: '',
-    submittedBy: '',
-    steps: [],
-    ingredient: '',
-    isShow: false,
-  };
+  recipeId: number = 0;
+  recipeForm: FormGroup;
+  steps: FormGroup[] = [];
+  selectedStepImages: string[] = [];
+  selectedRecipeImage: string = '';
 
   public Editor = ClassicEditor;
 
@@ -62,13 +53,89 @@ export class UpdateRecipeComponent {
 
   constructor(
     private recipeService: RecipeService,
-    // private stepService: StepService,
+    private stepService: StepService,
     private http: HttpClient,
     private router: Router,
-    private snackBar: MatSnackBar,
-    private route: ActivatedRoute
+    private messageService: MessageService,
+    private route: ActivatedRoute,
+    private fb: FormBuilder
   ) {
-    this.recipe.steps.forEach(() => this.stepOpenStates.push(true));
+    this.recipeForm = this.fb.group({
+      name: ['', Validators.required],
+      submittedBy: ['Our Ice Cream Parlor'],
+      imageUrl: ['', Validators.required],
+      description: ['', Validators.required],
+      ingredient: [''],
+    });
+
+    // Initialize the first step
+    this.addStep();
+
+    // Set the state of the first step to open
+    this.stepOpenStates.push(true);
+
+    // Initialize the states of other steps to closed
+    for (let i = 1; i < this.steps.length; i++) {
+      this.stepOpenStates.push(false);
+    }
+  }
+
+
+  // Function to add a new step
+  addStep() {
+    // Create a new step FormGroup
+    const stepGroup = this.fb.group({
+      content: ['', Validators.required],
+      imageUrl: ['', Validators.required]
+    });
+    // Push the new step FormGroup into the steps array
+    this.steps.push(stepGroup);
+    // Initialize the selected image array for the new step
+    this.selectedStepImages.push('');
+  }
+
+  // Function to remove a step
+  removeStep(index: number) {
+    // Remove the step FormGroup at the specified index
+    this.steps.splice(index, 1);
+    // Remove the corresponding selected image
+    this.selectedStepImages.splice(index, 1);
+  }
+
+  toggleStep(index: number) {
+    this.stepOpenStates[index] = !this.stepOpenStates[index];
+  }
+
+  onFileRecipeSelected(event: any): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.selectedRecipeImage = e.target.result;
+      };
+      reader.readAsDataURL(file);
+
+      this.recipeForm.patchValue({
+        imageUrl: file,
+      });
+    }
+  }
+
+  // Function to handle step image selection
+  onStepImageSelected(event: any, index: number) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.selectedStepImages[index] = e.target.result;
+      };
+      reader.readAsDataURL(file);
+      // Update the imageUrl form control value for the corresponding step
+      this.steps[index].patchValue({
+        imageUrl: file,
+      });
+    }
   }
 
   ngOnInit(): void {
@@ -81,103 +148,100 @@ export class UpdateRecipeComponent {
   getRecipeDetails(): void {
     this.recipeService.getRecipeById(this.recipeId).subscribe(
       (data) => {
-        this.recipe = data;
+        // Populate recipe details
+        this.recipeForm.patchValue({
+          name: data.name,
+          imageUrl: data.imageUrl,
+          description: data.description,
+          ingredient: data.ingredient,
+        });
+
+        // Clear existing steps and their corresponding selected images
+        this.steps = [];
+        this.selectedStepImages = [];
+
+        // Populate steps
+        data.steps.forEach((stepData: any) => {
+          const stepGroup = this.fb.group({
+            content: [stepData.content, Validators.required],
+            imageUrl: [stepData.imageUrl, Validators.required]
+          });
+          this.steps.push(stepGroup);
+          this.selectedStepImages.push(stepData.imageUrl); // Assuming imageUrl is fetched for each step
+        });
+
+        // Initialize the state of each step to open
+        this.stepOpenStates = new Array(data.steps.length).fill(true);
       },
       (error) => {
-        console.error('Error fetching recipe details:', error);
+        this.messageService.openError('Recipe detail data retrieval error')
       }
     );
+  }
+
+  // Method to delete all steps for the current recipe
+  deleteAllSteps() {
+    if (this.recipeId) {
+      this.stepService.getStepsByRecipeId(this.recipeId).subscribe(
+        (steps) => {
+          steps.forEach((step) => {
+            this.stepService.deleteStep(step.id).subscribe(
+              () => {
+
+              },
+              (error) => {
+                this.messageService.openError('Something went wrong')
+              }
+            );
+          });
+        },
+        (error) => {
+          this.messageService.openError('Steps data retrieval error')
+        }
+      );
+    } else {
+      this.messageService.openError('Data for this recipe is undefined')
+    }
   }
 
   updateRecipe(): void {
-    this.recipeService.updateRecipe(this.recipeId, this.recipe).subscribe(
-      () => {
-        console.log('Recipe updated successfully!', this.recipe); // Log the updated recipe data
+    const formData = { ...this.recipeForm.value };
+    this.isUpdating = true;
 
-        // this.updateSteps();
-        this.router.navigate(['/admin/recipe-management']);
-        this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-          data: { message: 'Recipe updated successfully!' },
-          panelClass: ['custom-snackbar'],
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
+    this.recipeService.updateRecipe(this.recipeId, formData).subscribe(
+      (result) => {
+
+        this.deleteAllSteps();
+
+        // For each step, create it with the recipe ID
+        this.steps.forEach((step, index) => {
+          this.createStep(step, index);
         });
+
+        // Recipe created successfully
+        this.router.navigate(['/admin/recipe-management']);
+        this.messageService.openSuccess('Recipe updated successfully');
       },
       (error) => {
-        console.error('Error updating recipe:', error);
-
-        this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-          data: { message: 'Failed to update recipe. Please try again later' },
-          panelClass: ['custom-snackbar'],
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
+        this.messageService.openError('Fail to update recipe. Please try again');
       }
     );
   }
 
-  // updateSteps(): void {
-  //   // Assuming you have a service method to update steps individually in the backend
-  //   for (const step of this.recipe.steps) {
-  //     this.stepService.updateStep(step.id, step).subscribe(
-  //       () => {
-  //         // Individual step updated successfully
-  //         // You can handle additional logic if needed
-  //       },
-  //       (error) => {
-  //         console.error(`Error updating step with ID ${step.id}:`, error);
+  createStep(step: FormGroup, index: number) {
+    const formData = { ...step.value };
+    formData.recipeId = this.recipeId;
 
-  //         this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-  //           data: { message: 'Failed to update step. Please try again later.' }, 
-  //           panelClass: ['custom-snackbar'],
-  //           duration: 3000,
-  //           horizontalPosition: 'end',
-  //           verticalPosition: 'top'
-  //         });
-  //       }
-  //     );
-  //   }
+    this.stepService.createStep(formData).subscribe(
+      (result) => {
 
-  //   // After all steps are updated, navigate and show success message
-  //   this.router.navigate(['/admin/recipe-management']);
-  //   this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-  //     data: { message: 'Recipe and steps updated successfully!' }, 
-  //     panelClass: ['custom-snackbar'],
-  //     duration: 3000,
-  //     horizontalPosition: 'end',
-  //     verticalPosition: 'top'
-  //   });
-  // }
-
-
-  addStep(event: Event): void {
-    event.preventDefault(); // Prevent form submission
-
-    // Ensure that recipe.steps is defined before pushing a new step
-    if (this.recipe.steps) {
-      this.recipe.steps.push({ id: 0, recipeId: 0, content: '', imageUrl: '' });
-    } else {
-      // If recipe.steps is undefined, initialize it as an empty array
-      this.recipe.steps = [{ id: 0, recipeId: 0, content: '', imageUrl: '' }];
-    }
-
-    this.stepOpenStates.push(true); // Open the newly added step by default
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 
-  removeStep(index: number): void {
-    // Ensure that the index is valid
-    if (index >= 0 && index < this.recipe.steps.length) {
-      // Remove the step and its corresponding state
-      this.recipe.steps.splice(index, 1);
-      this.stepOpenStates.splice(index, 1);
-    }
-  }
-
-  toggleStep(index: number): void {
-    this.stepOpenStates[index] = !this.stepOpenStates[index];
-  }
 
   autoResize(event: Event) {
     const textarea = event.target as HTMLTextAreaElement;

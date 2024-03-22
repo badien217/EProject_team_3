@@ -22,30 +22,45 @@ export class RecipeService {
     return this.http.get<Recipe[]>(`${baseUrl}/Recipe/GetAllShowRecipes`);
   }
 
-  getRecipeById(id: any): Observable<Recipe> {
+  getRecipeById(id: number): Observable<Recipe> {
     return this.http.get<Recipe>(`${baseUrl}/Recipe/${id}`);
   }
 
   createRecipe(data: any): Observable<any> {
-    return this.http.post(`${baseUrl}/Recipe`, data);
+    const formData = new FormData();
+    for (let key in data) {
+      if (data.hasOwnProperty(key)) {
+        formData.append(key, data[key]);
+
+      }
+    }
+
+    return this.http.post(`${baseUrl}/Recipe`, formData);
   }
 
-  updateRecipe(id: any, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}/Recipe/${id}`, data);
+  updateRecipe(id: number, data: any): Observable<any> {
+    const formData = new FormData();
+    for (let key in data) {
+      if (data.hasOwnProperty(key)) {
+        formData.append(key, data[key]);
+      }
+    }
+
+    return this.http.put(`${baseUrl}/Recipe/${id}`, formData);
   }
 
-  updateRecipeStatus(id: any, data: any): Observable<any> {
+  updateRecipeStatus(id: number, data: any): Observable<any> {
     return this.http.put(`${baseUrl}/Recipe/UpdateStatus/${id}`, data);
   }
 
-  deleteRecipe(id: any): Observable<any> {
+  deleteRecipe(id: number): Observable<any> {
     return this.http.delete(`${baseUrl}/Recipe/${id}`);
   }
   getAllRecipeRating(): Observable<RecipeRating[]> {
     return this.http.get<RecipeRating[]>(`${baseUrl}/RecipeRating`);
   }
 
-  getRecipeRatingById(id: any): Observable<RecipeRating[]> {
+  getRecipeRatingById(id: number): Observable<RecipeRating[]> {
     return this.http.get<RecipeRating[]>(`${baseUrl}/RecipeRating/${id}`);
   }
 
@@ -53,7 +68,7 @@ export class RecipeService {
     return this.http.post(`${baseUrl}/RecipeRating`, data);
   }
 
-  getAvgRating(id: any): Observable<any> {
+  getAvgRating(id: number): Observable<any> {
     return this.http.get<RecipeRating[]>(`${baseUrl}/RecipeRating/AvgRating/${id}`);
   }
 }

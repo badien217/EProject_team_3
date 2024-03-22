@@ -4,42 +4,48 @@
             [icon]="faX"></fa-icon></button>
 </div>
 <div mat-dialog-content class="add-book-dialog-container">
-    <form #bookForm="ngForm" class="py-2">
+    <form [formGroup]="bookForm" class="py-2">
+        <img [src]="selectedImage" alt="selectedImage" class="selected-img pb-3 object-fit-contain"
+            [hidden]="!selectedImage">
+        <div class="form-group pb-4">
+            <label for="imageUrl" class="bg-body-tertiary border py-2 px-3 rounded cursor-pointer">Choose an
+                image</label>
+            <input type="file" (change)="onFileSelected($event)" id="imageUrl" accept="image/*" required hidden>
+        </div>
         <div class="form-group pb-3">
             <label for="bookTitle">Title:</label>
-            <input type="text" class="form-control" id="bookTitle" name="title" [(ngModel)]="data.title" required>
+            <input type="text" class="form-control" id="bookTitle" formControlName="title" required>
         </div>
         <div class="form-group pb-3">
             <label for="bookAuthor">Author:</label>
-            <input type="text" class="form-control" id="bookAuthor" name="author" [(ngModel)]="data.author" required>
+            <input type="text" class="form-control" id="bookAuthor" formControlName="author" required>
         </div>
         <div class="form-group pb-3">
             <label for="bookPrice">Price:</label>
-            <input type="number" class="form-control" id="bookPrice" name="price" [(ngModel)]="data.price" required>
-        </div>
-        <div class="form-group pb-3">
-            <label for="bookImage">Image:</label>
-            <input type="text" class="form-control" id="bookImage" name="imageUrl" [(ngModel)]="data.imageUrl" required>
+            <input type="number" class="form-control" id="bookPrice" formControlName="price" required>
         </div>
         <div class="form-group pb-3">
             <label for="bookDescription">Description:</label>
-            <textarea rows="3" class="form-control" id="bookDescription" name="description"
-                [(ngModel)]="data.description" required></textarea>
+            <textarea rows="3" class="form-control" id="bookDescription" formControlName="description"
+                required></textarea>
         </div>
         <div class="form-group pb-3">
             <label for="bookPublishedDate">Published Date:</label>
-            <input type="date" class="form-control" id="bookPublishedDate" name="publishedDate"
-                [(ngModel)]="data.publishedDate" required>
+            <input type="date" class="form-control" id="bookPublishedDate" formControlName="publishedDate" required>
         </div>
         <div class="form-group pb-3">
             <label for="bookQuantityInStock">Quantity In Stock:</label>
-            <input type="number" class="form-control" id="bookQuantityInStock" name="quantityInStock"
-                [(ngModel)]="data.quantityInStock" required>
+            <input type="number" class="form-control" id="bookQuantityInStock" formControlName="quantityInStock"
+                required>
         </div>
     </form>
 </div>
 
 <div mat-dialog-actions class="d-flex align-items-center justify-content-end gap-2 border-top pe-4">
     <button (click)="onNoClick()" class="btn btn-secondary px-4">Cancel</button>
-    <button [mat-dialog-close]="data" [disabled]="!bookForm.valid" class="btn btn-success px-4">Save</button>
+    <button (click)="onSubmit()" [disabled]="bookForm.invalid" class="btn btn-success px-4">Save</button>
+</div>
+
+<div *ngIf="creating" class="d-flex align-items-center justify-content-center position-fixed top-0 start-0 overlay">
+    <div class="spinner-border text-accent-color"></div>
 </div>

@@ -16,19 +16,33 @@ export class FlavorService {
     return this.http.get<Flavor[]>(baseUrl);
   }
 
-  getFlavorById(id: any): Observable<Flavor> {
+  getFlavorById(id: number): Observable<Flavor> {
     return this.http.get<Flavor>(`${baseUrl}/${id}`);
   }
 
   createFlavor(data: any): Observable<any> {
-    return this.http.post(baseUrl, data);
+    const formData = new FormData();
+    for (let key in data) {
+      if (data.hasOwnProperty(key)) {
+        formData.append(key, data[key]);
+      }
+    }
+
+    return this.http.post(baseUrl, formData);
   }
 
-  updateFlavor(id: any, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
+  updateFlavor(id: number, data: any): Observable<any> {
+    const formData = new FormData();
+    for (let key in data) {
+      if (data.hasOwnProperty(key)) {
+        formData.append(key, data[key]);
+      }
+    }
+
+    return this.http.patch(`${baseUrl}/${id}`, formData);
   }
 
-  deleteFlavor(id: any): Observable<any> {
+  deleteFlavor(id: number): Observable<any> {
     return this.http.delete(`${baseUrl}/${id}`);
   }
 }

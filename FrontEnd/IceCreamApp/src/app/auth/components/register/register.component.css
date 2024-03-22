@@ -7,13 +7,13 @@
 }
 
 .subscription-type .selected {
-    border: 2px solid var(--light-coral);
-    color: var(--light-coral);
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
 }
 
 .payment-option .selected {
-    border: 1px solid var(--light-coral);
-    color: var(--light-coral);
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
     border-radius: 6px;
 }
 
@@ -32,7 +32,6 @@
 
 .login-container {
     width: 550px;
-    /* min-height: calc(100vh - 60px); */
 }
 
 .back-home {
@@ -46,6 +45,10 @@
 
 .text-feature {
     font-size: 12px;
+}
+
+.error-message {
+    font-size: 13px;
 }
 
 

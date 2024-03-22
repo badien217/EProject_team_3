@@ -5,6 +5,9 @@ import { Book } from '../interfaces/book';
   providedIn: 'root'
 })
 export class SessionStorageService {
+  avatarFirstLetter?: string;
+  avatarBackgroundColor?: string;
+
   cartItemsLength: number = 0;
   cartUpdated: EventEmitter<void> = new EventEmitter<void>();
 
@@ -16,6 +19,10 @@ export class SessionStorageService {
   set(key: string, value: any): void {
     sessionStorage.setItem(key, JSON.stringify(value));
     this.cartUpdated.emit(); // Emit event when cart is updated
+  }
+
+  setAvatar(value: any): void {
+    sessionStorage.setItem('avatar', JSON.stringify(value));
   }
 
   remove(key: string): void {
@@ -32,16 +39,6 @@ export class SessionStorageService {
     return this.get('cartDetails') || [];
   }
 
-  // updateCartItem(updatedItem: Book): void {
-  //   const cartItems: Book[] = this.getCartItems() || [];
 
-  //   const existingIndex = cartItems.findIndex(item => item.id === updatedItem.id);
-
-  //   if (existingIndex !== -1) {
-  //     // If the item exists in the cart, update its quantity
-  //     cartItems[existingIndex].quantity = updatedItem.quantity;
-  //     this.set('cartItems', cartItems);
-  //   }
-  // }
 
 }

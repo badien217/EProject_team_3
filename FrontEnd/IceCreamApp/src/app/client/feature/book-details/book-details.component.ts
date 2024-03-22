@@ -6,14 +6,13 @@ import { Subject, takeUntil } from 'rxjs';
 import { Book } from 'src/app/interfaces/book';
 import { BookService } from 'src/app/services/book.service';
 import { BookRating } from 'src/app/interfaces/book-rating';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SuccessSnackbarComponent } from 'src/app/shared/components/success-snackbar/success-snackbar.component';
-import { ErrorSnackbarComponent } from 'src/app/shared/components/error-snackbar/error-snackbar.component';
 import { CartDetail } from 'src/app/interfaces/cart-detail';
 import { Cart } from 'src/app/interfaces/cart';
 import { CartService } from 'src/app/services/cart.service';
 import { SessionStorageService } from 'src/app/services/session-storage.service';
 import { AuthenticationService } from 'src/app/auth/services/authentication.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-book-details',
@@ -32,8 +31,8 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   bookId!: number;
   books: Book[] = [];
   bookRatings: BookRating[] = [];
-  bookRatingDto: BookRating;
   avgRating: number = 0;
+  bookRatingForm: FormGroup;
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -46,11 +45,18 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
     private cartService: CartService,
     private sessionStorageService: SessionStorageService,
     private authService: AuthenticationService,
-    private snackBar: MatSnackBar
+    private messageService: MessageService,
+    private fb: FormBuilder
   ) {
     this.book = <any>{};
     this.books = <any>{};
-    this.bookRatingDto = <any>{};
+    this.bookRatingForm = this.fb.group({
+      bookId: [0],
+      rating: [0, Validators.required],
+      name: ['', Validators.required],
+      comment: ['', Validators.required],
+      ratingDate: [new Date()]
+    })
   }
 
   ngOnInit() {
@@ -59,6 +65,14 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
       this.retrieveBookDetails();
       this.retrieveBookRating();
       this.retrieveAvgRating();
+
+      this.bookRatingForm = this.fb.group({
+        bookId: [this.bookId],
+        rating: [0, Validators.required],
+        name: ['', Validators.required],
+        comment: ['', Validators.required],
+        ratingDate: [new Date()]
+      })
     });
     this.retrieveAllBooks();
   }
@@ -67,7 +81,6 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
     this.bookService.getBookById(this.bookId).pipe(takeUntil(this.destroy$)).subscribe(
       (data: Book) => {
         this.book = data;
-        console.log(this.book);
       }
     );
   }
@@ -77,7 +90,6 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
     this.bookService.getAllBooks().pipe(takeUntil(this.destroy$)).subscribe(
       (data: Book[]) => {
         this.books = data.slice(0, 8);
-        console.log(this.books);
         this.fetchAverageRatings();
       }
     );
@@ -87,7 +99,6 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
     this.bookService.getBookRatingById(this.bookId).pipe(takeUntil(this.destroy$)).subscribe(
       (data: BookRating[]) => {
         this.bookRatings = data;
-        console.log('ratings', this.bookRatings);
       }
     );
   }
@@ -112,36 +123,17 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   }
 
   createBookRating(): void {
-    const data = {
-      bookId: this.bookId,
-      name: this.bookRatingDto.name,
-      rating: this.bookRatingDto.rating,
-      comment: this.bookRatingDto.comment,
-      ratingDate: new Date()
-    }
+    const data = this.bookRatingForm.value;
 
     this.bookService.createBookRating(data).subscribe(
       response => {
         this.retrieveBookRating();
         this.retrieveAvgRating();
 
-        this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-          data: { message: 'Rating successfully!' },
-          panelClass: ['custom-snackbar'],
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
+        this.messageService.openSuccess('Rating successfully');
       },
       error => {
-        console.log(error);
-        this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-          data: { message: 'Error rating. Please check your credentials and try again.' },
-          panelClass: ['custom-snackbar', 'error'],
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
+        this.messageService.openError('Error rating. Please check your credentials');
       }
     );
   }
@@ -172,7 +164,7 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
           book.averageRating = avgRating;
         },
         error => {
-          console.error(`Error fetching average rating for book ${book.id}: `, error);
+          this.messageService.openError('Book rating data retrieval error')
         }
       );
     });
@@ -193,11 +185,10 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
                     existingDetail.quantity += 1;
                     this.cartService.updateCartDetail(existingDetail.id, existingDetail).subscribe(
                       () => {
-                        console.log('Cart detail updated successfully.');
                         this.cartService.updateCartDetailTotal(cart.cartDetails.length);
                       },
                       error => {
-                        console.error('Error updating cart detail:', error);
+                        this.messageService.openError('Fail to add book to cart');
                       }
                     );
                   } else {
@@ -209,20 +200,19 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
                     };
                     this.cartService.createCartDetail(newCartDetail).subscribe(
                       () => {
-                        console.log('New cart detail added successfully.');
                         this.cartService.updateCartDetailTotal(cart.cartDetails.length + 1);
                       },
                       error => {
-                        console.error('Error adding new cart detail:', error);
+                        this.messageService.openError('Fail to add book to cart');
                       }
                     );
                   }
                 } else {
-                  console.log('No cart found for the user.');
+                  this.messageService.openError('Fail to add book to cart');
                 }
               },
               error => {
-                console.error('Error fetching cart:', error);
+                this.messageService.openError('Cart data retrieval error');
               }
             );
           }
@@ -254,9 +244,6 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
       // Save updated details back to session storage
       // sessionStorage.setItem('cartDetails', JSON.stringify(storedCartDetails));
       this.sessionStorageService.set('cartDetails', storedCartDetails);
-
-      // Optionally, you can perform any additional logic or UI updates here
-      console.log('Cart detail added to session storage successfully.');
     }
   }
 

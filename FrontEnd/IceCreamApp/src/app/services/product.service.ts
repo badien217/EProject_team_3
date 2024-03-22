@@ -18,7 +18,7 @@ export class ProductService {
     return this.http.get<Product[]>(`${baseUrl}/Product`);
   }
 
-  getProductById(id: any): Observable<Product> {
+  getProductById(id: number): Observable<Product> {
     return this.http.get<Product>(`${baseUrl}/Product/${id}`);
   }
 
@@ -27,14 +27,28 @@ export class ProductService {
   }
 
   createProduct(data: any): Observable<any> {
-    return this.http.post(`${baseUrl}/Product`, data);
+    const formData = new FormData();
+    for (let key in data) {
+      if (data.hasOwnProperty(key)) {
+        formData.append(key, data[key]);
+      }
+    }
+
+    return this.http.post(`${baseUrl}/Product`, formData);
   }
 
-  updateProduct(id: any, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}/Product/${id}`, data);
+  updateProduct(id: number, data: any): Observable<any> {
+    const formData = new FormData();
+    for (let key in data) {
+      if (data.hasOwnProperty(key)) {
+        formData.append(key, data[key]);
+      }
+    }
+
+    return this.http.put(`${baseUrl}/Product/${id}`, formData);
   }
 
-  deleteProduct(id: any): Observable<any> {
+  deleteProduct(id: number): Observable<any> {
     return this.http.delete(`${baseUrl}/Product/${id}`);
   }
 

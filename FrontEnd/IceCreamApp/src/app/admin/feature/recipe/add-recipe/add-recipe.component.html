@@ -2,37 +2,37 @@
     <a [routerLink]="['/admin/recipe-management']" class="btn btn-outline-dark mb-3"><fa-icon
             [icon]="faArrowLeft"></fa-icon></a>
     <div class="h2 pb-3">Add New Recipe</div>
-    <form #recipeForm="ngForm" (ngSubmit)="createRecipe()">
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" [(ngModel)]="recipe.name" name="name" required>
-        </div>
+    <form [formGroup]="recipeForm">
         <div class="row g-3 mb-3">
             <div class="col">
-                <label for="submittedBy" class="form-label">Submitted By</label>
-                <input type="text" class="form-control" id="submittedBy" [(ngModel)]="recipe.submittedBy"
-                    name="submittedBy" required>
-            </div>
-            <div class="col">
-                <label for="imageUrl" class="form-label">Main Image</label>
-                <input class="form-control" type="text" id="imageUrl" [(ngModel)]="recipe.imageUrl" name="imageUrl"
-                    required>
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea [(ngModel)]="recipe.description" id="description" name="description" class="form-control" rows="5"
-                required></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="ingredient" class="form-label">Ingredients
-            </label>
-            <div class="content" role="main">
-                <ckeditor [editor]="Editor" [(ngModel)]="recipe.ingredient" name="ingredient" id="ingredient"
-                    [config]="editorConfig">
-                </ckeditor>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" formControlName="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="ingredient" class="form-label">Ingredients
+                    </label>
+                    <div class="content" role="main">
+                        <ckeditor [editor]="Editor" formControlName="ingredient" id="ingredient"
+                            [config]="editorConfig">
+                        </ckeditor>
+                    </div>
+                </div>
             </div>
 
+            <div class="col d-flex flex-column align-items-start pt-4">
+                <img [src]="selectedRecipeImage" alt="selectedRecipeImage"
+                    class="selected-recipe-img pb-3 object-fit-contain" [hidden]="!selectedRecipeImage">
+                <label for="imageUrl" class="bg-white border btn rounded cursor-pointer mt-2">Main
+                    Image</label>
+                <input class="form-control" type="file" id="imageUrl" (change)="onFileRecipeSelected($event)"
+                    accept="image/*" required hidden>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea formControlName="description" id="description" class="form-control" rows="5" required></textarea>
         </div>
 
         <div class="mb-3">
@@ -40,36 +40,45 @@
                 <label class="form-label m-0">Instructions</label>
             </div>
 
-            <div *ngFor="let step of recipe.steps; let i = index" class="ms-3 mt-3">
+            <div *ngFor="let step of steps; let i = index" class="step" [formGroup]="step">
                 <div class="d-flex align-items-center gap-3 pb-3">
                     <button type="button" class="border-0 bg-light" (click)="toggleStep(i)">
                         <fa-icon [icon]="stepOpenStates[i] ? faAngleUp : faAngleDown" class="pe-2"></fa-icon>
-                        <strong>Step {{ i + 1}}</strong>
+                        <strong>Step {{ i + 1 }}</strong>
                     </button>
 
                     <button type="button" class="btn btn-outline-danger" (click)="removeStep(i)">
                         <fa-icon [icon]="faTrash"></fa-icon>
                     </button>
                 </div>
-                <div [hidden]="!stepOpenStates[i]" [@fadeInOut]="stepOpenStates[i] ? 'open' : 'closed'">
-                    <div class="mb-2">
-                        <label class="form-label" for="stepContent{{ i }}">Content</label>
-                        <textarea id="stepContent{{ i }}" [(ngModel)]="step.content" name="content{{ i }}"
-                            class="form-control" rows="4" required></textarea>
+                <div class="row g-3 mb-3" [hidden]="!stepOpenStates[i]"
+                    [@fadeInOut]="stepOpenStates[i] ? 'open' : 'closed'">
+                    <div class="col">
+                        <label class="form-label" for="stepContent">Content</label>
+                        <textarea id="stepContent" formControlName="content" class="form-control" rows="5"
+                            required></textarea>
                     </div>
-                    <div class="mb-2">
-                        <label for="illustrationImage{{ i }}" class="form-label">Illustration Image</label>
-                        <input id="illustrationImage{{ i }}" [(ngModel)]="step.imageUrl" name="imageUrl{{ i }}"
-                            class="form-control" type="file" required>
+                    <div class="col d-flex flex-column align-items-start pt-4">
+                        <img [src]="selectedStepImages[i]" alt="selectedStepImage-{{i}}"
+                            class="selected-step-img pb-3 object-fit-contain" [hidden]="!selectedStepImages[i]">
+                        <label for="stepImage{{i}}" class="bg-white border btn rounded cursor-pointer mt-2">Illustration
+                            Image</label>
+                        <input id="stepImage{{i}}" class="form-control" type="file"
+                            (change)="onStepImageSelected($event, i)" accept="image/*" required hidden>
                     </div>
+
                 </div>
                 <hr class="border-1 border-dark">
             </div>
-            <button class="btn btn-outline-success d-flex align-items-center ms-2" (click)="addStep($event)"><span>Add
+            <button class="btn btn-outline-success d-flex align-items-center ms-2" (click)="addStep()"><span>Add
                     step</span><fa-icon [icon]="faPlus" class="ps-1"></fa-icon> </button>
+
+
         </div>
-
-
-        <button class="btn btn-success px-5" [disabled]="!recipeForm.valid" type="submit">Save</button>
+        <button class="btn btn-success px-5" (click)="createRecipe()">Save</button>
     </form>
+</div>
+
+<div *ngIf="isCreating" class="d-flex align-items-center justify-content-center position-fixed top-0 start-0 overlay">
+    <div class="spinner-border text-accent-color"></div>
 </div>

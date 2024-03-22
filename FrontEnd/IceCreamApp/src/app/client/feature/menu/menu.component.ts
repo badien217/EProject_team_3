@@ -26,7 +26,6 @@ export class MenuComponent implements OnInit {
     this.productService.getAllProducts().pipe(takeUntil(this.destroy$)).subscribe(
       (data: Product[]) => {
         this.iceCreams = data;
-        console.log(this.iceCreams);
       }
     );
   }

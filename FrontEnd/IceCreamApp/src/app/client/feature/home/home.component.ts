@@ -19,6 +19,7 @@ import { UserRecipeService } from 'src/app/services/user-recipe.service';
 import { UserRecipe } from 'src/app/interfaces/user-recipe';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/interfaces/user';
+import { MessageService } from 'src/app/services/message.service';
 
 
 @Component({
@@ -85,6 +86,7 @@ export class HomeComponent {
     private cartService: CartService,
     private userRecipeService: UserRecipeService,
     private userService: UserService,
+    private messageService: MessageService
   ) {
     this.user = <any>{};
   }
@@ -151,14 +153,12 @@ export class HomeComponent {
               userRecipe.name = userInfo.name;
             },
             error => {
-              console.error(`Error fetching username for user with userId ${userRecipe.userId}: `, error);
+              this.messageService.openError('User recipes data retrieval error');
             }
           );
         });
         // Assign the fetched user recipes to the component property
         this.userRecipes = data;
-
-        console.log(data)
       }
     );
 
@@ -174,7 +174,7 @@ export class HomeComponent {
           book.averageRating = avgRating;
         },
         error => {
-          console.error(`Error fetching average rating for book ${book.id}: `, error);
+          this.messageService.openError('Book ratings data retrieval error')
         }
       );
     });
@@ -195,11 +195,10 @@ export class HomeComponent {
                     existingDetail.quantity += 1;
                     this.cartService.updateCartDetail(existingDetail.id, existingDetail).subscribe(
                       () => {
-                        console.log('Cart detail updated successfully.');
                         this.cartService.updateCartDetailTotal(cart.cartDetails.length);
                       },
-                      error => {
-                        console.error('Error updating cart detail:', error);
+                      (error) => {
+                        this.messageService.openError('Fail to add book to cart')
                       }
                     );
                   } else {
@@ -211,20 +210,19 @@ export class HomeComponent {
                     };
                     this.cartService.createCartDetail(newCartDetail).subscribe(
                       () => {
-                        console.log('New cart detail added successfully.');
                         this.cartService.updateCartDetailTotal(cart.cartDetails.length + 1);
                       },
-                      error => {
-                        console.error('Error adding new cart detail:', error);
+                      (error) => {
+                        this.messageService.openError('Fail to add book to cart')
                       }
                     );
                   }
                 } else {
-                  console.log('No cart found for the user.');
+                  this.messageService.openError('Fail to add book to cart')
                 }
               },
               error => {
-                console.error('Error fetching cart:', error);
+                this.messageService.openError('Cart data retrieval error')
               }
             );
           }
@@ -256,9 +254,6 @@ export class HomeComponent {
       // Save updated details back to session storage
       // sessionStorage.setItem('cartDetails', JSON.stringify(storedCartDetails));
       this.sessionStorageService.set('cartDetails', storedCartDetails);
-
-      // Optionally, you can perform any additional logic or UI updates here
-      console.log('Cart detail added to session storage successfully.');
     }
   }
 

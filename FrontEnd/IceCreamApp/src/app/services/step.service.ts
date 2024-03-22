@@ -12,23 +12,33 @@ export class StepService {
 
   constructor(private http: HttpClient) { }
 
-  getAllSteps(): Observable<Step[]> {
-    return this.http.get<Step[]>(baseUrl);
-  }
-
-  getStepById(id: any): Observable<Step> {
-    return this.http.get<Step>(`${baseUrl}/${id}`);
+  getStepsByRecipeId(id: number): Observable<Step[]> {
+    return this.http.get<Step[]>(`${baseUrl}/${id}`);
   }
 
   createStep(data: any): Observable<any> {
-    return this.http.post(baseUrl, data);
+    const formData = new FormData();
+    for (let key in data) {
+      if (data.hasOwnProperty(key)) {
+        formData.append(key, data[key]);
+      }
+    }
+
+    return this.http.post(baseUrl, formData);
   }
 
-  updateStep(id: any, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
+  updateStep(id: number, data: any): Observable<any> {
+    const formData = new FormData();
+    for (let key in data) {
+      if (data.hasOwnProperty(key)) {
+        formData.append(key, data[key]);
+      }
+    }
+
+    return this.http.put(`${baseUrl}/${id}`, formData);
   }
 
-  deleteStep(id: any): Observable<any> {
+  deleteStep(id: number): Observable<any> {
     return this.http.delete(`${baseUrl}/${id}`);
   }
 

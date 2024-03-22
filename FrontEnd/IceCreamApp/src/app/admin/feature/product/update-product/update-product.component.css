@@ -1,3 +1,8 @@
 .update-product-dialog-container {
     width: 600px;
 }
+
+.selected-img {
+    width: 200px;
+    height: 200px;
+}

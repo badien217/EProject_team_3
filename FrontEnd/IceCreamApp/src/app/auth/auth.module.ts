@@ -6,7 +6,7 @@ import { LoginAdminComponent } from './components/login-admin/login-admin.compon
 import { RegisterComponent } from './components/register/register.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginClientComponent } from './components/login-client/login-client.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
@@ -26,6 +26,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     FormsModule,
     RouterModule,
     FontAwesomeModule,
+    ReactiveFormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

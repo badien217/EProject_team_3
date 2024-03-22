@@ -4,9 +4,8 @@ import { faHome, faEyeSlash, faEye, faAngleRight, faAngleLeft } from '@fortaweso
 import { AuthResponse } from '../../interfaces/auth-response';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SuccessSnackbarComponent } from 'src/app/shared/components/success-snackbar/success-snackbar.component';
-import { ErrorSnackbarComponent } from 'src/app/shared/components/error-snackbar/error-snackbar.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-login-client',
@@ -14,10 +13,13 @@ import { ErrorSnackbarComponent } from 'src/app/shared/components/error-snackbar
   styleUrls: ['./login-client.component.css']
 })
 export class LoginClientComponent {
-  loginDto: Login = {
-    username: '',
-    password: ''
-  };
+  faHome = faHome;
+  faEyeSlash = faEyeSlash;
+  faEye = faEye;
+  faAngleRight = faAngleRight;
+  faAngleLeft = faAngleLeft;
+  loginForm: FormGroup;
+
   authResponse: AuthResponse = {
     result: true,
     token: '',
@@ -25,49 +27,38 @@ export class LoginClientComponent {
     errors: [],
   };
 
-  faHome = faHome;
-  faEyeSlash = faEyeSlash;
-  faEye = faEye;
-  faAngleRight = faAngleRight;
-  faAngleLeft = faAngleLeft;
-
   showPassword = false;
 
   constructor(
     private authService: AuthenticationService,
     private router: Router,
-    private snackBar: MatSnackBar
-  ) { }
+    private messageService: MessageService,
+    private fb: FormBuilder
+  ) {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    })
+  }
 
   login(): void {
-    const data = {
-      username: this.loginDto.username,
-      password: this.loginDto.password
-    }
-    this.authService.login(data).subscribe(
-      (authResponse) => {
-        localStorage.setItem('isClientLoggedIn', authResponse.token);
-        sessionStorage.removeItem('cartDetails');
-        this.router.navigate(['/home']);
+    if (this.loginForm.valid) {
+      const loginData: Login = this.loginForm.value;
 
-        this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-          data: { message: 'Login success!' },
-          panelClass: ['custom-snackbar'],
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
-      },
-      (error) => {
-        this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-          data: { message: 'Error logging in. Please check your credentials and try again.' },
-          panelClass: ['custom-snackbar', 'error'],
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
-      }
-    );
+      this.authService.login(loginData).subscribe(
+        (authResponse) => {
+          localStorage.setItem('isClientLoggedIn', authResponse.token);
+          sessionStorage.removeItem('cartDetails');
+          this.router.navigate(['/home']);
+
+          this.messageService.openSuccess('Login successful');
+        },
+        (error) => {
+          this.messageService.openError('Login failed. Please try again');
+        }
+      );
+    }
+
   }
 
   togglePasswordVisibility(): void {

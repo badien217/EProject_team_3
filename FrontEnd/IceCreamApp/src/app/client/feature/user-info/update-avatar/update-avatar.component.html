@@ -1,1 +1,24 @@
-<p>update-avatar works!</p>
+<div class="d-flex align-items-center justify-content-between border-bottom">
+    <h2 mat-dialog-title>Upload Avatar</h2>
+    <button mat-dialog-title (click)="onNoClick()" class="bg-none border-0"><fa-icon [icon]="faX"></fa-icon></button>
+</div>
+<div mat-dialog-content class="update-user-dialog-container">
+    <form [formGroup]="userAvatarForm" class="py-2 d-flex flex-column align-items-center justify-content-center">
+        <img [src]="selectedImage" alt="selectedImage" class="selected-img pb-3 object-fit-cover rounded-circle"
+            [hidden]="!selectedImage">
+        <div class="form-group pb-2">
+            <label for="avatar" class="bg-body-tertiary border py-2 px-3 rounded cursor-pointer">Choose an
+                image</label>
+            <input type="file" (change)="onFileSelected($event)" id="avatar" accept="image/*" required hidden>
+        </div>
+    </form>
+</div>
+
+<div mat-dialog-actions class="d-flex align-items-center justify-content-end gap-2 border-top pe-4">
+    <button (click)="onNoClick()" class="border-0 rounded bg-secondary text-white py-1 px-4">Cancel</button>
+    <button (click)="onSubmit()" class="border-0 rounded btn-success text-white py-1 px-4">Save</button>
+</div>
+
+<div *ngIf="uploading" class="d-flex align-items-center justify-content-center position-fixed top-0 start-0 overlay">
+    <div class="spinner-border text-accent-color"></div>
+</div>

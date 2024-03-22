@@ -16,7 +16,7 @@ export class FaqService {
     return this.http.get<Faq[]>(baseUrl);
   }
 
-  getFaqById(id: any): Observable<Faq> {
+  getFaqById(id: number): Observable<Faq> {
     return this.http.get<Faq>(`${baseUrl}/${id}`);
   }
 
@@ -24,11 +24,11 @@ export class FaqService {
     return this.http.post(baseUrl, data);
   }
 
-  updateFaq(id: any, data: any): Observable<any> {
+  updateFaq(id: number, data: any): Observable<any> {
     return this.http.put(`${baseUrl}/${id}`, data);
   }
 
-  deleteFaq(id: any): Observable<any> {
+  deleteFaq(id: number): Observable<any> {
     return this.http.delete(`${baseUrl}/${id}`);
   }
 

@@ -1,3 +1,13 @@
 .table-bordered {
     border-color: #ccc;
 }
+
+.monthly-subscription {
+    color: #FFB000;
+    background-color: #F5F5DC;
+}
+
+.yearly-subscription {
+    color: #687EFF;
+    background-color: #E0F4FF;
+}

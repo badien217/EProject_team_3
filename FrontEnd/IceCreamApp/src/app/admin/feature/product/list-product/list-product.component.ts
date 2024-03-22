@@ -9,10 +9,8 @@ import { AddProductComponent } from '../add-product/add-product.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Flavor } from 'src/app/interfaces/flavor';
 import { UpdateProductComponent } from '../update-product/update-product.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDeletionDialogComponent } from 'src/app/shared/components/confirm-deletion-dialog/confirm-deletion-dialog.component';
-import { SuccessSnackbarComponent } from 'src/app/shared/components/success-snackbar/success-snackbar.component';
-import { ErrorSnackbarComponent } from 'src/app/shared/components/error-snackbar/error-snackbar.component';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-list-product',
@@ -33,7 +31,10 @@ export class ListProductComponent {
   searchTerm: string = '';
   flavors: Flavor = { id: 0, name: "", imageUrl: "" };
 
-  constructor(private productService: ProductService, private dialog: MatDialog, private snackBar: MatSnackBar) { }
+  constructor(private productService: ProductService,
+    private dialog: MatDialog,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
     this.retrieveProducts();
@@ -46,7 +47,7 @@ export class ListProductComponent {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
-      error: (e) => console.error(e),
+      error: (e) => this.messageService.openError('Product data retrieval error')
     });
   }
 
@@ -59,40 +60,10 @@ export class ListProductComponent {
   }
 
   openAddProductDialog(): void {
-    const dialogRef = this.dialog.open(AddProductComponent, {
-      data: { name: '', imageUrl: '', flavorId: 0, flavor: this.flavors }
-    });
+    const dialogRef = this.dialog.open(AddProductComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        result.flavorId = +result.flavorId;
-
-        this.productService.createProduct(result).subscribe(() => {
-          this.retrieveProducts();
-
-          this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-            data: { message: 'Product deleted successfully!' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        }, (error) => {
-          // Log the error here
-          console.error('Error while creating product:', error);
-
-          this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-            data: { message: 'Failed to create product. Please try again later' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-
-        });
-
-        console.log('result', result);
-      }
+      this.retrieveProducts();
     });
   }
 
@@ -100,6 +71,7 @@ export class ListProductComponent {
   openUpdateProductDialog(product: Product): void {
     const dialogRef = this.dialog.open(UpdateProductComponent, {
       data: {
+        id: product.id,
         name: product.name,
         imageUrl: product.imageUrl,
         flavorId: product.flavorId,
@@ -111,31 +83,7 @@ export class ListProductComponent {
       if (result) {
         result.flavorId = +result.flavorId;
 
-        console.log(product)        // Assuming you have an updateProduct method in your productService
-        this.productService.updateProduct(product.id, result).subscribe(() => {
-          this.retrieveProducts();
-
-          this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-            data: { message: 'Product updated successfully!' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        }, (error) => {
-          // Log the error here
-          console.error('Error while updating product:', error);
-
-          this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-            data: { message: 'Failed to update product. Please try again later' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        });
-
-        console.log('result', result);
+        this.retrieveProducts();
       }
     });
   }
@@ -151,24 +99,9 @@ export class ListProductComponent {
         this.productService.deleteProduct(productId).subscribe(() => {
           this.retrieveProducts();
 
-          this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-            data: { message: 'Product deleted successfully!' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          this.messageService.openSuccess('Product deleted successfully');
         }, (error) => {
-          // Log the error here
-          console.error('Error while deleting product:', error);
-
-          this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-            data: { message: 'Failed to delete product. Please try again later' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          this.messageService.openError('Failed to delete product. Please try again later');
         });
       }
     });

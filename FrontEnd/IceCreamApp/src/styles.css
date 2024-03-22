@@ -5,13 +5,9 @@
 }
 
 :root {
-    /* --dominant-color: #ffa68b;
-    --secondary-color: #ffc3ae;
-    --accent-color: #ffdcd3;
-    --lavender-brush: #feebe4; */
     --old-lace: #FFF5E4;
 
-    --dominant-color: #EDF8F7;
+    --dominant-color: #FFFFFF;
     --secondary-color: #E0F3F1;
     --accent-color: #65BDB3;
 }
@@ -84,7 +80,6 @@ h6 {
     cursor: pointer;
 }
 
-
 .main-admin {
     margin-left: 240px;
     min-height: 100vh;
@@ -95,28 +90,15 @@ h6 {
     height: 35px;
 }
 
-
 .true {
     background-color: #ecfdf3;
     color: #65B741;
-}
-
-.true::before {
-    content: '\2022';
-    margin-inline-end: 5px;
 }
 
 .false {
     background-color: #ffe4de;
     color: #ff5630;
 }
-
-.false::before {
-    content: '\2022';
-    margin-inline-end: 5px;
-}
-
-
 
 .zoom-in {
     animation: zoomIn 0.3s forwards;
@@ -125,7 +107,6 @@ h6 {
 .zoom-out {
     animation: zoomOut 0.3s forwards;
 }
-
 
 @keyframes zoomIn {
     0% {
@@ -235,9 +216,9 @@ h6 {
     background-color: var(--accent-color);
 } */
 
-.btn-accent-color:hover:before {
+/* .btn-accent-color:hover:before {
     background: rgba(0, 0, 0, 0.2);
-}
+} */
 
 .ngx-pagination a {
     text-decoration: none !important;
@@ -258,6 +239,17 @@ h6 {
     border-radius: 3px !important;
     border: transparent !important;
     color: #ffffff !important;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 1000;
+}
+
+.spinner-border {
+    position: absolute;
 }
 
 html,

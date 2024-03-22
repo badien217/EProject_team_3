@@ -11,12 +11,12 @@ export class AppComponent {
 
   constructor(private router: Router) { }
   ngOnInit() {
-    // this.router.events.subscribe((evt) => {
-    //   if (!(evt instanceof NavigationEnd)) {
-    //     return;
-    //   }
-    //   window.scrollTo(0, 0);
-    // });
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
   }
   get isAuthRoute() {
     return this.router.url.startsWith('/auth');

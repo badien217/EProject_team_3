@@ -13,14 +13,18 @@ export class DonutChartUserComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    // Fetch all users from UserService and create the chart
     this.userService.getAllUsers().subscribe(users => {
+      // Count the number of users with monthly and yearly subscriptions
       const monthlyCount = users.filter(user => user.subscriptionType === 'monthly').length;
       const yearlyCount = users.filter(user => user.subscriptionType === 'yearly').length;
 
+      // Create the donut chart with the counts of monthly and yearly subscribers
       this.createChart(monthlyCount, yearlyCount);
     });
   }
 
+  // Method to create the donut chart
   createChart(monthlyCount: number, yearlyCount: number) {
     this.chart = new Chart("DonutChartUser", {
       type: 'doughnut',
@@ -28,7 +32,7 @@ export class DonutChartUserComponent implements OnInit {
         labels: ['Monthly', 'Yearly'],
         datasets: [{
           data: [monthlyCount, yearlyCount],
-          backgroundColor: ['#007bff', '#28a745'], // Blue for monthly, green for yearly
+          backgroundColor: ['#ff7a1e', '#a9ce36'],
           hoverOffset: 4
         }]
       },

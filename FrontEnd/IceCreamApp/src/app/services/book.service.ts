@@ -17,19 +17,19 @@ export class BookService {
     return this.http.get<Book[]>(`${baseUrl}/Book`);
   }
 
-  getBookById(id: any): Observable<Book> {
+  getBookById(id: number): Observable<Book> {
     return this.http.get<Book>(`${baseUrl}/Book/${id}`);
   }
 
-  createBook(data: any): Observable<any> {
+  createBook(data: FormData): Observable<any> {
     return this.http.post(`${baseUrl}/Book`, data);
   }
 
-  updateBook(id: any, data: any): Observable<any> {
+  updateBook(id: number, data: FormData): Observable<any> {
     return this.http.put(`${baseUrl}/Book/${id}`, data);
   }
 
-  deleteBook(id: any): Observable<any> {
+  deleteBook(id: number): Observable<any> {
     return this.http.delete(`${baseUrl}/Book/${id}`);
   }
 
@@ -41,7 +41,7 @@ export class BookService {
     return this.http.get<BookRating[]>(`${baseUrl}/BookRating`);
   }
 
-  getBookRatingById(id: any): Observable<BookRating[]> {
+  getBookRatingById(id: number): Observable<BookRating[]> {
     return this.http.get<BookRating[]>(`${baseUrl}/BookRating/${id}`);
   }
 
@@ -49,7 +49,7 @@ export class BookService {
     return this.http.post(`${baseUrl}/BookRating`, data);
   }
 
-  getAvgRating(id: any): Observable<any> {
+  getAvgRating(id: number): Observable<any> {
     return this.http.get<BookRating[]>(`${baseUrl}/BookRating/AvgRating/${id}`);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { Order } from 'src/app/interfaces/order';
+import { MessageService } from 'src/app/services/message.service';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -9,14 +10,18 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./bar-chart-order.component.css']
 })
 export class BarChartOrderComponent {
-  orders: Order[] = []; // Initialize orders array
+  orders: Order[] = [];
 
-  constructor(private orderService: OrderService) { }
+  constructor(
+    private orderService: OrderService,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
     this.fetchOrders();
   }
 
+  // Fetches orders from the OrderService
   fetchOrders(): void {
     this.orderService.getAllOrders().subscribe(
       (orders: Order[]) => {
@@ -24,7 +29,7 @@ export class BarChartOrderComponent {
         this.createChart();
       },
       (error) => {
-        console.log('Error fetching orders:', error);
+        this.messageService.openError('Orders data retrieval error');
       }
     );
   }
@@ -32,12 +37,15 @@ export class BarChartOrderComponent {
   public chart: any;
 
   createChart() {
+    // Get current date and first and last day of the current month
     const currentDate = new Date();
     const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
 
+    // Generate array of dates for the current month
     const daysOfMonth = this.getDaysArray(firstDayOfMonth, lastDayOfMonth);
 
+    // Calculate order quantities for each day of the month
     const orderQuantities = daysOfMonth.map(day => {
       const dayOrders = this.orders.filter(order => new Date(order.orderDate).getDate() === day.getDate());
       return dayOrders.reduce((acc, cur) => acc + cur.orderDetails.reduce((acc, cur) => acc + cur.quantity, 0), 0);
@@ -46,12 +54,12 @@ export class BarChartOrderComponent {
     this.chart = new Chart("BarChartOrder", {
       type: 'bar',
       data: {
-        labels: daysOfMonth.map(date => date.getDate()), // Use only day numbers
+        labels: daysOfMonth.map(date => date.getDate()),
         datasets: [
           {
             label: "Order Quantity",
             data: orderQuantities,
-            backgroundColor: "rgba(255, 99, 132, 0.7)",
+            backgroundColor: "rgba(50, 142, 253,0.7)",
           }
         ]
       },
@@ -78,20 +86,19 @@ export class BarChartOrderComponent {
         scales: {
           x: {
             grid: {
-              display: false // Hide X-axis grid lines for cleaner look
+              display: false
             },
             ticks: {
               font: {
                 size: 12
               },
-              // Rotate the x-axis labels
               maxRotation: 0,
               minRotation: 0
             }
           },
           y: {
             grid: {
-              color: 'rgba(0, 0, 0, 0.2)', // Add a light grey color to Y-axis grid lines
+              color: 'rgba(0, 0, 0, 0.2)',
             },
             ticks: {
               font: {
@@ -104,6 +111,7 @@ export class BarChartOrderComponent {
     });
   }
 
+  // Utility function to generate an array of dates between two given dates
   getDaysArray(start: Date, end: Date) {
     const daysArray = [];
     for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {

@@ -6,8 +6,8 @@
 .btn-edit-avatar {
     width: 35px;
     height: 35px;
-    transform: translateX(-180%);
-    margin-top: 200px;
+    transform: translateX(480%);
+    margin-top: -35px;
 }
 
 .recipe-container {
@@ -17,6 +17,10 @@
 .recipe-img {
     width: 180px;
     height: 150px;
+}
+
+.fs-avatar {
+    font-size: 150px;
 }
 
 

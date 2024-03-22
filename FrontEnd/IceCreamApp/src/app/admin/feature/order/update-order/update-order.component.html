@@ -4,47 +4,18 @@
             [icon]="faX"></fa-icon></button>
 </div>
 <div mat-dialog-content class="update-order-dialog-container">
-    <form #orderForm="ngForm" class="py-2">
-        <div class="form-group pb-3">
-            <label for="orderName">Name:</label>
-            <input type="text" class="form-control" id="orderName" name="name" [(ngModel)]="data.name" required>
-        </div>
-        <div class="form-group pb-3">
-            <label for="orderEmail">Email:</label>
-            <input type="text" class="form-control" id="orderEmail" name="email" [(ngModel)]="data.email" required>
-        </div>
-        <div class="form-group pb-3">
-            <label for="orderPhone">Phone:</label>
-            <input type="text" class="form-control" id="orderPhone" name="phone" [(ngModel)]="data.phone" required>
-        </div>
-        <div class="form-group pb-3">
-            <label for="orderAmount">Amount:</label>
-            <input type="number" class="form-control" id="orderAmount" name="amount" [(ngModel)]="data.amount" required>
-        </div>
-        <div class="form-group pb-3">
-            <label for="orderPaymentOption">Payment Option:</label>
-            <input type="text" class="form-control" id="orderPaymentOption" name="paymentOption"
-                [(ngModel)]="data.paymentOption" required>
-        </div>
+    <form [formGroup]="orderForm" class="py-2">
         <div class="form-group pb-3">
             <label for="orderTransactionStatus">Transaction Status:</label>
-            <input type="text" class="form-control" id="orderTransactionStatus" name="transactionStatus"
-                [(ngModel)]="data.transactionStatus" required>
-        </div>
-        <div class="form-group pb-3">
-            <label for="orderAddress">Address:</label>
-            <textarea rows="2" class="form-control" id="orderAddress" name="address" [(ngModel)]="data.address"
-                required></textarea>
-        </div>
-        <div class="form-group pb-3">
-            <label for="orderDate">Order Date:</label>
-            <input type="date" class="form-control" id="orderDate" name="orderDate" [(ngModel)]="data.orderDate"
-                required>
+            <select id="orderTransactionStatus" formControlName="transactionStatus" class="form-select">
+                <option [ngValue]="true">Paid</option>
+                <option [ngValue]="false">Unpaid</option>
+            </select>
         </div>
     </form>
 </div>
 
 <div mat-dialog-actions class="d-flex align-items-center justify-content-end gap-2 border-top pe-4">
     <button (click)="onNoClick()" class="btn btn-secondary px-4">Cancel</button>
-    <button [mat-dialog-close]="data" [disabled]="!orderForm.valid" class="btn btn-success px-4">Save</button>
+    <button (click)="onSubmit()" [disabled]="orderForm.invalid" class="btn btn-success px-4">Save</button>
 </div>

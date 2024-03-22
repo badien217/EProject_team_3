@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { OrderService } from 'src/app/services/order.service';
 
@@ -7,20 +7,24 @@ import { OrderService } from 'src/app/services/order.service';
   templateUrl: './donut-chart.component.html',
   styleUrls: ['./donut-chart.component.css']
 })
-export class DonutChartComponent {
+export class DonutChartComponent implements OnInit {
   public chart: any;
 
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
+    // Fetch all orders from OrderService and create the chart
     this.orderService.getAllOrders().subscribe(orders => {
+      // Count the number of successful and failed transactions
       const successCount = orders.filter(order => order.transactionStatus).length;
       const failureCount = orders.length - successCount;
 
+      // Create the donut chart with the counts of successful and failed transactions
       this.createChart(successCount, failureCount);
     });
   }
 
+  // Method to create the donut chart
   createChart(successCount: number, failureCount: number) {
     this.chart = new Chart("DonutChart", {
       type: 'doughnut',
@@ -28,12 +32,11 @@ export class DonutChartComponent {
         labels: ['Success', 'Failure'],
         datasets: [{
           data: [successCount, failureCount],
-          backgroundColor: ['rgb(255, 205, 86)', 'rgb(75, 192, 192)'], // Green for success, red for failure
+          backgroundColor: ['rgb(255, 205, 86)', 'rgb(75, 192, 192)'],
           hoverOffset: 5
         }]
       },
       options: {
-        // aspectRatio: 2.5,
         plugins: {
           title: {
             display: true,

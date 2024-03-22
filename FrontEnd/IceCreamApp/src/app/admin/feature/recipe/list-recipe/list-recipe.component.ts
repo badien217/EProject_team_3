@@ -2,15 +2,13 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { faTrash, faPenToSquare, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Recipe } from 'src/app/interfaces/recipe';
+import { MessageService } from 'src/app/services/message.service';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { ConfirmDeletionDialogComponent } from 'src/app/shared/components/confirm-deletion-dialog/confirm-deletion-dialog.component';
-import { ErrorSnackbarComponent } from 'src/app/shared/components/error-snackbar/error-snackbar.component';
-import { SuccessSnackbarComponent } from 'src/app/shared/components/success-snackbar/success-snackbar.component';
 
 @Component({
   selector: 'app-list-recipe',
@@ -31,7 +29,10 @@ export class ListRecipeComponent implements OnInit {
   searchTerm: string = '';
   selectedStatus: boolean = false;
 
-  constructor(private recipeService: RecipeService, private dialog: MatDialog, private snackBar: MatSnackBar) { }
+  constructor(private recipeService: RecipeService,
+    private dialog: MatDialog,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
     this.retrieveRecipes();
@@ -44,13 +45,12 @@ export class ListRecipeComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
-        console.log(this.dataSource);
         // Initialize selectedStatus for each recipe
         this.dataSource.data.forEach(recipe => {
           this.selectedStatus = recipe.isShow; // Assuming isShow is the property representing the status
         });
       },
-      error: (e) => console.error(e),
+      error: (e) => this.messageService.openError('Recipe data retrieval error')
     });
   }
 
@@ -60,23 +60,9 @@ export class ListRecipeComponent implements OnInit {
       isShow: newStatus
     }
     this.recipeService.updateRecipeStatus(recipeId, updateStatusData).subscribe(() => {
-      this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-        data: { message: 'Recipe status updated successfully!' },
-        panelClass: ['custom-snackbar'],
-        duration: 3000,
-        horizontalPosition: 'end',
-        verticalPosition: 'top'
-      });
+      this.messageService.openSuccess('Recipe status updated successfully');
     }, (error) => {
-      console.log(recipeId, newStatus)
-      console.error('Error while updating recipe status:', error);
-      this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-        data: { message: 'Failed to update recipe status. Please try again later' },
-        panelClass: ['custom-snackbar'],
-        duration: 3000,
-        horizontalPosition: 'end',
-        verticalPosition: 'top'
-      });
+      this.messageService.openError('Failed to update recipe status. Please try again');
     });
   }
 
@@ -100,25 +86,10 @@ export class ListRecipeComponent implements OnInit {
         this.recipeService.deleteRecipe(recipeId).subscribe(() => {
           this.retrieveRecipes();
 
-          this.snackBar.openFromComponent(SuccessSnackbarComponent, {
-            data: { message: 'Recipe deleted successfully!' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          this.messageService.openSuccess('Recipe deleted successfully');
 
         }, (error) => {
-          // Log the error here
-          console.error('Error while deleting recipe:', error);
-
-          this.snackBar.openFromComponent(ErrorSnackbarComponent, {
-            data: { message: 'Failed to delete recipe. Please try again later' },
-            panelClass: ['custom-snackbar'],
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          this.messageService.openError('Failed to delete recipe. Please try again');
         });
       }
     });
