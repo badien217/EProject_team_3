@@ -388,6 +388,10 @@
         font-size: 13px;
     }
 
+    .title-container {
+        width: 100%;
+    }
+
     .flavour-img {
         width: 100px;
         height: 100px;
